@@ -31,23 +31,33 @@ This project looks to collect tweets for the user and clean the data for investm
 
 ## User Experience (UX)
 
--   ### User stories
+## User stories
 
-    -   #### First Time Visitor Goals
+-   ### User
 
-
-
-    -   #### Returning Visitor Goals
-
-
-    -   #### Frequent User Goals
+1.    I want a clear menu with options that are clear on intention.
+2.    I want to able to log in and have my information stored so I can log in again.
+3.    I want to be greeted by personlised message.
+4.    I want to get real time data through the app.
+5.    I want to be able to save this data to sheet to view in more organised way.
+6.    I want to be able to access data offline and have it sent to my email for future reference.
+7.    I want to be able to get sentiment data on my query of information.
+8.    I want to be able to understand data that is being presented to me.
     
+-   ### Site Owner
+
+9.    I want users to have positive experience when using the app.
+10.    I want users to understand and easily use the menu screen.
+11.    I want to have record of users email and password and retrieve information for validation
+12.    I want to provide user with clear message if incorrect information is entered.
+13.    I want validation on data entry points such as user email and password.
+
 *   ### Wireframes
 
     The flow for how the application operates was mapped out on lucidcharts
 
     * Highlevel overview wireframe image  
-     ![Highlevel](assets/images)
+     ![Highlevel](assets/images/sentiment%20data%20from%20twitter.jpeg)
 
     * lower layer 
     ![lower](assets/images)  
@@ -140,7 +150,7 @@ The deployment terminal is set to 80 columns by 24 rows. That means that each li
 
 ### Acknowledgements
 
-The app was completed as a Portfolio 3 Project for the Full Stack Software Developer (e-Commerce) Diploma at the [Code Institute](https://codeinstitute.net/). I would like to thank my mentor XXXXXXXXX, my class mates, the Slack community, and all at the Code Institute for their help and support. 
+The app was completed as a Portfolio 3 Project for the Full Stack Software Developer (e-Commerce) Diploma at the [Code Institute](https://codeinstitute.net/). I would like to thank my mentor Mo Shami, my class mates, the Slack community, and all at the Code Institute for their help and support. 
 
 Also to my friends and family who helped test site & provide feedback and most importantly patient with me during this time!
 
