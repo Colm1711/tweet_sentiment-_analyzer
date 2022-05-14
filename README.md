@@ -59,8 +59,8 @@ This project looks to collect tweets for the user and clean the data for investm
     * Highlevel overview wireframe image  
      ![Highlevel](assets/images/sentiment%20data%20from%20twitter.jpeg)
 
-    * lower layer 
-    ![lower](assets/images)  
+    * Login/Registration wireframe  
+    ![lower](assets/images/tweet_sentiment_login_registration.jpeg)  
 
     * Micro 
     ![micro](assets/images)
