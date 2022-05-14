@@ -1,8 +1,9 @@
 # Imports
 
+import sys
 import re
 from string import punctuation, whitespace, digits, ascii_uppercase, ascii_lowercase
-import sys
+
 
 # CONSTANTS
 
@@ -112,7 +113,7 @@ class Validation():
 
 
     def _has_lowercase(data_to_val):
-        # This will evaluate if password has uppercase and will return true if 
+        # This will evaluate if password has lowercase and will return true if 
         # present
         # This is a private function
         pw_has_lower = False
@@ -130,7 +131,7 @@ class Validation():
 
 
     def _has_punc(data_to_val):
-        # This will evaluate if password has uppercase and will return true if 
+        # This will evaluate if password has punctutiations and will return true if 
         # present
         # This is a private function
         pw_has_punc = False
