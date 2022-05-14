@@ -9,17 +9,17 @@ import sys
 REGEX = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 
 class Validation():
- """
+    """
         Description:
 
         This Class handles validating of information.
-    
+
         Params:
 
         Returns:
 
-        
-"""
+    
+    """
 
 
     def psw_valid(data_to_val):
@@ -27,7 +27,7 @@ class Validation():
         Description:
 
         This function handles validating of information.
-    
+
         Params:
                 data_to_val --> this is the data you want validated for 
                                 uppercase, lowercase, digits & val
@@ -55,6 +55,27 @@ class Validation():
             print('\nThis is not a valid password.')
             #Setting to system exit for now. Need to add handling of incorrect information
             return sys.exit()
+
+    def email_valid(email):
+        """
+        Description:
+
+        This function handles email validating using regular expressions.
+
+        Params:
+                email --> use regualr expressions to check for email
+
+        Returns:
+
+                Boolean - True --> if all conditions are met
+                Boolean - False --> if any conditions are not met
+        
+        """
+        if re.fullmatch(REGEX, email):
+            return True
+        else:
+            print('\nThis is not a valid email')
+            return False
 
     def _has_digit(data_to_val):
         # This will evaluate if there is a digit and will return true if present.
@@ -125,23 +146,3 @@ class Validation():
 
         return True
 
-    def email_valid(email):
-            """
-        Description:
-
-        This function handles email validating using regular expressions.
-    
-        Params:
-                email --> use regualr expressions to check for email
-
-        Returns:
-
-                Boolean - True --> if all conditions are met
-                Boolean - False --> if any conditions are not met
-        
-        """
-            if re.fullmatch(REGEX, email):
-                return True
-            else:
-                print('This is not a valid email')
-                return False
