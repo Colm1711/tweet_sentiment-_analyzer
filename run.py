@@ -1,6 +1,10 @@
 # Imports
+
+import re
 import gspread
 from google.oauth2.service_account import Credentials
+from string import punctuation, whitespace, digits, ascii_uppercase, ascii_lowercase
+
 
 
 # Constants
@@ -14,7 +18,7 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPEAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPEAD_CLIENT.open('authentication')
-
+REGEX = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 
 # Vars
 
@@ -29,11 +33,6 @@ def welcome_screen():
     Description:
     This function handles the welcome screen for user when they first run program.
     It asks user whether they want to log in or register.
-
-    Params:
-    
-
-    Returns:
     
     """
     print('Welcome to the Twitter sentiment application')
@@ -75,49 +74,142 @@ def user_registration():
             none
 
     Returns:
-
+            str - Name
+            str - Business
             str - email
             str - password
     
     """
-
+    name = input('Please your name: ')
+    business = input('Please enter institution you work for: ')
     print('Please enter your email and the password you would like.\n')
     print('Please note that your email must include @ symbol')
     print('Please your password must be at least 6 charecters long and must be alphanumeric')
     email, password = user_login_details()
-    return email, password
+    return name, business, email, password
 
-def val_password(password):
+# DATA VALIDATION
+
+def psw_valid(data_to_val):
     """
     Description:
 
-    This function handles user registration.
-    Calls on the user_login_detail
-
+    This function handles validating of information.
+ 
     Params:
-            password
+            data_to_val --> this is the data you want validated for 
+                            uppercase, lowercase, digits & val
 
+    Returns:
+
+            Boolean - True --> if all conditions are met
+            Boolean - False --> if any conditions are not met
+    
     """
-    valid = 0
-    password = password
-    if len(password) < 6:
-        for i in password:
-            if (i.islower()):
-                valid += 1
-            if (i.isupper()):
-                valid += 1
-            if (i.isdigit()):
-                valid += 1
+    data_to_val = data_to_val
 
-    print(valid)       
-    if valid < len(password):
-        print("Your password was not valid, please try again")
+    digit = has_digit(data_to_val)
+    lowercase = has_lowercase(data_to_val)
+    punc = has_punc(data_to_val)
+    upper = has_uppercase(data_to_val)
+    
+    if digit and lowercase and punc and upper == True:
+        print('Valid')
+        return True
     else:
-        print('password is valid')
+        print('Not valid')
+        return False
+        
+
+def has_digit(data_to_val):
+    # This will evaluate if there is a digit and will return true if present
+    pw_has_digits = False
+    data_to_val = data_to_val.strip()
+
+    for i in data_to_val:
+        if i in digits:
+            pw_has_digits = True
+            break
+
+    if not pw_has_digits:
+        return False
+
+    return True
+
+def has_uppercase(data_to_val):    
+    # This will evaluate if there is uppercase and will return true if 
+    # present
+    pw_has_upper = False
+    data_to_val = data_to_val.strip()
+
+    for i in data_to_val:
+        if i in ascii_uppercase:
+            pw_has_upper = True
+            break
+        
+    if not pw_has_upper:
+        return False
+
+    return True
 
 
-#welcome_screen()
-email, password = user_login_details()
-val_password(password)
+def has_lowercase(data_to_val):
+    # This will evaluate if password has uppercase and will return true if 
+    # present
+    pw_has_lower = False
+    data_to_val = data_to_val.strip()
+
+    for i in data_to_val:
+        if i in ascii_lowercase:
+            pw_has_lower = True
+            break
+        
+    if not pw_has_lower:
+        return False
+
+    return True
+
+
+def has_punc(data_to_val):
+    # This will evaluate if password has uppercase and will return true if 
+    # present
+    pw_has_punc = False
+    data_to_val = data_to_val.strip()
+
+    for i in data_to_val:
+        if i in punctuation:
+            pw_has_punc = True
+            break
+        
+    if not pw_has_punc:
+        return False
+
+    return True
+
+def email_valid(email):
+        """
+    Description:
+
+    This function handles email validating.
+ 
+    Params:
+            email --> use regualr expressions to check for email
+
+    Returns:
+
+            Boolean - True --> if all conditions are met
+            Boolean - False --> if any conditions are not met
+    
+    """
+    if re.fullmatch(REGEX, email):
+        return True
+    else:
+        return False
+
+
+name, business, email, password = user_registration()
+psw_valid(password)
+email_valid(email)
+
 
 
