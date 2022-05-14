@@ -113,7 +113,8 @@ This project looks to collect tweets for the user and clean the data for investm
 
 ### Known Bugs
 
-
+- when attempting to hook up smtplib to tweet sentiment gmail account to send user registration froms. Recieved '[Errno 101] Network is unreachable' error
+  message. Data online points to firewall issues. No known solution.
 
 [Back to top](<#contents>)
 
