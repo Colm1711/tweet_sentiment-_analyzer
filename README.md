@@ -142,7 +142,13 @@ The deployment terminal is set to 80 columns by 24 rows. That means that each li
 
 ### Code
 
-- I imported Tweepy library to help extend this project and to connect with the Twitter API [Tweepy](https://docs.tweepy.org/en/stable/)
+- Email validation and password validation information on use of regular expression was sourced here[GeeksforGeeks](https://www.geeksforgeeks.org/password-validation-in-python/)
+
+- Regular expressions were taken from cheetsheet[MyGreatLearning](https://www.mygreatlearning.com/blog/regular-expression-in-python/)
+
+#### Libraries
+
+- Imported Tweepy library to help extend this project and to connect with the Twitter API [Tweepy](https://docs.tweepy.org/en/stable/)
 
 ### Content
 
