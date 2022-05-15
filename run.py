@@ -1,5 +1,6 @@
 # Imports
 
+import json
 import gspread
 from google.oauth2.service_account import Credentials
 from getpass import getpass
@@ -24,7 +25,8 @@ SHEET = GSPEAD_CLIENT.open('authentication')
 
 # Googlesheet vars
 users = SHEET.worksheet('Users')
-user_data = users.get_all_values()
+user_data = users.col_values(1)
+passw_data = users.col_values(2)
 
 # Welcome message
 
@@ -40,18 +42,16 @@ def welcome_screen():
     """
     print('\nWelcome to the Twitter sentiment application. This is designed to retrieve twitter information and add sentimant scores to data.\n')
     print('If you are returning user please Login. Dont have an account or first time vistor please select the Register option. \n' )
+
     log_reg = input('Login(L) or Register(R)? : ')
     if log_reg.lower() == "l" or log_reg == 'Login':
         user_login_details()
     elif log_reg.lower() == 'r' or log_reg == 'Register':
         user_registration()
     elif log_reg.lower() != 'r' or 'l' or log_reg != 'login' or 'Register':
-        print('You must select a valid option: Login or Register - YOU HAVE 1 MORE ATTEMPT\n')
+        print('\nWARNING! You must select a vaild option')
         log_reg = input('Login(L) or Register(R)? : ')
-        if log_reg.lower() == "l" or log_reg == 'Login':
-            user_login_details()
-        elif log_reg.lower() == 'r' or log_reg == 'Register':
-            user_registration()
+        welcome_screen()
     else:
         print('Something has gone wrong here.')  
 
@@ -70,11 +70,14 @@ def user_login_details():
             str - password
     
     """
+    # This handles user login details
     email = input('Please enter your email: ')
     password = getpass('Please enter your password: ')
+    # checks details are valid email and password
     val_email = Validation.email_valid(email)
     val_password = Validation.psw_valid(password)
-    return val_email, val_password
+    if(val_email and val_password):
+        return access_level(email, password)
 
 def user_registration():
     """
@@ -93,12 +96,19 @@ def user_registration():
             str - val_password
     
     """
+    # This handles user registering name
     print('Please fill out your details: \n')
     name = input('Please your name: ')
+
+    # This handles user registering organization
     institution = input('Please enter institution you work for: ')
+
+    # This handles user registering email
     print('Please enter your email and the password you would like.\n')
     print('Please note that your email must include @ symbol')
     email = input('Please enter your email: ')
+
+     # This handles user registering password
     print('Please your password must be at least 6 charecters long and must be alphanumeric')
     password = getpass('Please enter your password: ')
     val_email = Validation.email_valid(email)
@@ -107,7 +117,46 @@ def user_registration():
     return name, institution, val_email, val_password
 
 
+def access_level(user, password):
+    """
+      Description:
 
+    This function handles access level when logging in.
+    It is set to False by default.
 
+    Params:
+            str - user
+            str - password 
+
+    Returns:
+            Bolean - True or False
+
+    """
+    # setting access level to default of False
+    admin_access = False
+
+    # accessing the admin creds file
+    creds_admin = open('admin_creds.json')
+    admin_data = json.load(creds_admin)
+    admin_user = admin_data.get('user')
+    admin_passw = admin_data.get('passw')
+
+    try:
+        # checking DB to see if user email and password are registered users
+        # starts the main python file
+        if user in user_data[1:] and password in passw_data[1:]:
+            main(admin_access)
+        # user email and password are admin access updating var to True
+        # starts the main python file
+        elif user == admin_user and password == admin_passw:
+            admin_access = True
+            main(admin_access)
+        return admin_access
+    except OSError:
+        print('Could not access database, please contact admin at admin.tweet.sentiment.123@gmail.com')       
+
+def main(access_level):
+    pass
+    
 welcome_screen()
 
