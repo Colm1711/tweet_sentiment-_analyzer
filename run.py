@@ -38,15 +38,21 @@ def welcome_screen():
     program.
 
     Queries user whether they want to log in or register.
-    
+
+    Params:
+            none
+
+    Returns:
+            none
+
     """
     print('\nWelcome to the Twitter sentiment application. This is designed to retrieve twitter information and add sentimant scores to data.\n')
     print('If you are returning user please Login. Dont have an account or first time vistor please select the Register option. \n' )
 
     log_reg = input('Login(L) or Register(R)? : ')
-    if log_reg.lower() == "l" or log_reg == 'Login':
+    if log_reg.lower() == "l" or log_reg.lower() == 'login':
         user_login_details()
-    elif log_reg.lower() == 'r' or log_reg == 'Register':
+    elif log_reg.lower() == 'r' or log_reg.lower() == 'Register':
         user_registration()
     elif log_reg.lower() != 'r' or 'l' or log_reg != 'login' or 'Register':
         print('\nWARNING! You must select a vaild option')
@@ -119,7 +125,7 @@ def user_registration():
 
 def access_level(user, password):
     """
-      Description:
+    Description:
 
     This function handles access level when logging in.
     It is set to False by default.
@@ -129,7 +135,7 @@ def access_level(user, password):
             str - password 
 
     Returns:
-            Bolean - True or False
+            Boolean - True or False
 
     """
     # setting access level to default of False
@@ -140,7 +146,8 @@ def access_level(user, password):
     admin_data = json.load(creds_admin)
     admin_user = admin_data.get('user')
     admin_passw = admin_data.get('passw')
-
+    
+    # check to see if DB accessible
     try:
         # checking DB to see if user email and password are registered users
         # starts the main python file
@@ -156,7 +163,9 @@ def access_level(user, password):
         print('Could not access database, please contact admin at admin.tweet.sentiment.123@gmail.com')       
 
 def main(access_level):
-    pass
+    print('\nWhat stock would you like to get price and sentiment data for?\n')
+    stock_p_item = input('Stock: ')
+    print(stock_p_item)
     
 welcome_screen()
 

@@ -47,7 +47,6 @@ class Validation():
         
         if len(data_to_val) > 6:
             if digit and lowercase and punc and upper == True:
-                print('This password is valid.')
                 return True
             else:
                 print('This password is not valid, must be alphanumeric with lowercase, uppercase & punctuation symbols\n')
