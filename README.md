@@ -147,9 +147,21 @@ The deployment terminal is set to 80 columns by 24 rows. That means that each li
 
 - Regular expressions were taken from cheetsheet[MyGreatLearning](https://www.mygreatlearning.com/blog/regular-expression-in-python/)
 
+- Regualr expressions of emojis was sourced from this cheatsheet[Github](https://gist.github.com/Alex-Just/e86110836f3f93fe7932290526529cd1)
+
 #### Libraries
 
 - Imported Tweepy library to help extend this project and to connect with the Twitter API [Tweepy](https://docs.tweepy.org/en/stable/)
+
+- Gspread
+
+- re - regualr expressions
+
+- JSON
+
+- getpass this is to hide password for user from terminal output to ensure their data is protected
+
+- TextBlob is imported to help woth polarity analysis of tweets[TextBlob](https://textblob.readthedocs.io/en/dev/)
 
 ### Content
 
