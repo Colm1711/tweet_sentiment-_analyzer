@@ -19,14 +19,6 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPEAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPEAD_CLIENT.open('authentication')
 
-
-# Vars
-
-# Googlesheet vars
-users = SHEET.worksheet('Users')
-user_data = users.col_values(1)
-passw_data = users.col_values(2)
-
 # Welcome message
 
 def welcome_screen():
@@ -153,7 +145,6 @@ def access_level(user, password):
     pswd_val = sheets.get_col_vals('Users', 2)
     # check to see if DB accessible
     # checking DB to see if user email and password are registered users
-    # starts the main python file
     try:
         if user in user_val and password in pswd_val:
             main(admin_access, user, password)
