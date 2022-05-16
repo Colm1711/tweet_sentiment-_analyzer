@@ -15,11 +15,7 @@ class Validation():
 
         This Class handles validating of information.
 
-        Params:
-
-        Returns:
-
-    
+   
     """
 
 
@@ -52,7 +48,7 @@ class Validation():
                 print('This password is not valid, must be alphanumeric with lowercase, uppercase & punctuation symbols\n')
                 return False
         else:
-            print(f'Something went with the vlaidatoin of this password')
+            print(f'This password is not 6 characters long!')
 
     def email_valid(email):
         """
