@@ -1,11 +1,10 @@
 # Imports
 
-import json
 import gspread
 from google.oauth2.service_account import Credentials
 from getpass import getpass
 from validation import Validation
-
+from sheets import Sheets as sheets
 
 
 # Constants
@@ -120,7 +119,7 @@ def user_registration():
     print('Please note that your email must include @ symbol')
     email = input('Please enter your email: ')
 
-     # This handles user registering password
+    # This handles user registering password
     print('Please your password must be at least 6 charecters long and must be alphanumeric')
     password = getpass('Please enter your password: ')
     val_email = Validation.email_valid(email)
@@ -148,31 +147,35 @@ def access_level(user, password):
     admin_access = False
 
     # accessing the admin creds file
-    creds_admin = open('admin_creds.json')
-    admin_data = json.load(creds_admin)
-    admin_user = admin_data.get('user')
-    admin_passw = admin_data.get('passw')
-    
+    admin_user = sheets.get_col_vals('Admin', 1)
+    admin_passw = sheets.get_col_vals('Admin', 2)
+    user_val = sheets.get_col_vals('Users', 1)  
+    pswd_val = sheets.get_col_vals('Users', 2)
     # check to see if DB accessible
+    # checking DB to see if user email and password are registered users
+    # starts the main python file
     try:
-        # checking DB to see if user email and password are registered users
-        # starts the main python file
-        if user in user_data[1:] and password in passw_data[1:]:
-            main(admin_access)
+        if user in user_val and password in pswd_val:
+            main(admin_access, user, password)
         # user email and password are admin access updating var to True
         # starts the main python file
-        elif user == admin_user and password == admin_passw:
+        elif user in admin_user and password in admin_passw:
             admin_access = True
-            main(admin_access)
+            main(admin_access, user, password)
+            return admin_access
+        else:
+            print('You have not entered valid details\n')
+            user_login_details()
         return admin_access
-    except OSError:
-        print('Could not access database, please contact admin at admin')
+    except:
+        print('Could not access database')
   
 
-def main(access_level):
-    print('\nWhat stock would you like to get price and sentiment data for?\n')
-    stock_p_item = input('Stock: ')
-    print(stock_p_item)
+def main(access_level, user, password):
+
+        print('\nWhat stock would you like to get price and sentiment data for?\n')
+        stock_p_item = input('Stock: ')
+        print(stock_p_item)
     
 welcome_screen()
 
