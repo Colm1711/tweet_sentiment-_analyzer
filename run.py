@@ -5,6 +5,7 @@ from google.oauth2.service_account import Credentials
 from getpass import getpass
 from validation import Validation
 from sheets import Sheets as sheets
+from tweet_api import Tweet_Sentiment as tweet
 
 
 # Constants
@@ -76,7 +77,7 @@ def user_login_details():
     val_password = Validation.psw_valid(password)
     if(val_email and val_password):
         return access_level(email, password)
-    else:   
+    else:  
         print(f'This information failed validation.')
         user_login_details()
          
@@ -145,28 +146,29 @@ def access_level(user, password):
     pswd_val = sheets.get_col_vals('Users', 2)
     # check to see if DB accessible
     # checking DB to see if user email and password are registered users
-    try:
-        if user in user_val and password in pswd_val:
-            main(admin_access, user, password)
-        # user email and password are admin access updating var to True
-        # starts the main python file
-        elif user in admin_user and password in admin_passw:
-            admin_access = True
-            main(admin_access, user, password)
-            return admin_access
-        else:
-            print('You have not entered valid details\n')
-            user_login_details()
+    if user in user_val and password in pswd_val:
+        main(admin_access)
+    # user email and password are admin access updating var to True
+    # starts the main python file
+    elif user in admin_user and password in admin_passw:
+        admin_access = True
+        main(admin_access)
         return admin_access
-    except:
-        print('Could not access database')
-  
+    else:
+        print('You have not entered valid details\n')
+        user_login_details()
+    return admin_access
+ 
 
-def main(access_level, user, password):
-
-        print('\nWhat stock would you like to get price and sentiment data for?\n')
-        stock_p_item = input('Stock: ')
-        print(stock_p_item)
-    
+def main(access_level):
+        if access_level == True:
+            print('\nYou Have accessed admin level\n')
+        else:
+            print('\nWelcome to the home screen!\n')
+            print('\nWhat stock would you like to get price and sentiment data for?\n')
+            stock_p_item = input()
+            print(stock_p_item)
+            print(tweet.polarity_analysis(stock_p_item)) 
+            main(access_level=False)
 welcome_screen()
 
