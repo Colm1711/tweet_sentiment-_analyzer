@@ -59,8 +59,10 @@ def get_tweets_from_timeline():
             str
 
     """
-    tweets_timeline = api.search_tweets(q=search_term, lang='en')
+    # have set language to english and limited the search to first 200
+    tweets_timeline = api.search_tweets(q=search_term, lang='en', count=2000, tweet_mode='extended')
     return tweets_timeline
+
 
 # Clean data of retweets, hastags, username handles and hyperlinks
 def clean_tweets(tweets_to_clean):
@@ -73,13 +75,15 @@ def clean_tweets(tweets_to_clean):
             str
 
     Returns:
-            str
+            list(str's)
 
     """
-    cleaned_tweets = ""
-    # string_of_tweets = ""
-    for tweet in tweets_to_clean:
-        clean_text = tweet.text.replace('RT', '')
+    tweet_list = []
+
+    tweets_dict = {tweet.full_text for tweet in tweets_to_clean}
+    for tweet in tweets_dict:
+        clean_text = tweet.replace('RT', '')
+        clean_text = clean_text.replace('\n', '')
         clean_text = clean_text.replace('#', '')
         if clean_text.startswith('@'):
             remove = clean_text.index(' ')
@@ -89,36 +93,37 @@ def clean_tweets(tweets_to_clean):
             clean_text = clean_text[remove+2:]
         clean_text = re.sub('http://\S+|https://\S+', '', clean_text)
         clean_text = re.sub(pattern, ' ', clean_text)
-    
-        cleaned_tweets += clean_text
-    return cleaned_tweets
+        tweet_list.append(clean_text)
+    return tweet_list
 
 def polarity_analysis(data):
-        """
+    """
     Description:
 
     This function scans the cleaned tweets and returns either positive, negative or neutral polarity status.
 
     Params:
-            str
+        list(str)
 
     Returns:
-            tuple(float + str)
+        tuple(float + str)
 
-    """    
+    """   
+ 
     polarity = 0
+    positive = 0
+    negative = 0
+    neutral = 0
 
-    analysis = TextBlob(data)
-    polarity = analysis.polarity * 10
-
-    if polarity > 1:
-        status = 'positive'
-    elif polarity < 1:
-        status = 'negative'
-    else:
-        status = 'neutral'
-
-    return polarity, status
-
-
+    for tweet in data:
+        analysis = TextBlob(tweet)
+        tweet_data_polarity = analysis.polarity
+        if tweet_data_polarity > 0:
+            positive += 1
+        elif tweet_data_polarity < 0:
+            negative += 1
+        else:
+            neutral += 1
+        polarity += analysis.polarity
+    return f'Polarity: {polarity}\nAmount of positive: {positive}\nAmount of negative: {negative}\nAmount of neutral: {neutral}'
 
