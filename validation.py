@@ -52,9 +52,7 @@ class Validation():
                 print('This password is not valid, must be alphanumeric with lowercase, uppercase & punctuation symbols\n')
                 return False
         else:
-            print('\nThis is not a valid password.')
-            #Setting to system exit for now. Need to add handling of incorrect information
-            return sys.exit()
+            print(f'Something went with the vlaidatoin of this password')
 
     def email_valid(email):
         """

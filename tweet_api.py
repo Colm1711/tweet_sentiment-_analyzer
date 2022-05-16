@@ -136,5 +136,5 @@ def polarity_analysis(data):
         else:
             neutral += 1
         polarity += analysis.polarity
-    return f'Polarity: {polarity}\nAmount of positive: {positive}\nAmount of negative: {negative}\nAmount of neutral: {neutral}'
+    return f'Polarity for {search_term} is: {polarity}\nAmount of positive: {positive}\nAmount of negative: {negative}\nAmount of neutral: {neutral}'
 

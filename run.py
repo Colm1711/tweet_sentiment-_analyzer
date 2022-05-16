@@ -76,15 +76,21 @@ def user_login_details():
             str - password
     
     """
-    # This handles user login details
+
     email = input('Please enter your email: ')
     password = getpass('Please enter your password: ')
+        
     # checks details are valid email and password
     val_email = Validation.email_valid(email)
     val_password = Validation.psw_valid(password)
     if(val_email and val_password):
         return access_level(email, password)
+    else:   
+        print(f'This information failed validation.')
+        user_login_details()
+         
 
+        
 def user_registration():
     """
     Description:
@@ -160,7 +166,8 @@ def access_level(user, password):
             main(admin_access)
         return admin_access
     except OSError:
-        print('Could not access database, please contact admin at admin.tweet.sentiment.123@gmail.com')       
+        print('Could not access database, please contact admin at admin')
+  
 
 def main(access_level):
     print('\nWhat stock would you like to get price and sentiment data for?\n')
