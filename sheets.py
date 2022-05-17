@@ -1,4 +1,5 @@
 import gspread
+import pandas as pd
 from google.oauth2.service_account import Credentials
 
 # Constants
@@ -212,3 +213,18 @@ class Sheets():
         except Exception as inst:
             return f'{inst} error! Failed to clear contents of {worksheet}.\n'
 
+    def show_worksheet(data):
+        """
+        Description:
+
+        This shows worksheet in table form
+
+        Params:
+                data(str) - sheet to display
+
+        Returns:
+                prints table to terminal
+
+        """        
+        dataframe = pd.DataFrame(data.get_all_records())
+        print(dataframe)
