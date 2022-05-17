@@ -72,17 +72,9 @@ def user_login_details():
     email = input('Please enter your email: ')
     password = getpass('Please enter your password: ')
         
-    # checks details are valid email and password
-    val_email = Validation.email_valid(email)
-    val_password = Validation.psw_valid(password)
-    if(val_email and val_password):
-        return access_level(email, password)
-    else:  
-        print(f'This information failed validation.')
-        user_login_details()
-         
+    return access_level(email, password)
 
-        
+
 def user_registration():
     """
     Description:
@@ -117,7 +109,8 @@ def user_registration():
     password = getpass('Please enter your password: ')
     val_email = Validation.email_valid(email)
     val_password = Validation.psw_valid(password)
-    
+    data = name, institution, email, password
+    sheets.update_worksheet_row(data, 'Registration applications')
     return name, institution, val_email, val_password
 
 
@@ -127,13 +120,14 @@ def access_level(user, password):
 
     This function handles access level when logging in.
     It is set to False by default.
+    Runs main() with update.
 
     Params:
             str - user
             str - password 
 
     Returns:
-            Boolean - True or False
+             Boolean - True or False
 
     """
     # setting access level to default of False
@@ -153,13 +147,11 @@ def access_level(user, password):
     elif user in admin_user and password in admin_passw:
         admin_access = True
         main(admin_access)
-        return admin_access
     else:
         print('You have not entered valid details\n')
         user_login_details()
-    return admin_access
+  
  
-
 def main(access_level):
         if access_level == True:
             print('\nYou Have accessed admin level\n')
