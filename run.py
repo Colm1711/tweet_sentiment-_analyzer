@@ -161,40 +161,109 @@ def main(access_level):
         3: 'Exit',
         }
         admin_menu = {
-        1: 'View Users list?',
-        2: 'View User registration list?',
-        3: 'Exit',
+        1: 'View worksheets',    
+        2: 'View Users list?',
+        3: 'View Admin list?',
+        4: 'View User registration list?',
+        5: 'Exit',
         }
         if access_level == True:
             print('\nYou have accessed admin level\n')
             print('What would you like to do?\n')
-            # Menu
+            # Admin Menu
             for key in admin_menu.keys():
-                print(f'{key} - {user_menu[key]}')
+                print(f'{key} - {admin_menu[key]}')
             option = int(input())
+            # View Worksheets
             if option == 1:
-                print('\nUsers list\n')
+                print('Sheets:\n')
+                lists = sheets.get_worksheets()
+                for list in lists:
+                    index = lists.index(list) + 1
+                    print(f'{index}: {list}')
+                print('\nReturn to main menu? - 4')
+                choice = input('\nPlease enter choice: ')
+                # Users list
+                if int(choice) == 1:
+                    print('Users:')
+                    users_name = sheets.get_col_vals('Users', 1)
+                    users_paswd = sheets.get_col_vals('Users', 2)
+                    print(users_name)
+                    print(users_paswd)
+                    main(True)
+                # Admin list
+                elif int(choice) == 2:
+                    print('Admin:')
+                    admins_name = sheets.get_col_vals('Admin', 1)
+                    admins_paswd = sheets.get_col_vals('Admin', 2)
+                    print(admins_name)
+                    print(admins_paswd)
+                    main(True)
+                # User registration list
+                elif int(choice) == 3:
+                    print('User registration list')
+                    reg_name = sheets.get_col_vals('Registration applications', 1)
+                    reg_org = sheets.get_col_vals('Registration applications', 2)
+                    reg_email = sheets.get_col_vals('Registration applications', 3)
+                    reg_paswd = sheets.get_col_vals('Registration applications', 4)
+                    print(reg_name)
+                    print(reg_org)  
+                    print(reg_email)  
+                    print(reg_paswd)  
+                    main(True)
+                else:
+                    print('Home')
+                    main(True)
+            # Users list
             elif option == 2:
+                print('\nUsers list\n')
+                users_name = sheets.get_col_vals('Users', 1)
+                users_paswd = sheets.get_col_vals('Users', 2)
+                print(users_name)
+                print(users_paswd)
+                main(True)
+            # Admin list
+            elif option == 3:
+                print('User Admin list')
+                admins_name = sheets.get_col_vals('Admin', 1)
+                admins_paswd = sheets.get_col_vals('Admin', 2)
+                print(admins_name)
+                print(admins_paswd)
+                main(True)
+            # User registration list
+            elif option == 4:
                 print('User registration list')
+                reg_name = sheets.get_col_vals('Registration applications', 1)
+                reg_org = sheets.get_col_vals('Registration applications', 2)
+                reg_email = sheets.get_col_vals('Registration applications', 3)
+                reg_paswd = sheets.get_col_vals('Registration applications', 4)
+                print(reg_name)
+                print(reg_org)  
+                print(reg_email)  
+                print(reg_paswd)
+                main(True)        
             else:
-                print('welcome_screen()') 
+                print('Home')
+                welcome_screen()
+        # User Menu         
         else:
             print('\nWelcome to the home screen!\n')
             print('What would you like to do?\n')
             for key in user_menu.keys():
                 print(f'{key} - {user_menu[key]}')
             option = int(input())
-            
+            # Stock sentiment Option
             if option == 1:
                 print('\nWhat stock would you like to get price and sentiment data for?\n')
                 stock_p_item = input()
-                print(tweet.polarity_analysis(stock_p_item)) 
+                print(tweet.polarity_analysis(stock_p_item))
+            # Saved files 
             elif option == 2:
-                print('Saved files')
+                print('Saved to file?')
+                # files saved == None return false
             else:
-                print('welcome_screen()')                
+                print('Home')
+                welcome_screen()                
                 
-# welcome_screen()
-
-main(True)
+welcome_screen()
 
