@@ -166,11 +166,11 @@ class Sheets():
         """
 
         try:
-            print(f'Updating the following {worksheet}\n')
+            print(f'\nUpdating the following {worksheet}\n')
             wsheet = SHEET.worksheet(worksheet)
             wsheet.append_row(data)
             print(f'Worksheet: {worksheet} updated successfully\n')
-            current_ws = get_worksheets()
+            current_ws = Sheets.get_worksheets()
             return f'\n{current_ws}'
 
         except ValueError as e:
