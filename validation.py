@@ -1,13 +1,13 @@
 # Imports
 
-import sys
 import re
-from string import punctuation, whitespace, digits, ascii_uppercase, ascii_lowercase
+from string import punctuation, digits, ascii_uppercase
 
 
 # CONSTANTS
 
 REGEX = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+
 
 class Validation():
     """
@@ -17,7 +17,6 @@ class Validation():
 
    
     """
-
 
     def psw_valid(data_to_val):
         """
@@ -45,7 +44,8 @@ class Validation():
             if digit and lowercase and punc and upper == True:
                 return True
             else:
-                print('This password is not valid, must be alphanumeric with lowercase, uppercase & punctuation symbols\n')
+                print('This password is not valid, must be alphanumeric with lowercase\
+ , uppercase & punctuation symbols\n')
                 return False
         else:
             print(f'This password is not 6 characters long!')
@@ -72,7 +72,8 @@ class Validation():
             return False
 
     def _has_digit(data_to_val):
-        # This will evaluate if there is a digit and will return true if present.
+        # This will evaluate if there is a digit and will return true if \
+        # present.
         # This is a private function
         pw_has_digits = False
         data_to_val = data_to_val.strip()
@@ -104,7 +105,6 @@ class Validation():
 
         return True
 
-
     def _has_lowercase(data_to_val):
         # This will evaluate if password has lowercase and will return true if 
         # present
@@ -122,10 +122,9 @@ class Validation():
 
         return True
 
-
     def _has_punc(data_to_val):
-        # This will evaluate if password has punctutiations and will return true if 
-        # present
+        # This will evaluate if password has punctutiations and will return 
+        # true if present
         # This is a private function
         pw_has_punc = False
         data_to_val = data_to_val.strip()
