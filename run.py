@@ -8,7 +8,6 @@ from sheets import Sheets as sheets
 from tweet_api import Tweet_Sentiment as tweet
 
 
-
 # Constants
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -22,6 +21,7 @@ GSPEAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPEAD_CLIENT.open('authentication')
 
 # Welcome message
+
 
 def welcome_screen():
     """
@@ -39,8 +39,11 @@ def welcome_screen():
             none
 
     """
-    print('\nWelcome to the Twitter sentiment application. This is designed to retrieve twitter information and add sentimant scores to data.\n')
-    print('If you are returning user please Login. Dont have an account or first time vistor please select the Register option. \n' )
+    print('\nWelcome to the Twitter sentiment application. This is designed to\
+ retrieve sotck data and twitter information adding sentimant scores to\
+ data.\n')
+    print('If you are returning user please Login. Dont have an account or first\
+ time vistor please select the Register option. \n')
 
     log_reg = input('Login(L) or Register(R)? : ')
     if log_reg.lower() == "l" or log_reg.lower() == 'login':
@@ -53,6 +56,7 @@ def welcome_screen():
         welcome_screen()
     else:
         print('Something has gone wrong here.')  
+
 
 def user_login_details():
     """
@@ -106,13 +110,15 @@ def user_registration():
     email = input('Please enter your email: ')
 
     # This handles user registering password
-    print('Please your password must be at least 6 charecters long and must be alphanumeric\n')
+    print('Please your password must be at least 6 charecters long and must be\
+ alphanumeric\n')
     password = getpass('Please enter your password: ')
     val_email = Validation.email_valid(email)
     val_password = Validation.psw_valid(password)
     data = name, institution, email, password
-    sheets.update_worksheet_row(data, 'Registration applications')
-    print(f'\n Returning to Welcome screen, admin team will be in contact\n')
+    curr_sheet = 'Registration applications'
+    sheets.update_worksheet_row(data, curr_sheet)
+    print('\n Returning to Welcome screen, admin team will be in contact\n')
     welcome_screen()
     return name, institution, val_email, val_password
 
@@ -161,25 +167,27 @@ def main(access_level):
 
     Params:
             access level - Boolean
+            
     """
+
     user_menu = {
-    1: 'Get stock price and sentiment?',
-    2: 'View saved files?',
-    3: 'Exit',
+                    1: 'Get stock price and sentiment?',
+                    2: 'View saved files?',
+                    3: 'Exit',
     }
     admin_menu = {
-    1: 'View worksheets',    
-    2: 'View Users list?',
-    3: 'View Admin list?',
-    4: 'View User registration list?',
-    5: 'Exit',
+                    1: 'View worksheets',    
+                    2: 'View Users list?',
+                    3: 'View Admin list?',
+                    4: 'View User registration list?',
+                    5: 'Exit',
     }
 
     user_sheet = SHEET.worksheet('Users')
     admin_sheet = SHEET.worksheet('Admin')
     reg_sheet = SHEET.worksheet('Registration applications')
 
-    if access_level == True:
+    if access_level is True:
         print('\nYou have accessed admin level\n')
         print('What would you like to do?\n')
         # Admin Menu
@@ -198,7 +206,7 @@ def main(access_level):
             # Users list
             if int(choice) == 1:
                 print('\nUsers list\n')
-                users = sheets.show_worksheet(user_sheet)
+                users = sheets().show_worksheet(user_sheet)
                 print('\n\n\nAre you Ready?\n')
                 ready = input('Yes(Y)? This will return you to Homescreen: ')
                 if ready.lower() == 'yes' or 'y':
@@ -206,7 +214,7 @@ def main(access_level):
             # Admin list
             elif int(choice) == 2:
                 print('\nAdmin list\n')
-                admins = sheets.show_worksheet(admin_sheet)
+                admins = sheets().show_worksheet(admin_sheet)
                 print('\n\n\nAre you Ready?\n')
                 ready = input('Yes(Y)? This will return you to Homescreen: ')
                 if ready.lower() == 'yes' or 'y':
@@ -214,7 +222,7 @@ def main(access_level):
             # User registration list
             elif int(choice) == 3:
                 print('\nUser registration list\n')
-                reg_list = sheets.show_worksheet(reg_sheet)
+                reg_list = sheets().show_worksheet(reg_sheet)
                 print('\n\n\nAre you Ready?\n')
                 ready = input('Yes(Y)? This will return you to Homescreen: ')
                 if ready.lower() == 'yes' or 'y':
@@ -224,28 +232,31 @@ def main(access_level):
                 main(True)
         # Users list
         elif option == 2:
-                print('\nUsers list\n')
-                users = sheets.show_worksheet(user_sheet)
-                print('\n\n\nAre you Ready?\n')
-                ready = input('Yes(Y)? This will return you to Homescreen: ')
-                if ready.lower() == 'yes' or 'y':
-                    main(True)
+            print('\nUsers list\n')
+            users = sheets().show_worksheet(user_sheet)
+            print(users)
+            print('\n\n\nAre you Ready?\n')
+            ready = input('Yes(Y)? This will return you to Homescreen: ')
+            if ready.lower() == 'yes' or 'y':
+                main(True)
         # Admin list
         elif option == 3:
-                print('\nAdmin list\n')
-                admins = sheets.show_worksheet(admin_sheet)
-                print('\n\n\nAre you Ready?\n')
-                ready = input('Yes(Y)? This will return you to Homescreen: ')
-                if ready.lower() == 'yes' or 'y':
-                    main(True)
+            print('\nAdmin list\n')
+            admins = sheets().show_worksheet(admin_sheet)
+            print(admins)
+            print('\n\n\nAre you Ready?\n')
+            ready = input('Yes(Y)? This will return you to Homescreen: ')
+            if ready.lower() == 'yes' or 'y':
+                main(True)
         # User registration list
         elif option == 4:
-                print('\nUser registration list\n')
-                reg_list = sheets.show_worksheet(reg_sheet)
-                print('\n\n\nAre you Ready?\n')
-                ready = input('Yes(Y)? This will return you to Homescreen: ')
-                if ready.lower() == 'yes' or 'y':
-                    main(True)        
+            print('\nUser registration list\n')
+            reg_list = sheets().show_worksheet(reg_sheet)
+            print(reg_list)
+            print('\n\n\nAre you Ready?\n')
+            ready = input('Yes(Y)? This will return you to Homescreen: ')
+            if ready.lower() == 'yes' or 'y':
+                main(True)        
         else:
             print('Home')
             welcome_screen()
@@ -258,14 +269,15 @@ def main(access_level):
         option = int(input())
         # Stock sentiment Option
         if option == 1:
-            print('\nWhat stock would you like to get price and sentiment data for?\n')
+            print('\nWhat stock would you like to get price and sentiment data\
+ for?\n')
             stock_p_item = input()
             print(tweet.polarity_analysis(stock_p_item))
             print('\n\n\nAre you Ready?\n')
             ready = input('Yes(Y)? This will return you to Homescreen: ')
             if ready.lower() == 'yes' or 'y':
                 main(False)
-        # Saved files 
+        # Saved retuns  
         elif option == 2:
             print('Saved to file?')
             print('\n\n\nAre you Ready?\n')
@@ -276,5 +288,6 @@ def main(access_level):
             print('Home')
             welcome_screen()                
                 
-welcome_screen()
+
+main(True)
 

@@ -22,13 +22,19 @@ users = SHEET.worksheet('Users')
 user_data = users.col_values(1)
 passw_data = users.col_values(2)
 
+
 class Sheets():
 
-    def new_sheet(input):
+    def __init__(self):
+        self.self = self
+
+    
+    def new_sheet(self, input):
         """
         Description:
 
-        This function creates a new worksheet in main tweet sentiment gspread page.
+        This function creates a new worksheet in main tweet sentiment gspread\
+            page.
 
         Params:
                 str - input of newsheet to be created
@@ -37,13 +43,15 @@ class Sheets():
                 new worksheet in gspread workspace 
 
         """
+        self.input = input
+
         try:
             new_sheet = GSPEAD_CLIENT.create(input)
-            new_sheet.share('tweet.sentiment.123@gmail.com', perm_type='user', role='writer')
+            new_sheet.share('tweet.sentiment.123@gmail.com', perm_type='user',
+                            role='writer')
             print(f'Your new sheet {new_sheet} has been created!\n')
         except Exception as inst:
             print(f'{inst} error! Your new worksheet failed to create.')
-
 
     def get_worksheets():
         """
@@ -66,8 +74,7 @@ class Sheets():
             worksheets_list.append(i.title)
         return worksheets_list
 
-
-    def get_col_value_lists(wrksht):
+    def get_col_value_lists(self, wrksht):
         """
         Description:
 
@@ -85,6 +92,9 @@ class Sheets():
                 cols[i]
 
         """
+
+        self.wrksht = wrksht
+
         col_worksheet = SHEET.worksheet(wrksht)
 
         cols = []
@@ -112,7 +122,7 @@ class Sheets():
         except ValueError as e:
             print(f'Error {e} occurred when retrieving data!')
 
-    def get_row_vals(sheet, row):
+    def get_row_vals(self, sheet, row):
         """
         Description:
 
@@ -126,13 +136,15 @@ class Sheets():
                 list of str's excluding first row.
 
         """
+
+        self.sheet = sheet
+        self.row = row
         try:
             return SHEET.worksheet(sheet).row_values(row)[1:]
         except ValueError as e:
             print(f'Error {e} occurred when retrieving data!')    
         
-
-    def display_worksheets(data):
+    def display_worksheets(self, data):
         """
         Description:
 
@@ -143,13 +155,13 @@ class Sheets():
 
         Returns:
                 list of sheets and index numbers.
-
         """
+        self.data = data
+
         for i in data:
             # adding one as index is to start 1 instead of 0
             index = data.index(i) + 1
             print(f'{index} : {i}')
-
 
     def update_worksheet_row(data, worksheet):
         """
@@ -165,20 +177,16 @@ class Sheets():
                 list of sheets and index numbers.
 
         """
-
         try:
             print(f'\nUpdating the following {worksheet}\n')
             wsheet = SHEET.worksheet(worksheet)
             wsheet.append_row(data)
-            print(f'Worksheet: {worksheet} updated successfully\n')
-            current_ws = Sheets.get_worksheets()
-            return f'\n{current_ws}'
+            return f'Worksheet: {worksheet} updated successfully\n'
 
         except ValueError as e:
             return f'Invalid data {e}\n'   
 
-
-    def del_worksheet(ws):
+    def del_worksheet(self, ws):
         """
         Description:
 
@@ -188,6 +196,7 @@ class Sheets():
                 ws(str) - worksheet to delete
 
         """
+        self.ws = ws
         del_worksheet = SHEET.worksheet(ws)
         try:
             SHEET.del_worksheet(del_worksheet)
@@ -195,8 +204,7 @@ class Sheets():
         except Exception as inst:
             return f'{inst} error! Failed to delete {del_worksheet}.\n'
 
-
-    def clear_worksheet(worksheet):
+    def clear_worksheet(self, worksheet):
         """
         Description:
 
@@ -206,25 +214,30 @@ class Sheets():
             worksheet(str) - worksheet to clear
 
         """
-        worksheet = worksheet
+        self.worksheet = worksheet
+
         try:
             worksheet.clear()
             return f'Worksheeet {worksheet} has been cleared of all values\n'
         except Exception as inst:
             return f'{inst} error! Failed to clear contents of {worksheet}.\n'
 
-    def show_worksheet(data):
+    def show_worksheet(self, data):
         """
         Description:
-
-        This shows worksheet in table form
-
+        
+            This shows worksheet in table form
+    
         Params:
-                data(str) - sheet to display
 
+            data(str) - sheet to display
+    
         Returns:
-                prints table to terminal
 
-        """        
+            prints table to terminal
+
+        """
+        self.data = data
+
         dataframe = pd.DataFrame(data.get_all_records())
-        print(dataframe)
+        return dataframe

@@ -26,8 +26,6 @@ auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 # pass in authentication to API
 api = tweepy.API(auth)
 
- 
-
 # emoji regex search - this was sourced from
 pattern = re.compile(
     "(["
@@ -45,7 +43,11 @@ pattern = re.compile(
     "])"
   )
 
+
 class Tweet_Sentiment():
+    """
+        This is the Tweet sentiment class
+    """
 
     # testing with public tweets from profile
     def get_tweets_from_timeline(search_term):
@@ -62,16 +64,17 @@ class Tweet_Sentiment():
 
         """
         # have set language to english and limited the search to first 200
-        tweets_timeline = api.search_tweets(q=search_term, lang='en', count=2000, tweet_mode='extended')
+        tweets_timeline = api.search_tweets(q=search_term, lang='en', 
+                                            count=2000, tweet_mode='extended')
         return tweets_timeline
-
 
     # Clean data of retweets, hastags, username handles and hyperlinks
     def clean_tweets(tweets_to_clean):
         """
         Description:
 
-        This function cleans the tweets fetched from the homepage of twitter account.
+        This function cleans the tweets fetched from the homepage of twitter\
+ account.
 
         Params:
                 str
@@ -80,6 +83,7 @@ class Tweet_Sentiment():
                 list(str's)
 
         """
+ 
         # list to populate cleaned tweets
         tweet_list = []
 
@@ -116,7 +120,7 @@ class Tweet_Sentiment():
             f string of string data
 
         """   
-    
+
         polarity = 0
         positive = 0
         negative = 0
