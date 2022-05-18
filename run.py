@@ -303,5 +303,5 @@ def main(access_level):
             welcome_screen()                
                 
 
-main(False)
+welcome_screen()
 

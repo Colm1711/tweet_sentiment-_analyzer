@@ -1,7 +1,7 @@
 # Imports
 
 import re
-from string import punctuation, digits, ascii_uppercase
+from string import punctuation, digits, ascii_uppercase, ascii_lowercase
 
 
 # CONSTANTS
