@@ -276,10 +276,28 @@ def main(access_level):
         if option == 1:
             print('\nWhat stock would you like to get price and sentiment data\
  for?\n')
-            print('\Do you want a list of the companies?(Y/N)')
+            print('Do you want a list of the companies?(Y/N)')
             answer = input()
             if answer.lower() == 'y':
-                si.get_companies()
+                s_name_list = si.get_companies()
+                print(s_name_list.iloc[:, [0, 1]])
+                print('\n\n\nAre you Ready?\n')
+                print('Would you like to search for stock data?\n')
+                print('Yes(Y):Stock data. No(N):Homescreen:')
+                stock_search = input()
+                if stock_search.lower() == 'yes' or stock_search.lower() == 'y':
+                    print('\nEnter stock you would like data for:\n')
+                    stock_p_item = input()
+                    stock_ticker = si.get_ticker(stock_p_item)
+                    stock_price = si.get_weeks_stock_data(stock_ticker)
+                    print(stock_price)
+                    print(f'\n{tweet.polarity_analysis(stock_p_item)}')
+                    print('\n\n\nAre you Ready?\n')
+                    ready = input('Yes(Y)? This will return you to Homescreen: ')
+                    if ready.lower() == 'yes' or 'y':
+                        main(False)
+                else:
+                    main(False)
             else:
                 print('\nEnter stock you would like data for:\n')
                 stock_p_item = input()
@@ -303,5 +321,5 @@ def main(access_level):
             welcome_screen()                
                 
 
-welcome_screen()
+main(False)
 
