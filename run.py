@@ -1,6 +1,7 @@
 # Imports
 
 import gspread
+import stocks_info as si
 from google.oauth2.service_account import Credentials
 from getpass import getpass
 from validation import Validation
@@ -171,7 +172,7 @@ def main(access_level):
     """
 
     user_menu = {
-                    1: 'Get stock price and sentiment?',
+                    1: 'Get stocks price and sentiment?',
                     2: 'View saved files?',
                     3: 'Exit',
     }
@@ -207,6 +208,7 @@ def main(access_level):
             if int(choice) == 1:
                 print('\nUsers list\n')
                 users = sheets().show_worksheet(user_sheet)
+                print(users)
                 print('\n\n\nAre you Ready?\n')
                 ready = input('Yes(Y)? This will return you to Homescreen: ')
                 if ready.lower() == 'yes' or 'y':
@@ -215,6 +217,7 @@ def main(access_level):
             elif int(choice) == 2:
                 print('\nAdmin list\n')
                 admins = sheets().show_worksheet(admin_sheet)
+                print(admins)
                 print('\n\n\nAre you Ready?\n')
                 ready = input('Yes(Y)? This will return you to Homescreen: ')
                 if ready.lower() == 'yes' or 'y':
@@ -223,6 +226,7 @@ def main(access_level):
             elif int(choice) == 3:
                 print('\nUser registration list\n')
                 reg_list = sheets().show_worksheet(reg_sheet)
+                print(reg_sheet)
                 print('\n\n\nAre you Ready?\n')
                 ready = input('Yes(Y)? This will return you to Homescreen: ')
                 if ready.lower() == 'yes' or 'y':
@@ -252,6 +256,7 @@ def main(access_level):
         elif option == 4:
             print('\nUser registration list\n')
             reg_list = sheets().show_worksheet(reg_sheet)
+            print(reg_sheet)
             print(reg_list)
             print('\n\n\nAre you Ready?\n')
             ready = input('Yes(Y)? This will return you to Homescreen: ')
@@ -271,12 +276,21 @@ def main(access_level):
         if option == 1:
             print('\nWhat stock would you like to get price and sentiment data\
  for?\n')
-            stock_p_item = input()
-            print(tweet.polarity_analysis(stock_p_item))
-            print('\n\n\nAre you Ready?\n')
-            ready = input('Yes(Y)? This will return you to Homescreen: ')
-            if ready.lower() == 'yes' or 'y':
-                main(False)
+            print('\Do you want a list of the companies?(Y/N)')
+            answer = input()
+            if answer.lower() == 'y':
+                si.get_companies()
+            else:
+                print('\nEnter stock you would like data for:\n')
+                stock_p_item = input()
+                stock_ticker = si.get_ticker(stock_p_item)
+                stock_price = si.get_weeks_stock_data(stock_ticker)
+                print(stock_price)
+                print(f'\n{tweet.polarity_analysis(stock_p_item)}')
+                print('\n\n\nAre you Ready?\n')
+                ready = input('Yes(Y)? This will return you to Homescreen: ')
+                if ready.lower() == 'yes' or 'y':
+                    main(False)
         # Saved retuns  
         elif option == 2:
             print('Saved to file?')
@@ -289,5 +303,5 @@ def main(access_level):
             welcome_screen()                
                 
 
-main(True)
+main(False)
 
