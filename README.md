@@ -116,6 +116,8 @@ This project looks to collect tweets for the user and clean the data for investm
 - when attempting to hook up smtplib to tweet sentiment gmail account to send user registration froms. Recieved '[Errno 101] Network is unreachable' error
   message. Data online points to firewall issues. No known solution.
 
+- There is a bug when the incorrect option is selected in login and rehgistration in the welcome function.
+
 [Back to top](<#contents>)
 
 ## Deployment
@@ -149,6 +151,10 @@ The deployment terminal is set to 80 columns by 24 rows. That means that each li
 
 - Regualr expressions of emojis was sourced from this cheatsheet[Github](https://gist.github.com/Alex-Just/e86110836f3f93fe7932290526529cd1)
 
+- Dataframes information was sourced from [w3schools](https://www.w3schools.com/python/pandas/pandas_dataframes.asp)
+
+- Manilpoualiton of spreadhseets was sourced from here[gspread](https://docs.gspread.org/en/latest/user-guide.html)
+
 #### Libraries
 
 - Imported Tweepy library to help extend this project and to connect with the Twitter API [Tweepy](https://docs.tweepy.org/en/stable/)
@@ -162,6 +168,10 @@ The deployment terminal is set to 80 columns by 24 rows. That means that each li
 - getpass this is to hide password for user from terminal output to ensure their data is protected
 
 - TextBlob is imported to help woth polarity analysis of tweets[TextBlob](https://textblob.readthedocs.io/en/dev/)
+
+- yfinance 
+
+- yahoo_fin.stock_info
 
 ### Content
 
