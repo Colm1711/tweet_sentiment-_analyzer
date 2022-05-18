@@ -153,7 +153,9 @@ The deployment terminal is set to 80 columns by 24 rows. That means that each li
 
 - Dataframes information was sourced from [w3schools](https://www.w3schools.com/python/pandas/pandas_dataframes.asp)
 
-- Manilpoualiton of spreadhseets was sourced from here[gspread](https://docs.gspread.org/en/latest/user-guide.html)
+- Manipulation of spreadhseets was sourced from here[gspread](https://docs.gspread.org/en/latest/user-guide.html)
+
+- how to set dates for stock look back was sourced here[python.org](https://docs.python.org/3/library/datetime.html#timedelta-objects)
 
 #### Libraries
 
