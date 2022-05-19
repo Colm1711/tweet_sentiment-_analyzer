@@ -21,7 +21,7 @@ def get_companies():
 def get_ticker(company_name):
     # collects list from top 500 companys
     stock_list = si.tickers_sp500(include_company_data=True)
-    # fileter out just company security and symbol
+    # filter out just company security and symbol
     df_list = stock_list.iloc[:, [0, 1]]
     # setting row return to length of data
     pd.set_option('display.max_rows', len(df_list))
@@ -38,5 +38,22 @@ def get_ticker(company_name):
 def get_weeks_stock_data(company_symbol):
     # getting the previous weeks worth of data
     stock_price_data = yf.download(company_symbol, start=WEEK_LOOKBACK,
-                                   end=TODAY, group_by='ticker')
+                                   end=TODAY, group_by='ticker', rounding=True, actions=True)
     return stock_price_data
+
+def get_quote_table(ticker):
+    #This collects teh quote table contents that has price 
+    quote_table = si.get_quote_table(ticker)
+    PE = quote_table
+    return quote_table
+
+def get_dividends(qtable):
+    dividends = qtable['Forward Dividend & Yield'].split()
+    div = dividends[0]
+    yld = dividends[1]
+    return div, yld
+
+def get_pe_ratio(qtable):
+    PE = qtable['PE Ratio (TTM)']
+    return PE
+    
