@@ -159,6 +159,8 @@ The deployment terminal is set to 80 columns by 24 rows. That means that each li
 
 - Yahoo finance reference (https://algotrading101.com/learn/yahoo-finance-api-guide/)
 
+- Gspread formating (https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells)
+
 #### Libraries
 
 - Imported Tweepy library to help extend this project and to connect with the Twitter API [Tweepy](https://docs.tweepy.org/en/stable/)
