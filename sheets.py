@@ -226,13 +226,20 @@ class Sheets():
 
 
 # TESTING OF ADDING STOCK DATA
+
+#sets name
 # name = 'Stock'
 # Ssd = GSPEAD_CLIENT.open(name)
-# Just need to add if exists for the spreadsheets
 
-#2Adds new sheet
+
+#2Adds new sheet if one doesn't exist
 # sw = Ssd.add_worksheet(title='Stock Data', rows=100, cols=100)
+
+
+#b
+# Needs to eb sepreate
 # data = ['Stock Name', 'Dividends', 'P/E', 'Polarity']
+# sw = Ssd.get_worksheet(0)
 # srow = sw.append_row(data)
 
 
