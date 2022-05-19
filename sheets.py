@@ -67,7 +67,7 @@ class Sheets():
 
         worksheets_list = []
 
-        worksheet_list = wksheet.worksheets()
+        worksheet_list = wksheet
         for i in worksheet_list:
             worksheets_list.append(i.title)
         return worksheets_list
@@ -172,7 +172,7 @@ class Sheets():
                 worksheet(str) - worsheet to update
 
         Returns:
-                list of sheets and index numbers.
+                print message of success
 
         """
         try:
@@ -225,10 +225,9 @@ class Sheets():
 
 
 
-#1Creates new sheet stock
-name = 'Stock'
-Ssd = GSPEAD_CLIENT.open(name)
-# nw = Sheets().new_sheet(name)
+# TESTING OF ADDING STOCK DATA
+# name = 'Stock'
+# Ssd = GSPEAD_CLIENT.open(name)
 # Just need to add if exists for the spreadsheets
 
 #2Adds new sheet
@@ -237,14 +236,41 @@ Ssd = GSPEAD_CLIENT.open(name)
 # srow = sw.append_row(data)
 
 
-#3gets rid of the first defaul sheet
+#3gets rid of the first default sheet
 # dele = Ssd.get_worksheet(0)
 # Ssd.del_worksheet(dele)
 
 
-#4Make First rpw bold
+#4Make First row bold, background blue, text white and centers text.
 # upd = Ssd.get_worksheet(0)
-# upd.format('1', {'textFormat': {'bold': True}})
+# print(upd)
+# #header
+# upd.format('1', {
+#     "backgroundColor": {
+#       "red": 0.0,
+#       "green": 0.0,
+#       "blue": 1.0
+#     },
+#     "horizontalAlignment": "CENTER",
+#     "textFormat": {
+#       "foregroundColor": {
+#         "red": 1.0,
+#         "green": 1.0,
+#         "blue": 1.0
+#       },
+#       "fontSize": 12,
+#       "bold": True
+#     }
+# }
+
+# )
+# #rows
+# upd.format('2:99', {
+#     "horizontalAlignment": "CENTER",
+#       "fontSize": 10
+#     }
+# )
+
 
 
 #USer to Add new data
