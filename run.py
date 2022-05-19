@@ -6,7 +6,7 @@ from google.oauth2.service_account import Credentials
 from getpass import getpass
 from validation import Validation
 from sheets import Sheets as sheets
-from tweet_api import Tweet_Sentiment as tweet
+from tweet_api import TweetSentiment as tweet
 
 
 # Constants
@@ -56,7 +56,7 @@ def welcome_screen():
         log_reg = input('Login(L) or Register(R)? : ')
         welcome_screen()
     else:
-        print('Something has gone wrong here.')  
+        print('Something has gone wrong here.')
 
 
 def user_login_details():
@@ -72,12 +72,10 @@ def user_login_details():
 
             str - email
             str - password
-    
     """
 
     email = input('Please enter your email: ')
     password = getpass('Please enter your password: ')
-        
     return access_level(email, password)
 
 
@@ -96,7 +94,6 @@ def user_registration():
             str - institution
             str - val_email
             str - val_password
-    
     """
     # This handles user registering name
     print('Please fill out your details: \n')
@@ -134,8 +131,7 @@ def access_level(user, password):
 
     Params:
             str - user
-            str - password 
-
+            str - password
     Returns:
              Boolean - True or False
 
@@ -146,7 +142,7 @@ def access_level(user, password):
     # accessing the admin creds file
     admin_user = sheets.get_col_vals('Admin', 1)
     admin_passw = sheets.get_col_vals('Admin', 2)
-    user_val = sheets.get_col_vals('Users', 1)  
+    user_val = sheets.get_col_vals('Users', 1)
     pswd_val = sheets.get_col_vals('Users', 2)
     # check to see if DB accessible
     # checking DB to see if user email and password are registered users
@@ -160,15 +156,14 @@ def access_level(user, password):
     else:
         print('You have not entered valid details\n')
         user_login_details()
-  
- 
+
+
 def main(access_level):
     """
     This function handles Admin and user menu and options.
 
     Params:
             access level - Boolean
-            
     """
 
     user_menu = {
@@ -177,7 +172,7 @@ def main(access_level):
                     3: 'Exit',
     }
     admin_menu = {
-                    1: 'View worksheets',    
+                    1: 'View worksheets',
                     2: 'View Users list?',
                     3: 'View Admin list?',
                     4: 'View User registration list?',
@@ -199,9 +194,9 @@ def main(access_level):
         if option == 1:
             print('Sheets:\n')
             lists = sheets.get_worksheets()
-            for list in lists:
-                index = lists.index(list) + 1
-                print(f'{index}: {list}')
+            for li in lists:
+                index = lists.index(li) + 1
+                print(f'{index}: {li}')
             print('\nReturn to main menu? - 4')
             choice = input('\nPlease enter choice: ')
             # Users list
@@ -261,11 +256,11 @@ def main(access_level):
             print('\n\n\nAre you Ready?\n')
             ready = input('Yes(Y)? This will return you to Homescreen: ')
             if ready.lower() == 'yes' or 'y':
-                main(True)        
+                main(True)
         else:
             print('Home')
             welcome_screen()
-    # User Menu         
+    # User Menu
     else:
         print('\nWelcome to the home screen!\n')
         print('What would you like to do?\n')
@@ -285,7 +280,8 @@ def main(access_level):
                 print('Would you like to search for stock data?\n')
                 print('Yes(Y):Stock data. No(N):Homescreen:')
                 stock_search = input()
-                if stock_search.lower() == 'yes' or stock_search.lower() == 'y':
+                if stock_search.lower() == 'yes'\
+                        or stock_search.lower() == 'y':
                     print('\nEnter stock you would like data for:\n')
                     stock_p_item = input()
                     stock_ticker = si.get_ticker(stock_p_item)
@@ -293,7 +289,8 @@ def main(access_level):
                     print(stock_price)
                     print(f'\n{tweet.polarity_analysis(stock_p_item)}')
                     print('\n\n\nAre you Ready?\n')
-                    ready = input('Yes(Y)? This will return you to Homescreen: ')
+                    ready = input('Yes(Y)? This will return you to Homescreen:\
+                                  ')
                     if ready.lower() == 'yes' or 'y':
                         main(False)
                 else:
@@ -309,7 +306,7 @@ def main(access_level):
                 ready = input('Yes(Y)? This will return you to Homescreen: ')
                 if ready.lower() == 'yes' or 'y':
                     main(False)
-        # Saved retuns  
+        # Saved retuns
         elif option == 2:
             print('Saved to file?')
             print('\n\n\nAre you Ready?\n')
@@ -318,8 +315,6 @@ def main(access_level):
                 main(False)
         else:
             print('Home')
-            welcome_screen()                
-                
+            welcome_screen()
 
 main(False)
-

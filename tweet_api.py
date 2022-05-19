@@ -44,12 +44,12 @@ pattern = re.compile(
   )
 
 
-class Tweet_Sentiment():
+class TweetSentiment():
     """
         This is the Tweet sentiment class
     """
 
-    # testing with public tweets from profile
+# testing with public tweets from profile
     def get_tweets_from_timeline(search_term):
         """
         Description:
@@ -64,7 +64,7 @@ class Tweet_Sentiment():
 
         """
         # have set language to english and limited the search to first 200
-        tweets_timeline = api.search_tweets(q=search_term, lang='en', 
+        tweets_timeline = api.search_tweets(q=search_term, lang='en',
                                             count=2000, tweet_mode='extended')
         return tweets_timeline
 
@@ -83,7 +83,6 @@ class Tweet_Sentiment():
                 list(str's)
 
         """
- 
         # list to populate cleaned tweets
         tweet_list = []
 
@@ -105,7 +104,8 @@ class Tweet_Sentiment():
                 clean_text = clean_text[remove_space_at+2:]
             # removing any links
             clean_text = re.sub('http://\S+|https://\S+', '', clean_text)
-            # removing any emojis, the list was sourced externally. Ref in README file.
+            # removing any emojis, the list was sourced externally. Ref in
+            # README file.
             clean_text = re.sub(pattern, ' ', clean_text)
             tweet_list.append(clean_text)
         return tweet_list
@@ -114,27 +114,28 @@ class Tweet_Sentiment():
         """
         Description:
 
-        This function scans the cleaned tweets and returns either positive, negative or neutral polarity status.
+        This function scans the cleaned tweets and returns either positive,\
+        negative or neutral polarity status.
 
         Returns:
             f string of string data
 
-        """   
+        """
 
         polarity = 0
         positive = 0
         negative = 0
         neutral = 0
 
-        t_data = Tweet_Sentiment.get_tweets_from_timeline(data)
-        data_t = Tweet_Sentiment.clean_tweets(t_data)
+        t_data = TweetSentiment.get_tweets_from_timeline(data)
+        data_t = TweetSentiment.clean_tweets(t_data)
 
         # unpacks list for individual tweets
         for tweet in data_t:
             # creating textblob object for analysis
             analysis = TextBlob(tweet)
             # using in built func to analyze polarity of each tweet
-            tweet_data_polarity = analysis.polarity
+            tweet_data_polarity = analysis.sentiment.polarity
             # assigning positive, negative or neutral based on polarity score
             if tweet_data_polarity > 0:
                 positive += 1
@@ -143,5 +144,5 @@ class Tweet_Sentiment():
             else:
                 neutral += 1
             polarity += analysis.polarity
-        return f'Polarity for {data} is: {polarity}\nAmount of positive: {positive}\nAmount of negative: {negative}\nAmount of neutral: {neutral}'
-
+        return f'Polarity for {data} is: {polarity}\nAmount of positive:\
+ {positive}\nAmount of negative: {negative}\nAmount of neutral: {neutral}'

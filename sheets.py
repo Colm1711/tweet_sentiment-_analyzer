@@ -28,7 +28,6 @@ class Sheets():
     def __init__(self):
         self.self = self
 
-    
     def new_sheet(self, input):
         """
         Description:
@@ -40,7 +39,7 @@ class Sheets():
                 str - input of newsheet to be created
 
         Returns:
-                new worksheet in gspread workspace 
+                new worksheet in gspread workspace
 
         """
         self.input = input
@@ -60,12 +59,11 @@ class Sheets():
         This function returns a list worksheets in main.
 
         Params:
-                
 
         Returns:
-                list of worksheet in gspread workspace 
+                list of worksheet in gspread workspace
 
-        """    
+        """
 
         worksheets_list = []
 
@@ -81,14 +79,14 @@ class Sheets():
         This function returns a list worksheets in main.
 
         Params:
-                
+
 
         Returns:
-                list of lists - cols are the nested list. 
+                list of lists - cols are the nested list.
                 Returns first 10 by default.
-                
-                ex. access list item: 
-                
+
+                ex. access list item:
+
                 cols[i]
 
         """
@@ -142,8 +140,8 @@ class Sheets():
         try:
             return SHEET.worksheet(sheet).row_values(row)[1:]
         except ValueError as e:
-            print(f'Error {e} occurred when retrieving data!')    
-        
+            print(f'Error {e} occurred when retrieving data!')
+
     def display_worksheets(self, data):
         """
         Description:
@@ -184,7 +182,7 @@ class Sheets():
             return f'Worksheet: {worksheet} updated successfully\n'
 
         except ValueError as e:
-            return f'Invalid data {e}\n'   
+            return f'Invalid data {e}\n'
 
     def del_worksheet(self, ws):
         """
@@ -225,13 +223,13 @@ class Sheets():
     def show_worksheet(self, data):
         """
         Description:
-        
+
             This shows worksheet in table form
-    
+
         Params:
 
             data(str) - sheet to display
-    
+
         Returns:
 
             prints table to terminal
