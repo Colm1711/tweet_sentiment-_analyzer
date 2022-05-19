@@ -52,7 +52,7 @@ class Sheets():
         except Exception as inst:
             print(f'{inst} error! Your new worksheet failed to create.')
 
-    def get_worksheets():
+    def get_worksheets(wksheet):
         """
         Description:
 
@@ -67,7 +67,7 @@ class Sheets():
 
         worksheets_list = []
 
-        worksheet_list = SHEET.worksheets()
+        worksheet_list = wksheet.worksheets()
         for i in worksheet_list:
             worksheets_list.append(i.title)
         return worksheets_list
@@ -176,31 +176,12 @@ class Sheets():
 
         """
         try:
-            print(f'\nUpdating the following {worksheet}\n')
             wsheet = SHEET.worksheet(worksheet)
             wsheet.append_row(data)
             return f'Worksheet: {worksheet} updated successfully\n'
 
         except ValueError as e:
             return f'Invalid data {e}\n'
-
-    def del_worksheet(self, ws):
-        """
-        Description:
-
-        This deltes a worksheet.
-
-        Params:
-                ws(str) - worksheet to delete
-
-        """
-        self.ws = ws
-        del_worksheet = SHEET.worksheet(ws)
-        try:
-            SHEET.del_worksheet(del_worksheet)
-            return f'Worksheeet {del_worksheet} has been deleted\n'
-        except Exception as inst:
-            return f'{inst} error! Failed to delete {del_worksheet}.\n'
 
     def clear_worksheet(self, worksheet):
         """
@@ -239,3 +220,37 @@ class Sheets():
 
         dataframe = pd.DataFrame(data.get_all_records())
         return dataframe
+
+
+
+
+
+#1Creates new sheet stock
+name = 'Stock'
+Ssd = GSPEAD_CLIENT.open(name)
+# nw = Sheets().new_sheet(name)
+# Just need to add if exists for the spreadsheets
+
+#2Adds new sheet
+# sw = Ssd.add_worksheet(title='Stock Data', rows=100, cols=100)
+# data = ['Stock Name', 'Dividends', 'P/E', 'Polarity']
+# srow = sw.append_row(data)
+
+
+#3gets rid of the first defaul sheet
+# dele = Ssd.get_worksheet(0)
+# Ssd.del_worksheet(dele)
+
+
+#4Make First rpw bold
+# upd = Ssd.get_worksheet(0)
+# upd.format('1', {'textFormat': {'bold': True}})
+
+
+#USer to Add new data
+# stock_data_row = Ssd.get_worksheet(0)
+# stock_data_row.append_row([])
+
+# Logs off and clears
+# dele = Ssd.get_worksheet(0)
+# dele.clear()

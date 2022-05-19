@@ -157,6 +157,8 @@ The deployment terminal is set to 80 columns by 24 rows. That means that each li
 
 - how to set dates for stock look back was sourced here[python.org](https://docs.python.org/3/library/datetime.html#timedelta-objects)
 
+- Yahoo finance reference (https://algotrading101.com/learn/yahoo-finance-api-guide/)
+
 #### Libraries
 
 - Imported Tweepy library to help extend this project and to connect with the Twitter API [Tweepy](https://docs.tweepy.org/en/stable/)

@@ -167,9 +167,15 @@ def main(access_level):
     """
 
     user_menu = {
-                    1: 'Get stocks price and sentiment?',
+                    1: 'Get stocks, price and sentiment?',
                     2: 'View saved files?',
                     3: 'Exit',
+    }
+    user_stock_menu = {
+                    1: 'Get a companies data for the week?",
+                    2: 'Stock Dividends & Price Earnings?',
+                    3: 'Companies current polarity',
+                    4. 'Exit'
     }
     admin_menu = {
                     1: 'View worksheets',
@@ -293,11 +299,17 @@ def main(access_level):
                                   ')
                     if ready.lower() == 'yes' or 'y':
                         main(False)
+                    elif read.lower() == 'no' or 'n':
+                        print('More options')
+                        main(False)
                 else:
                     main(False)
             else:
                 print('\nEnter stock you would like data for:\n')
                 stock_p_item = input()
+                
+
+                #Stock Data
                 stock_ticker = si.get_ticker(stock_p_item)
                 stock_price = si.get_weeks_stock_data(stock_ticker)
                 print(stock_price)
