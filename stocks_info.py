@@ -50,10 +50,20 @@ def get_quote_table(ticker):
 def get_dividends(qtable):
     dividends = qtable['Forward Dividend & Yield'].split()
     div = dividends[0]
-    yld = dividends[1]
-    return div, yld
+    return div
 
 def get_pe_ratio(qtable):
     PE = qtable['PE Ratio (TTM)']
     return PE
-    
+
+def get_stock_price(qtable):
+    stock_price = qtable['Quote Price']
+    return round(stock_price, 2)
+
+def get_ls_tickers():
+    g = get_companies()
+    return g.iloc[:, 0].tolist()
+
+def get_ls_companies():
+    g = get_companies()
+    return g.iloc[:, 1].tolist()
