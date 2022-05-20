@@ -118,6 +118,11 @@ This project looks to collect tweets for the user and clean the data for investm
 
 - There is a bug when the incorrect option is selected in login and rehgistration in the welcome function.
 
+- with gspread there is an API limit of 500 requests per 100 seconds per project and 100 requests per 100 seconds per user. Due to this when writing the 
+  company name and ticker name to stock data sheet gfor user was getting 429 error code. SOLVED: added 2 second wait btween writes to sheet.
+
+- pandas append is being depreciated for concat. This leads to print out to terminal of warning message 
+
 [Back to top](<#contents>)
 
 ## Deployment
