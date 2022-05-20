@@ -175,11 +175,10 @@ def main(access_level):
                     3: 'Exit',
     }
     admin_menu = {
-                    1: 'View worksheets',
-                    2: 'View Users list?',
-                    3: 'View Admin list?',
-                    4: 'View User registration list?',
-                    5: 'Exit',
+                    1: 'View Users list?',
+                    2: 'View Admin list?',
+                    3: 'View User registration list?',
+                    4: 'Exit',
     }
 
     user_sheet = SHEET.worksheet('Users')
@@ -193,47 +192,8 @@ def main(access_level):
         for key in admin_menu.keys():
             print(f'{key} - {admin_menu[key]}')
         option = int(input())
-        # View Worksheets
-        if option == 1:
-            print('Sheets:\n')
-            lists = sheets.get_worksheets()
-            for li in lists:
-                index = lists.index(li) + 1
-                print(f'{index}: {li}')
-            print('\nReturn to main menu? - 4')
-            choice = input('\nPlease enter choice: ')
-            # Users list
-            if int(choice) == 1:
-                print('\nUsers list\n')
-                users = sheets().show_worksheet(user_sheet)
-                print(users)
-                print('\n\n\nAre you Ready?\n')
-                ready = input('Yes(Y)? This will return you to Homescreen: ')
-                if ready.lower() == 'yes' or 'y':
-                    main(True)
-            # Admin list
-            elif int(choice) == 2:
-                print('\nAdmin list\n')
-                admins = sheets().show_worksheet(admin_sheet)
-                print(admins)
-                print('\n\n\nAre you Ready?\n')
-                ready = input('Yes(Y)? This will return you to Homescreen: ')
-                if ready.lower() == 'yes' or 'y':
-                    main(True)
-            # User registration list
-            elif int(choice) == 3:
-                print('\nUser registration list\n')
-                reg_list = sheets().show_worksheet(reg_sheet)
-                print(reg_sheet)
-                print('\n\n\nAre you Ready?\n')
-                ready = input('Yes(Y)? This will return you to Homescreen: ')
-                if ready.lower() == 'yes' or 'y':
-                    main(True)
-            else:
-                print('Home')
-                main(True)
         # Users list
-        elif option == 2:
+        if option == 1:
             print('\nUsers list\n')
             users = sheets().show_worksheet(user_sheet)
             print(users)
@@ -242,7 +202,7 @@ def main(access_level):
             if ready.lower() == 'yes' or 'y':
                 main(True)
         # Admin list
-        elif option == 3:
+        elif option == 2:
             print('\nAdmin list\n')
             admins = sheets().show_worksheet(admin_sheet)
             print(admins)
@@ -251,15 +211,30 @@ def main(access_level):
             if ready.lower() == 'yes' or 'y':
                 main(True)
         # User registration list
-        elif option == 4:
+        elif option == 3:
             print('\nUser registration list\n')
             reg_list = sheets().show_worksheet(reg_sheet)
-            print(reg_sheet)
+            # print(reg_sheet)
             print(reg_list)
-            print('\n\n\nAre you Ready?\n')
-            ready = input('Yes(Y)? This will return you to Homescreen: ')
-            if ready.lower() == 'yes' or 'y':
+
+            print('Approve user?Yes(Y)')
+            approval = input()
+            if approval.lower() == 'yes' or 'y':
+                print('Which user from table above? Please pick by idnex number')
+                user_to_approve = int(input())
+                user_choice = user_to_approve +  2
+                reg_user = sheets.get_row_vals('Registration applications', user_choice)
+                move_to_user = sheets.update_worksheet_row([reg_user[1], reg_user[2]], 'Users')
+                print(' Usersheet has been updated!\n')
+                print('Now deleting from registration page...')
+                sheets.del_reg(user_to_approve)
+                print('All Done!')
                 main(True)
+            else:
+                print('\n\n\nAre you Ready?\n')
+                ready = input('Yes(Y)? This will return you to Homescreen: ')
+                if ready.lower() == 'yes' or 'y':
+                    main(True)
         else:
             print('Reurning Home')
             welcome_screen()
@@ -275,56 +250,60 @@ def main(access_level):
             print('\nGet Top 500 companies stock info from SP500!\n')
             print('Updating stock sheet with data, please wait')
             #  limiting to 10 as heavy on resources and time
-            name = 'Stock'
-            stockdata_sh = GSPEAD_CLIENT.open(name).sheet1
-            data = ['Stock Name', 'Ticker', 'Price($)', 'Dividend', 'P/E', 'Polarity']
-            stockdata_sh.append_row(data)
-            stockdata_sh.format('1', {
-                                        "backgroundColor": {
-                                            "red": 0.0,
-                                            "green": 0.0,
-                                            "blue": 1.0
-                                                           },
-                                        "horizontalAlignment": "CENTER",
-                                        "textFormat": {
-                                            "foregroundColor": {
-                                                "red": 1.0,
-                                                "green": 1.0,
+            try:
+                name = 'Stock'
+                stockdata_sh = GSPEAD_CLIENT.open(name).sheet1
+                data = ['Stock Name', 'Ticker', 'Price($)', 'Dividend', 'P/E', 'Polarity']
+                stockdata_sh.append_row(data)
+                stockdata_sh.format('1', {
+                                            "backgroundColor": {
+                                                "red": 0.0,
+                                                "green": 0.0,
                                                 "blue": 1.0
-                                                                },
-                                                "fontSize": 12,
-                                                "bold": True
-                                                        }
-                                        })
-            stock_comp_list = si.get_ls_companies()
-            # limiting to 5 as heavy on resources and time
-            # This adds stock name to the excel sheet
-            for i in range(2, 7):
-                data = stock_comp_list[i]
-                time.sleep(2)
-                stockdata_sh.update_cell(i, 1, data)
-            # limiting to 5 as heavy on resources and time
-            # This adds ticker name and data to the excel sheet
-            stock_tick_list = si.get_ls_tickers()
-            for i in range(2, 7):
-                data = stock_tick_list[i]
-                quote_t = si.get_quote_table(data)
-                tick_data = si.get_stock_price(quote_t)
-                div_data = si.get_dividends(quote_t)
-                pe_data = si.get_pe_ratio(quote_t)
-                pol_data = tweet.polarity_analysis(tick_data)
-                time.sleep(2)
-                stockdata_sh.update_cell(i, 2, data)
-                time.sleep(1)
-                stockdata_sh.update_cell(i, 3, tick_data)
-                time.sleep(1)
-                stockdata_sh.update_cell(i, 4, div_data)
-                time.sleep(1)
-                stockdata_sh.update_cell(i, 5, pe_data)
-                time.sleep(1)
-                stockdata_sh.update_cell(i, 6, pol_data)
-            print('Done')
-            main(False)
+                                                            },
+                                            "horizontalAlignment": "CENTER",
+                                            "textFormat": {
+                                                "foregroundColor": {
+                                                    "red": 1.0,
+                                                    "green": 1.0,
+                                                    "blue": 1.0
+                                                                    },
+                                                    "fontSize": 12,
+                                                    "bold": True
+                                                            }
+                                            })
+                stock_comp_list = si.get_ls_companies()
+                # limiting to 5 as heavy on resources and time
+                # This adds stock name to the excel sheet
+                for i in range(2, 7):
+                    data = stock_comp_list[i]
+                    time.sleep(2)
+                    stockdata_sh.update_cell(i, 1, data)
+                # limiting to 5 as heavy on resources and time
+                # This adds ticker name and data to the excel sheet
+                stock_tick_list = si.get_ls_tickers()
+                for i in range(2, 7):
+                    data = stock_tick_list[i]
+                    quote_t = si.get_quote_table(data)
+                    tick_data = si.get_stock_price(quote_t)
+                    div_data = si.get_dividends(quote_t)
+                    pe_data = si.get_pe_ratio(quote_t)
+                    pol_data = tweet.polarity_analysis(tick_data)
+                    time.sleep(2)
+                    stockdata_sh.update_cell(i, 2, data)
+                    time.sleep(1)
+                    stockdata_sh.update_cell(i, 3, tick_data)
+                    time.sleep(1)
+                    stockdata_sh.update_cell(i, 4, div_data)
+                    time.sleep(1)
+                    stockdata_sh.update_cell(i, 5, pe_data)
+                    time.sleep(1)
+                    stockdata_sh.update_cell(i, 6, pol_data)
+                print('Done')
+                main(False)
+            except:
+                print('ERROR: Could not apply data to excelsheet, please reach out to admin on this')
+                main(False)
         # Saved retuns
         elif option == 2:
             print('Get a companies stock data for the week')
@@ -333,10 +312,14 @@ def main(access_level):
             print('\nEnter stock you would like data for(Please note you must\
                 enter companies name as it appears e.g. "Apple" not "apple"):\n')
             stock_p_item = input()
+            try:
             # Stock Data
-            stock_ticker = si.get_ticker(stock_p_item)
-            stock_price = si.get_weeks_stock_data(stock_ticker)
-            print(stock_price)
+                stock_ticker = si.get_ticker(stock_p_item)
+                stock_price = si.get_weeks_stock_data(stock_ticker)
+                print(stock_price)
+            except:
+                print('ERROR: Could not get data, please reach out to admin on this')
+                main(False)
             print('\n\n\nAre you Ready?\n')
             ready = input('Yes(Y)? This will return you to Homescreen: ')
             if ready.lower() == 'yes' or 'y':
@@ -347,7 +330,7 @@ def main(access_level):
             print('Exiting......')
             welcome_screen()
 
-main(False)
+main(True)
 
 
 
