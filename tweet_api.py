@@ -29,7 +29,7 @@ if not os.path.exists('tweet_api.json'):
 # auth = tweepy.OAuthHandler(API_KEY, API_KEY_SECRET)
 # auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 
-auth = tweepy.Client(TWEET_API)
+auth = tweepy.Client(bearer_token=TWEET_API)
 
 # pass in authentication to API
 api = tweepy.API(auth)
