@@ -183,7 +183,7 @@ class Sheets():
         except ValueError as e:
             return f'Invalid data {e}\n'
 
-    def clear_worksheet(self, worksheet):
+    def clear_worksheet(worksheet):
         """
         Description:
 
@@ -193,7 +193,6 @@ class Sheets():
             worksheet(str) - worksheet to clear
 
         """
-        self.worksheet = worksheet
 
         try:
             worksheet.clear()
@@ -223,67 +222,18 @@ class Sheets():
 
 
 
-
-
-# TESTING OF ADDING STOCK DATA
-
-#sets name
-# name = 'Stock'
-# Ssd = GSPEAD_CLIENT.open(name)
-
-
-#2Adds new sheet if one doesn't exist
-# sw = Ssd.add_worksheet(title='Stock Data', rows=100, cols=100)
-
-
-#b
-# Needs to eb sepreate
-# data = ['Stock Name', 'Dividends', 'P/E', 'Polarity']
-# sw = Ssd.get_worksheet(0)
-# srow = sw.append_row(data)
-
-
-#3gets rid of the first default sheet
-# dele = Ssd.get_worksheet(0)
-# Ssd.del_worksheet(dele)
-
-
-#4Make First row bold, background blue, text white and centers text.
-# upd = Ssd.get_worksheet(0)
-# print(upd)
-# #header
-# upd.format('1', {
-#     "backgroundColor": {
-#       "red": 0.0,
-#       "green": 0.0,
-#       "blue": 1.0
-#     },
-#     "horizontalAlignment": "CENTER",
-#     "textFormat": {
-#       "foregroundColor": {
-#         "red": 1.0,
-#         "green": 1.0,
-#         "blue": 1.0
-#       },
-#       "fontSize": 12,
-#       "bold": True
-#     }
-# }
-
-# )
-# #rows
-# upd.format('2:99', {
-#     "horizontalAlignment": "CENTER",
-#       "fontSize": 10
-#     }
-# )
-
-
-
-#USer to Add new data
-# stock_data_row = Ssd.get_worksheet(0)
-# stock_data_row.append_row([])
-
-# Logs off and clears
-# dele = Ssd.get_worksheet(0)
-# dele.clear()
+    def clear_sheet_exit():
+        name = 'Stock'
+        stockdata_sh = GSPEAD_CLIENT.open(name).sheet1
+        fmt_undo = stockdata_sh.format("1",{"backgroundColor": {
+                                                "red": 1.0,
+                                                "green": 1.0,
+                                                "blue": 1.0
+                                            },"textFormat": {
+                                            "foregroundColor": {
+                                                "red": 1.0,
+                                                "green": 1.0,
+                                                "blue": 1.0
+                                                                },
+                                            "bold": False}})
+        stockdata_sh.clear()                                 
