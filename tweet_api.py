@@ -123,9 +123,6 @@ class TweetSentiment():
         """
 
         polarity = 0
-        positive = 0
-        negative = 0
-        neutral = 0
 
         t_data = TweetSentiment.get_tweets_from_timeline(data)
         data_t = TweetSentiment.clean_tweets(t_data)
@@ -137,11 +134,5 @@ class TweetSentiment():
             # using in built func to analyze polarity of each tweet
             tweet_data_polarity = analysis.sentiment.polarity
             # assigning positive, negative or neutral based on polarity score
-            if tweet_data_polarity > 0:
-                positive += 1
-            elif tweet_data_polarity < 0:
-                negative += 1
-            else:
-                neutral += 1
             polarity += analysis.polarity
         return round(polarity, 2)
