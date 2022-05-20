@@ -72,8 +72,8 @@ class TweetSentiment():
 
         """
         # have set language to english and limited the search to first 200
-        tweets_timeline = auth.search_tweets(q=search_term, lang='en',
-                                            count=2000, tweet_mode='extended')
+        tweets_timeline = auth.search_all_tweets(query=search_term, lang='en',
+                                                 max=500,)
         return tweets_timeline
 
     # Clean data of retweets, hastags, username handles and hyperlinks
