@@ -3,13 +3,18 @@
 import tweepy
 import json
 import re
-
+import os
 from textblob import TextBlob
 
 # CONATANTS
 
 # SETTING UP ACCESS TO TWITTER
 TWEET_ADMIN = open('tweet_api.json')
+
+if not os.path.exists('tweet_api.json'):
+    with open("tweet_api.json", 'wb') as f:
+        f.write(TWEET_ADMIN)
+
 ADMIN_DATA = json.load(TWEET_ADMIN)
 API_KEY = ADMIN_DATA.get('api_key')
 API_KEY_SECRET = ADMIN_DATA.get('api_key_secret')
