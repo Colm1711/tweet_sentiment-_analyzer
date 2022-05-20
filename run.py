@@ -345,4 +345,4 @@ def main(access_level):
             print('Exiting......')
             welcome_screen()
 
-main(True)
+welcome_screen()
