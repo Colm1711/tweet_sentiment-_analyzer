@@ -199,7 +199,7 @@ def main(access_level):
             print(users)
             print('\n\n\nAre you Ready?\n')
             ready = input('Yes(Y)? This will return you to Homescreen: ')
-            if ready.lower() == 'yes' or 'y':
+            if ready.lower() == 'yes' or ready.lower() == 'y':
                 main(True)
         # Admin list
         elif option == 2:
@@ -208,7 +208,7 @@ def main(access_level):
             print(admins)
             print('\n\n\nAre you Ready?\n')
             ready = input('Yes(Y)? This will return you to Homescreen: ')
-            if ready.lower() == 'yes' or 'y':
+            if ready.lower() == 'yes' or ready.lower() == 'y':
                 main(True)
         # User registration list
         elif option == 3:
@@ -217,9 +217,9 @@ def main(access_level):
             # print(reg_sheet)
             print(reg_list)
 
-            print('Approve user?Yes(Y)')
+            print('\nApprove user? Yes(Y)')
             approval = input()
-            if approval.lower() == 'yes' or 'y':
+            if approval.lower() == 'yes' or approval.lower() == 'y':
                 print('Which user from table above? Please pick by idnex number')
                 user_to_approve = int(input())
                 user_choice = user_to_approve +  2
@@ -229,11 +229,15 @@ def main(access_level):
                 print('Now deleting from registration page...')
                 sheets.del_reg(user_to_approve)
                 print('All Done!')
-                main(True)
-            else:
+                print(reg_list)
                 print('\n\n\nAre you Ready?\n')
                 ready = input('Yes(Y)? This will return you to Homescreen: ')
-                if ready.lower() == 'yes' or 'y':
+                if ready.lower() == 'yes' or ready.lower() == 'y':
+                    main(True)
+            else:
+                print('\nAre you Ready to return to Homsscreen?\n')
+                ready = input('Yes(Y)? This will return you to Homescreen: ')
+                if ready.lower() == 'yes' or ready.lower() == 'y':
                     main(True)
         else:
             print('Reurning Home')
@@ -322,7 +326,7 @@ def main(access_level):
                 main(False)
             print('\n\n\nAre you Ready?\n')
             ready = input('Yes(Y)? This will return you to Homescreen: ')
-            if ready.lower() == 'yes' or 'y':
+            if ready.lower() == 'yes' or ready.lower() == 'y':
                 main(False)
         else:
             # clears the stock data sheet on exit
