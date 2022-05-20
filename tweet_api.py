@@ -9,7 +9,8 @@ from textblob import TextBlob
 # CONATANTS
 
 # SETTING UP ACCESS TO TWITTER
-TWEET_API = open("TWEET_API")
+# TWEET_API = open("tweet_api.json")
+TWEET_API = os.environ.get("TWEET_API")
 
 if not os.path.exists('tweet_api.json'):
     with open("tweet_api.json", 'wb') as f:
