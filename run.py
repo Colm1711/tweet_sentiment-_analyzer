@@ -170,7 +170,8 @@ def main(access_level):
     """
 
     user_menu = {
-                    1: 'Get Top 500 companies stock info from SP500 and sentiment?',
+                    1: 'Get Top 500 companies stock info from SP500 and \
+                        sentiment?',
                     2: 'Get a companies stock data for the week',
                     3: 'Exit',
     }
@@ -216,15 +217,19 @@ def main(access_level):
             print('\nUser registration list\n')
             reg_list = sheets().show_worksheet(reg_sheet)
             print(reg_list)
-            # Queries user if they want to 
+            # Queries user if they want to
             print('\nApprove user? Yes(Y)')
             approval = input()
             if approval.lower() == 'yes' or approval.lower() == 'y':
-                print('Which user from table above? Please pick by index number')
+                print('Which user from table above? Please pick by index \
+                    number')
                 user_to_approve = int(input())
-                user_choice = user_to_approve +  2
-                reg_user = sheets.get_row_vals('Registration applications', user_choice)
-                move_to_user = sheets.update_worksheet_row([reg_user[1], reg_user[2]], 'Users')
+                user_choice = user_to_approve + 2
+                reg_user = sheets.get_row_vals('Registration applications',
+                                               user_choice)
+                move_to_user = sheets.update_worksheet_row([reg_user[1],
+                                                            reg_user[2]],
+                                                           'Users')
                 print(' Usersheet has been updated!\n')
                 print('Now deleting from registration page...')
                 sheets.del_reg(user_to_approve)
@@ -259,7 +264,8 @@ def main(access_level):
             try:
                 name = 'Stock'
                 stockdata_sh = GSPEAD_CLIENT.open(name).sheet1
-                data = ['Stock Name', 'Ticker', 'Price($)', 'Dividend', 'P/E', 'Polarity']
+                data = ['Stock Name', 'Ticker', 'Price($)', 'Dividend', 'P/E',
+                        'Polarity']
                 stockdata_sh.append_row(data)
                 stockdata_sh.format('1', {
                                             "backgroundColor": {
@@ -308,7 +314,8 @@ def main(access_level):
                 print('Done')
                 main(False)
             except ValueError() as e:
-                print(f'ERROR: Could not apply data to excelsheet, as you entered {e} please reach out to admin on this')
+                print(f'ERROR: Could not apply data to excelsheet, as you \
+                        entered {e} please reach out to admin on this')
                 main(False)
         # Saved retuns
         elif option == 2:
@@ -316,15 +323,17 @@ def main(access_level):
             s = si.get_companies()
             print(s.iloc[:, 1])
             print('\nEnter stock you would like data for(Please note you must\
-                enter companies name as it appears e.g. "Apple" not "apple"):\n')
+                enter companies name as it appears \
+                    e.g. "Apple" not "apple"):\n')
             stock_p_item = input()
             try:
-            # Stock Data
+                # Stock Data
                 stock_ticker = si.get_ticker(stock_p_item)
                 stock_price = si.get_weeks_stock_data(stock_ticker)
                 print(stock_price)
             except ValueError() as e:
-                print(f'ERROR: Could not apply data to excelsheet, as you entered {e} please reach out to admin on this')
+                print(f'ERROR: Could not apply data to excelsheet, as you \
+                        entered {e} please reach out to admin on this')
                 main(False)
             print('\n\n\nAre you Ready?\n')
             ready = input('Yes(Y)? This will return you to Homescreen: ')
@@ -337,6 +346,3 @@ def main(access_level):
             welcome_screen()
 
 main(True)
-
-
-
