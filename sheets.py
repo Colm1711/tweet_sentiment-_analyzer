@@ -25,10 +25,8 @@ passw_data = users.col_values(2)
 
 class Sheets():
 
-    def __init__(self):
-        self.self = self
 
-    def new_sheet(self, input):
+    def new_sheet(input):
         """
         Description:
 
@@ -52,31 +50,11 @@ class Sheets():
         except Exception as inst:
             print(f'{inst} error! Your new worksheet failed to create.')
 
-    def get_worksheets(wksheet):
+    def get_col_value_lists(wrksht):
         """
         Description:
 
-        This function returns a list worksheets in main.
-
-        Params:
-
-        Returns:
-                list of worksheet in gspread workspace
-
-        """
-
-        worksheets_list = []
-
-        worksheet_list = wksheet
-        for i in worksheet_list:
-            worksheets_list.append(i.title)
-        return worksheets_list
-
-    def get_col_value_lists(self, wrksht):
-        """
-        Description:
-
-        This function returns a list worksheets in main.
+        This function get column valuse as a list.
 
         Params:
 
@@ -90,8 +68,6 @@ class Sheets():
                 cols[i]
 
         """
-
-        self.wrksht = wrksht
 
         col_worksheet = SHEET.worksheet(wrksht)
 
@@ -120,7 +96,7 @@ class Sheets():
         except ValueError as e:
             print(f'Error {e} occurred when retrieving data!')
 
-    def get_row_vals(self, sheet, row):
+    def get_row_vals(sheet, row):
         """
         Description:
 
@@ -134,9 +110,6 @@ class Sheets():
                 list of str's excluding first row.
 
         """
-
-        self.sheet = sheet
-        self.row = row
         try:
             return SHEET.worksheet(sheet).row_values(row)[1:]
         except ValueError as e:
@@ -154,7 +127,6 @@ class Sheets():
         Returns:
                 list of sheets and index numbers.
         """
-        self.data = data
 
         for i in data:
             # adding one as index is to start 1 instead of 0
@@ -236,4 +208,12 @@ class Sheets():
                                                 "blue": 1.0
                                                                 },
                                             "bold": False}})
-        stockdata_sh.clear()                                 
+        stockdata_sh.clear()
+
+
+    def del_reg(row):
+        name = 'authentication'
+        row = row + 2
+        # 2 then delete record
+        reg_data_sh = GSPEAD_CLIENT.open(name).worksheet('Registration applications')
+        reg_data_sh.delete_row(row)
