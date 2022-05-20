@@ -1,6 +1,6 @@
 # Your requirements go here
-textblob
-tweepy
+textblob==0.17.1
+tweepy==4.9.0
 google-auth==2.3.3
 google-auth-oauthlib==0.4.6
 gspread==5.1.1
