@@ -123,6 +123,8 @@ This project looks to collect tweets for the user and clean the data for investm
 
 - pandas append is being depreciated for concat. This leads to print out to terminal of warning message 
 
+- heroku deployement with twitter API keys. Tutor support resolved.
+
 [Back to top](<#contents>)
 
 ## Deployment
@@ -190,7 +192,7 @@ The deployment terminal is set to 80 columns by 24 rows. That means that each li
 
 ### Acknowledgements
 
-The app was completed as a Portfolio 3 Project for the Full Stack Software Developer (e-Commerce) Diploma at the [Code Institute](https://codeinstitute.net/). I would like to thank my mentor Mo Shami, my class mates, the Slack community, and all at the Code Institute for their help and support. 
+The app was completed as a Portfolio 3 Project for the Full Stack Software Developer (e-Commerce) Diploma at the [Code Institute](https://codeinstitute.net/). I would like to thank my mentor Mo Shami, both tutors Gemma and Scott, my class mates, the Slack community, and all at the Code Institute for their help and support. 
 
 Also to my friends and family who helped test site & provide feedback and most importantly patient with me during this time!
 
