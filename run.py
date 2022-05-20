@@ -42,10 +42,10 @@ def welcome_screen():
 
     """
     print('\nWelcome to the Twitter sentiment application. This is designed to\
- retrieve sotck data and twitter information adding sentimant scores to\
+ retrieve sotck data and twitter information adding sentiment scores to\
  data.\n')
     print('If you are returning user please Login. Dont have an account or first\
- time vistor please select the Register option. \n')
+ time vistor? Please select the Register option. \n')
 
     log_reg = input('Login(L) or Register(R)? : ')
     if log_reg.lower() == "l" or log_reg.lower() == 'login':
@@ -212,15 +212,15 @@ def main(access_level):
                 main(True)
         # User registration list
         elif option == 3:
+            # presents user with registration list
             print('\nUser registration list\n')
             reg_list = sheets().show_worksheet(reg_sheet)
-            # print(reg_sheet)
             print(reg_list)
-
+            # Queries user if they want to 
             print('\nApprove user? Yes(Y)')
             approval = input()
             if approval.lower() == 'yes' or approval.lower() == 'y':
-                print('Which user from table above? Please pick by idnex number')
+                print('Which user from table above? Please pick by index number')
                 user_to_approve = int(input())
                 user_choice = user_to_approve +  2
                 reg_user = sheets.get_row_vals('Registration applications', user_choice)
@@ -229,6 +229,8 @@ def main(access_level):
                 print('Now deleting from registration page...')
                 sheets.del_reg(user_to_approve)
                 print('All Done!')
+                # waiting so script has chance to update
+                time.sleep(10)
                 print(reg_list)
                 print('\n\n\nAre you Ready?\n')
                 ready = input('Yes(Y)? This will return you to Homescreen: ')
@@ -305,8 +307,8 @@ def main(access_level):
                     stockdata_sh.update_cell(i, 6, pol_data)
                 print('Done')
                 main(False)
-            except:
-                print('ERROR: Could not apply data to excelsheet, please reach out to admin on this')
+            except ValueError() as e:
+                print(f'ERROR: Could not apply data to excelsheet, as you entered {e} please reach out to admin on this')
                 main(False)
         # Saved retuns
         elif option == 2:
@@ -321,8 +323,8 @@ def main(access_level):
                 stock_ticker = si.get_ticker(stock_p_item)
                 stock_price = si.get_weeks_stock_data(stock_ticker)
                 print(stock_price)
-            except:
-                print('ERROR: Could not get data, please reach out to admin on this')
+            except ValueError() as e:
+                print(f'ERROR: Could not apply data to excelsheet, as you entered {e} please reach out to admin on this')
                 main(False)
             print('\n\n\nAre you Ready?\n')
             ready = input('Yes(Y)? This will return you to Homescreen: ')
