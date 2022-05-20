@@ -72,7 +72,7 @@ class TweetSentiment():
 
         """
         # have set language to english and limited the search to first 200
-        tweets_timeline = api.search_tweets(q=search_term, lang='en',
+        tweets_timeline = auth.search_tweets(q=search_term, lang='en',
                                             count=2000, tweet_mode='extended')
         return tweets_timeline
 
