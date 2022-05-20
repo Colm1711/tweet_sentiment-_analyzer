@@ -25,7 +25,6 @@ passw_data = users.col_values(2)
 
 class Sheets():
 
-
     def new_sheet(input):
         """
         Description:
@@ -192,16 +191,14 @@ class Sheets():
         dataframe = pd.DataFrame(data.get_all_records())
         return dataframe
 
-
-
     def clear_sheet_exit():
         name = 'Stock'
         stockdata_sh = GSPEAD_CLIENT.open(name).sheet1
-        fmt_undo = stockdata_sh.format("1",{"backgroundColor": {
+        fmt_undo = stockdata_sh.format("1", {"backgroundColor": {
                                                 "red": 1.0,
                                                 "green": 1.0,
                                                 "blue": 1.0
-                                            },"textFormat": {
+                                            }, "textFormat": {
                                             "foregroundColor": {
                                                 "red": 1.0,
                                                 "green": 1.0,
@@ -210,10 +207,10 @@ class Sheets():
                                             "bold": False}})
         stockdata_sh.clear()
 
-
     def del_reg(row):
         name = 'authentication'
         row = row + 2
         # 2 then delete record
-        reg_data_sh = GSPEAD_CLIENT.open(name).worksheet('Registration applications')
+        reg_data_sh = GSPEAD_CLIENT.open(name).worksheet('Registration \
+                                                          applications')
         reg_data_sh.delete_row(row)
