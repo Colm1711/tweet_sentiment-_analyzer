@@ -144,5 +144,4 @@ class TweetSentiment():
             else:
                 neutral += 1
             polarity += analysis.polarity
-        return f'Polarity for {data} is: {polarity}\nAmount of positive:\
- {positive}\nAmount of negative: {negative}\nAmount of neutral: {neutral}'
+        return round(polarity, 2)
