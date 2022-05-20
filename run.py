@@ -2,6 +2,7 @@
 
 import gspread
 import stocks_info as si
+import time
 from google.oauth2.service_account import Credentials
 from getpass import getpass
 from validation import Validation
@@ -116,6 +117,8 @@ def user_registration():
     data = name, institution, email, password
     curr_sheet = 'Registration applications'
     sheets.update_worksheet_row(data, curr_sheet)
+    print('\n Thank you for submitting your interest with us. Why not check\
+        out our twitter page @TSentiment123 \n')
     print('\n Returning to Welcome screen, admin team will be in contact\n')
     welcome_screen()
     return name, institution, val_email, val_password
@@ -167,15 +170,9 @@ def main(access_level):
     """
 
     user_menu = {
-                    1: 'Get stocks, price and sentiment?',
-                    2: 'View saved files?',
+                    1: 'Get Top 500 companies stock info from SP500 and sentiment?',
+                    2: 'Get a companies stock data for the week',
                     3: 'Exit',
-    }
-    user_stock_menu = {
-                    1: 'Get a companies data for the week?",
-                    2: 'Stock Dividends & Price Earnings?',
-                    3: 'Companies current polarity',
-                    4. 'Exit'
     }
     admin_menu = {
                     1: 'View worksheets',
@@ -264,7 +261,7 @@ def main(access_level):
             if ready.lower() == 'yes' or 'y':
                 main(True)
         else:
-            print('Home')
+            print('Reurning Home')
             welcome_screen()
     # User Menu
     else:
@@ -275,58 +272,82 @@ def main(access_level):
         option = int(input())
         # Stock sentiment Option
         if option == 1:
-            print('\nWhat stock would you like to get price and sentiment data\
- for?\n')
-            print('Do you want a list of the companies?(Y/N)')
-            answer = input()
-            if answer.lower() == 'y':
-                s_name_list = si.get_companies()
-                print(s_name_list.iloc[:, [0, 1]])
-                print('\n\n\nAre you Ready?\n')
-                print('Would you like to search for stock data?\n')
-                print('Yes(Y):Stock data. No(N):Homescreen:')
-                stock_search = input()
-                if stock_search.lower() == 'yes'\
-                        or stock_search.lower() == 'y':
-                    print('\nEnter stock you would like data for:\n')
-                    stock_p_item = input()
-                    stock_ticker = si.get_ticker(stock_p_item)
-                    stock_price = si.get_weeks_stock_data(stock_ticker)
-                    print(stock_price)
-                    print(f'\n{tweet.polarity_analysis(stock_p_item)}')
-                    print('\n\n\nAre you Ready?\n')
-                    ready = input('Yes(Y)? This will return you to Homescreen:\
-                                  ')
-                    if ready.lower() == 'yes' or 'y':
-                        main(False)
-                    elif read.lower() == 'no' or 'n':
-                        print('More options')
-                        main(False)
-                else:
-                    main(False)
-            else:
-                print('\nEnter stock you would like data for:\n')
-                stock_p_item = input()
-                
-
-                #Stock Data
-                stock_ticker = si.get_ticker(stock_p_item)
-                stock_price = si.get_weeks_stock_data(stock_ticker)
-                print(stock_price)
-                print(f'\n{tweet.polarity_analysis(stock_p_item)}')
-                print('\n\n\nAre you Ready?\n')
-                ready = input('Yes(Y)? This will return you to Homescreen: ')
-                if ready.lower() == 'yes' or 'y':
-                    main(False)
+            print('\nGet Top 500 companies stock info from SP500!\n')
+            print('Updating stock sheet with data, please wait')
+            #  limiting to 10 as heavy on resources and time
+            name = 'Stock'
+            stockdata_sh = GSPEAD_CLIENT.open(name).sheet1
+            data = ['Stock Name', 'Ticker', 'Price($)', 'Dividend', 'P/E', 'Polarity']
+            stockdata_sh.append_row(data)
+            stockdata_sh.format('1', {
+                                        "backgroundColor": {
+                                            "red": 0.0,
+                                            "green": 0.0,
+                                            "blue": 1.0
+                                                           },
+                                        "horizontalAlignment": "CENTER",
+                                        "textFormat": {
+                                            "foregroundColor": {
+                                                "red": 1.0,
+                                                "green": 1.0,
+                                                "blue": 1.0
+                                                                },
+                                                "fontSize": 12,
+                                                "bold": True
+                                                        }
+                                        })
+            stock_comp_list = si.get_ls_companies()
+            # limiting to 5 as heavy on resources and time
+            # This adds stock name to the excel sheet
+            for i in range(2, 7):
+                data = stock_comp_list[i]
+                time.sleep(2)
+                stockdata_sh.update_cell(i, 1, data)
+            # limiting to 5 as heavy on resources and time
+            # This adds ticker name and data to the excel sheet
+            stock_tick_list = si.get_ls_tickers()
+            for i in range(2, 7):
+                data = stock_tick_list[i]
+                quote_t = si.get_quote_table(data)
+                tick_data = si.get_stock_price(quote_t)
+                div_data = si.get_dividends(quote_t)
+                pe_data = si.get_pe_ratio(quote_t)
+                pol_data = tweet.polarity_analysis(tick_data)
+                time.sleep(2)
+                stockdata_sh.update_cell(i, 2, data)
+                time.sleep(1)
+                stockdata_sh.update_cell(i, 3, tick_data)
+                time.sleep(1)
+                stockdata_sh.update_cell(i, 4, div_data)
+                time.sleep(1)
+                stockdata_sh.update_cell(i, 5, pe_data)
+                time.sleep(1)
+                stockdata_sh.update_cell(i, 6, pol_data)
+            print('Done')
+            main(False)
         # Saved retuns
         elif option == 2:
-            print('Saved to file?')
+            print('Get a companies stock data for the week')
+            s = si.get_companies()
+            print(s.iloc[:, 1])
+            print('\nEnter stock you would like data for(Please note you must\
+                enter companies name as it appears e.g. "Apple" not "apple"):\n')
+            stock_p_item = input()
+            # Stock Data
+            stock_ticker = si.get_ticker(stock_p_item)
+            stock_price = si.get_weeks_stock_data(stock_ticker)
+            print(stock_price)
             print('\n\n\nAre you Ready?\n')
             ready = input('Yes(Y)? This will return you to Homescreen: ')
             if ready.lower() == 'yes' or 'y':
                 main(False)
         else:
-            print('Home')
+            # clears the stock data sheet on exit
+            sheets.clear_sheet_exit()
+            print('Exiting......')
             welcome_screen()
 
 main(False)
+
+
+
