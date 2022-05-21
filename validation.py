@@ -34,7 +34,7 @@ class Validation():
             Boolean --> iFalse
         """
 
-        digit = Validation._has_digit(data_to_val)
+        digit = Validation.has_digit(data_to_val)
         lowercase = Validation._has_lowercase(data_to_val)
         punc = Validation._has_punc(data_to_val)
         upper = Validation._has_uppercase(data_to_val)
@@ -69,10 +69,20 @@ class Validation():
             print('\nThis is not a valid email')
             return False
 
-    def _has_digit(data_to_val):
-        # This will evaluate if there is a digit and will return true if \
-        # present.
-        # This is a private function
+    def has_digit(data_to_val):
+        
+        """
+        Description:
+
+                Checks if input has digit
+
+        returns: 
+                
+                bol -->    False if not present
+
+                bol -->    True if present
+        """
+
         pw_has_digits = False
         data_to_val = data_to_val.strip()
 
