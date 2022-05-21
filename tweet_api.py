@@ -9,27 +9,26 @@ from textblob import TextBlob
 # CONATANTS
 
 # SETTING UP ACCESS TO TWITTER
-# TWEET_API = open("tweet_api.json")
-TWEET_API = os.environ.get("TWEET_API")
+TWEET_API = open("tweet_api.json")
+# TWEET_API = os.environ.get("TWEET_API")
 
-if not os.path.exists('tweet_api.json'):
-    with open("tweet_api.json", 'wb') as f:
-        f.write(str.encode(TWEET_API))
+# if not os.path.exists('tweet_api.json'):
+#     with open("tweet_api.json", 'wb') as f:
+#         f.write(str.encode(TWEET_API))
+# auth = tweepy.Client(bearer_token=TWEET_API)
 
-# ADMIN_DATA = json.load(TWEET_API)
-# API_KEY = ADMIN_DATA.get('api_key')
-# API_KEY_SECRET = ADMIN_DATA.get('api_key_secret')
-# ACCESS_TOKEN = ADMIN_DATA.get('access_token')
-# ACCESS_TOKEN_SECRET = ADMIN_DATA.get('access_token_secret')
+ADMIN_DATA = json.load(TWEET_API)
+API_KEY = ADMIN_DATA.get('api_key')
+API_KEY_SECRET = ADMIN_DATA.get('api_key_secret')
+ACCESS_TOKEN = ADMIN_DATA.get('access_token')
+ACCESS_TOKEN_SECRET = ADMIN_DATA.get('access_token_secret')
 
 
 # # VARIABLES
 
 # # authentication
-# auth = tweepy.OAuthHandler(API_KEY, API_KEY_SECRET)
-# auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
-
-auth = tweepy.Client(bearer_token=TWEET_API)
+auth = tweepy.OAuthHandler(API_KEY, API_KEY_SECRET)
+auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 
 # pass in authentication to API
 api = tweepy.API(auth)
@@ -72,8 +71,7 @@ class TweetSentiment():
 
         """
         # have set language to english and limited the search to first 200
-        tweets_timeline = auth.search_all_tweets(query=search_term, lang='en',
-                                                 max=500,)
+        tweets_timeline = api.search_tweets(q=search_term, lang='en')
         return tweets_timeline
 
     # Clean data of retweets, hastags, username handles and hyperlinks
