@@ -232,26 +232,41 @@ def main(access_level):
         # Admin Menu
         for key in admin_menu.keys():
             print(f'{key} - {admin_menu[key]}')
-        option = int(input())
+        option = input()
+        check_option = Validation.has_digit(option)
+        # check to ensure option enterd has digit
+        if check_option is False:
+            print('You must select a valid option!')
+            main(True)
+        else:
+            # converts to int before ps
+            option = int(option)
+            pass
+        # credit to this code goes to Gerry McBride in python class
+        if option in [1, 2, 3, 4]:
+            pass
+        else:
+            print('You must select a valid option!')
+            main(True)
         # Users list
         if option == 1:
             print('\nUsers list\n')
-            users = sheets().show_worksheet(user_sheet)
+            users = sheets.show_worksheet(user_sheet)
             print(users)
             admin_ready()
         # Admin list
         elif option == 2:
             print('\nAdmin list\n')
-            admins = sheets().show_worksheet(admin_sheet)
+            admins = sheets.show_worksheet(admin_sheet)
             print(admins)
             admin_ready()
         # User registration list
         elif option == 3:
             # presents user with registration list
             print('\nUser registration list\n')
-            reg_list = sheets().show_worksheet(reg_sheet)
+            reg_list = sheets.show_worksheet(reg_sheet)
             print(reg_list)
-            # Queries user if they want to
+            # Queries user if they want to do next
             print('\nApprove user? Yes(Y)')
             approval = input()
             if approval.lower() == 'yes' or approval.lower() == 'y':
@@ -286,11 +301,12 @@ def main(access_level):
             print(f'{key} - {user_menu[key]}')
         option = input()
         check_option = Validation.has_digit(option)
-        # check to ensure option enterd has didgit
+        # check to ensure option enterd has digit
         if check_option is False:
             print('You must select a valid option!')
             main(False)
         else:
+            # converts to int before ps
             option = int(option)
             pass
         # credit to this code goes to Gerry McBride in python class
