@@ -25,14 +25,19 @@ passw_data = users.col_values(2)
 
 class Sheets():
 
-    def share_sheet(input):
+    def share_sheet(user):
         """
         Description:
 
         Share sheet with user.
 
+        Params:
+            str --> user email
+
         """
-        new_sheet.share('tweet.sentiment.123@gmail.com', perm_type='user',
+
+
+        new_sheet.share(user, perm_type='user',
                         role='writer')
 
     def get_col_vals(sheet, col):
@@ -42,8 +47,8 @@ class Sheets():
         Returns first col of worksheets as list.
 
         Params:
-                sheet = str
-                col = int
+            str -->  sheet  
+            int -->  col
 
         Returns:
                 list of str's excluding first row.
@@ -61,8 +66,8 @@ class Sheets():
         Returns first row of worksheets as list.
 
         Params:
-                sheet = str
-                row = int
+            str --> sheet 
+            int --> row 
 
         Returns:
                 list of str's excluding first row.
@@ -80,8 +85,8 @@ class Sheets():
         This updates a new row to the worksheet.
 
         Params:
-                data(str) - informmation to update
-                worksheet(str) - worsheet to update
+            str -->  data - informmation to update
+            str -->  worksheet - worsheet to update
 
         Returns:
                 print message of success
@@ -95,7 +100,7 @@ class Sheets():
         except ValueError as e:
             return f'Invalid data {e}\n'
 
-    def show_worksheet(self, data):
+    def show_worksheet(data):
         """
         Description:
 
@@ -103,15 +108,13 @@ class Sheets():
 
         Params:
 
-            data(str) - sheet to display
+            str --> data - sheet to display
 
         Returns:
 
             prints table to terminal
 
         """
-        self.data = data
-
         dataframe = pd.DataFrame(data.get_all_records())
         return dataframe
 
@@ -144,6 +147,8 @@ class Sheets():
 
         This function handkes the deletion of user from Registration
         after the user details have been moved to User sheets.
+
+        int --> row 
 
         """
         name = 'authentication'
