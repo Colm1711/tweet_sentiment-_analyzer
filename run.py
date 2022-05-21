@@ -376,11 +376,13 @@ def main(access_level):
             print('Get a companies stock data for the week')
             s = si.get_companies()
             print(s.iloc[:, 1])
-            print('\nEnter stock you would like data for '
-                  '(Please note you must enter companies name '
-                  'as it appears e.g. "Apple" not "apple"):\n')
+            print('\nEnter stock you would like data for:\n')
             # user inputs the stock to check
             stock_p_item = input()
+            if stock_p_item.islower() is True:
+                stock_p_item = stock_p_item.title()
+            else:
+                pass
             try:
                 # Stock Data to be returned to terminal to user.
                 stock_ticker = si.get_ticker(stock_p_item)
