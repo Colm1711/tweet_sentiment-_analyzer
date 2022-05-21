@@ -273,6 +273,7 @@ def main(access_level):
                 print(reg_list)
                 admin_ready()
             else:
+                print('Need to input a vlaid option!')
                 admin_ready()
         else:
             print('Reurning Home')
@@ -283,7 +284,21 @@ def main(access_level):
         print('What would you like to do?\n')
         for key in user_menu.keys():
             print(f'{key} - {user_menu[key]}')
-        option = int(input())
+        option = input()
+        check_option = Validation.has_digit(option)
+        # check to ensure option enterd has didgit
+        if check_option is False:
+            print('You must select a valid option!')
+            main(False)
+        else:
+            option = int(option)
+            pass
+        # credit to this code goes to Gerry McBride in python class
+        if option in [1, 2, 3]:
+            pass
+        else:
+            print('You must select a valid option!')
+            main(False)
         # Stock sentiment Option
         if option == 1:
             print('\nGet Top 500 companies stock info from SP500!\n')
@@ -389,7 +404,7 @@ def main(access_level):
                 stock_price = si.get_weeks_stock_data(stock_ticker)
                 print(stock_price)
             except:
-                print('ERROR: Could not apply data to excelsheet, please'
+                print('ERROR: Could not retrieve data to excelsheet, please'
                       ' reach out to admin on this')
                 main(False)
             user_ready()
@@ -399,4 +414,4 @@ def main(access_level):
             print('Exiting......')
             welcome_screen()
 
-welcome_screen()
+main(True)
