@@ -160,6 +160,34 @@ def access_level(user, password):
         print('You have not entered valid details\n')
         user_login_details()
 
+def admin_ready():
+    """
+    Description:
+        Handles the ready status of admin. If input is yes returns to main menu.
+        If invalid option entered, uses recursion to query user to try again.
+    """
+    print('\n\n\nAre you Ready?\n')
+    ready = input('Yes(Y)? This will return you to Homescreen: ')
+    if ready.lower() == 'yes' or ready.lower() == 'y':
+        main(True)
+    else:
+        print('Not a valid option')
+        admin_ready()
+
+
+def user_ready():
+        """
+    Description:
+        Handles the ready status of user. If input is yes returns to main menu.
+        If invalid option entered, uses recursion to query user to try again.
+    """
+    print('\n\n\nAre you Ready?\n')
+    ready = input('Yes(Y)? This will return you to Homescreen: ')
+    if ready.lower() == 'yes' or ready.lower() == 'y':
+        main(False)
+    else:
+        print('Not a valid option')
+        user_ready()
 
 def main(access_level):
     """
@@ -198,19 +226,13 @@ def main(access_level):
             print('\nUsers list\n')
             users = sheets().show_worksheet(user_sheet)
             print(users)
-            print('\n\n\nAre you Ready?\n')
-            ready = input('Yes(Y)? This will return you to Homescreen: ')
-            if ready.lower() == 'yes' or ready.lower() == 'y':
-                main(True)
+            admin_ready()
         # Admin list
         elif option == 2:
             print('\nAdmin list\n')
             admins = sheets().show_worksheet(admin_sheet)
             print(admins)
-            print('\n\n\nAre you Ready?\n')
-            ready = input('Yes(Y)? This will return you to Homescreen: ')
-            if ready.lower() == 'yes' or ready.lower() == 'y':
-                main(True)
+            admin_ready()
         # User registration list
         elif option == 3:
             # presents user with registration list
@@ -237,15 +259,9 @@ def main(access_level):
                 # waiting so script has chance to update
                 time.sleep(10)
                 print(reg_list)
-                print('\n\n\nAre you Ready?\n')
-                ready = input('Yes(Y)? This will return you to Homescreen: ')
-                if ready.lower() == 'yes' or ready.lower() == 'y':
-                    main(True)
+                admin_ready()
             else:
-                print('\nAre you Ready to return to Homsscreen?\n')
-                ready = input('Yes(Y)? This will return you to Homescreen: ')
-                if ready.lower() == 'yes' or ready.lower() == 'y':
-                    main(True)
+                admin_ready()
         else:
             print('Reurning Home')
             welcome_screen()
@@ -333,10 +349,10 @@ def main(access_level):
                     except:
                         print('Could not write Stock polarity')                    
                 print('Done')
-                main(False)
+                user_ready()
             except:
                 print('ERROR: Could not apply data to excelsheet,\
-                        entered please reach out to admin on this')
+                        please reach out to admin on this')
                 main(False)
         # Saved retuns
         elif option == 2:
@@ -356,10 +372,7 @@ def main(access_level):
                 print('ERROR: Could not apply data to excelsheet, please\
                         reach out to admin on this')
                 main(False)
-            print('\n\n\nAre you Ready?\n')
-            ready = input('Yes(Y)? This will return you to Homescreen: ')
-            if ready.lower() == 'yes' or ready.lower() == 'y':
-                main(False)
+            user_ready()
         else:
             # clears the stock data sheet on exit
             sheets.clear_sheet_exit()
