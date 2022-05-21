@@ -272,14 +272,24 @@ def main(access_level):
             if approval.lower() == 'yes' or approval.lower() == 'y':
                 print('Which user from table above? Please pick by index '
                       'number')
-                user_to_approve = int(input())
+                user_to_approve = input()
+                check_input = Validation.has_digit(user_to_approve)
+                # check to ensure option enterd has digit
+                if check_input is False:
+                    print('You must select a valid option!')
+                    print('Returning to Home Menu')
+                    main(True)
+                else:
+                # converts to int before ps
+                    user_to_approve = int(user_to_approve)
+                    pass
                 user_choice = user_to_approve + 2
                 reg_user = sheets.get_row_vals('Registration applications',
                                                user_choice)
                 move_to_user = sheets.update_worksheet_row([reg_user[1],
                                                             reg_user[2]],
                                                            'Users')
-                print(' Usersheet has been updated!\n')
+                print('Usersheet has been updated!\n')
                 print('Now deleting from registration page...')
                 sheets.del_reg(user_to_approve)
                 print('All Done!')
@@ -288,10 +298,11 @@ def main(access_level):
                 print(reg_list)
                 admin_ready()
             else:
-                print('Need to input a vlaid option!')
-                admin_ready()
+                print('Need to input a valid option! Please try again :-(\n')
+                print('Returning to Home Menu')
+                main(True)
         else:
-            print('Reurning Home')
+            print('Returning Home Screen.')
             welcome_screen()
     # User Menu
     else:
