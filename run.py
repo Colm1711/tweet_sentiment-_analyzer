@@ -53,11 +53,11 @@ def welcome_screen():
         user_login_details()
     elif log_reg.lower() == 'r' or log_reg.lower() == 'register':
         user_registration()
-    elif log_reg.lower() != 'r' or log_reg.lower() != 'l' or log_reg.lower() != 'login' or log_reg.lower() != 'register':
-        print('\nWARNING! You must select a vaild option')
-        welcome_screen()
     else:
-        print('Something has gone wrong here.')
+        print('\n\nWARNING! You must select a vaild option: \n')
+        print('options: Login(L) or Register(R)')
+        print('\nReturning to Welcome screen....\n')
+        welcome_screen()
 
 
 def user_login_details():
