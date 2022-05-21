@@ -32,7 +32,8 @@ def welcome_screen():
     This function handles the welcome screen for user when they first run
     program.
 
-    Queries user whether they want to log in or register.
+    Queries user whether they want to log in or register by comparing user_
+    input against if/else statements.
 
     Params:
             none
@@ -41,12 +42,12 @@ def welcome_screen():
             none
 
     """
-    print('\nWelcome to the Twitter sentiment application. This is designed to\
- retrieve sotck data and twitter information adding sentiment scores to\
- data.\n')
-    print('If you are returning user please Login. Dont have an account or first\
- time vistor? Please select the Register option. \n')
-
+    print('\nWelcome to the Twitter sentiment application. This is designed to'
+          ' retrieve sotck data and twitter information adding sentiment'
+          ' scores to data.\n')
+    print('If you are returning user please Login. Dont have an account or'
+          ' first time vistor? Please select the Register option.\n')
+    # Login or Register query
     log_reg = input('Login(L) or Register(R)? : ')
     if log_reg.lower() == "l" or log_reg.lower() == 'login':
         user_login_details()
@@ -64,7 +65,8 @@ def user_login_details():
     """
     Description:
 
-    This function handles colleciton of user log in.
+    This function handles colleciton of user log in input
+    and exports results to access level function.
 
     Params:
             none
@@ -85,7 +87,7 @@ def user_registration():
     Description:
 
     This function handles user registration.
-    Calls on the user_login_detail
+    Calls on the user_login_detail to handle the inputs.
 
     Params:
             none
@@ -109,16 +111,16 @@ def user_registration():
     email = input('Please enter your email: ')
 
     # This handles user registering password
-    print('Please your password must be at least 6 charecters long and must be\
- alphanumeric\n')
+    print('Please your password must be at least 6 charecters long '
+          'and must be alphanumeric\n')
     password = getpass('Please enter your password: ')
     val_email = Validation.email_valid(email)
     val_password = Validation.psw_valid(password)
     data = name, institution, email, password
     curr_sheet = 'Registration applications'
     sheets.update_worksheet_row(data, curr_sheet)
-    print('\n Thank you for submitting your interest with us. Why not check\
-        out our twitter page @TSentiment123 \n')
+    print('\n Thank you for submitting your interest with us. Why not check'
+          'out our twitter page @TSentiment123 \n')
     print('\n Returning to Welcome screen, admin team will be in contact\n')
     welcome_screen()
     return name, institution, val_email, val_password
@@ -130,7 +132,7 @@ def access_level(user, password):
 
     This function handles access level when logging in.
     It is set to False by default.
-    Runs main() with update.
+    Runs main() with updated access level.
 
     Params:
             str - user
@@ -160,11 +162,14 @@ def access_level(user, password):
         print('You have not entered valid details\n')
         user_login_details()
 
+
 def admin_ready():
     """
     Description:
-        Handles the ready status of admin. If input is yes returns to main menu.
+        Handles the ready status of admin. If input is yes returns to main
+        menu.
         If invalid option entered, uses recursion to query user to try again.
+
     """
     print('\n\n\nAre you Ready?\n')
     ready = input('Yes(Y)? This will return you to Homescreen: ')
@@ -173,6 +178,7 @@ def admin_ready():
     else:
         print('Not a valid option')
         admin_ready()
+
 
 def user_ready():
     """
@@ -188,27 +194,33 @@ def user_ready():
         print('Not a valid option')
         user_ready()
 
+
 def main(access_level):
     """
     This function handles Admin and user menu and options.
 
+    User level - can access the Stocks Data sheet to query live stock data
+
+    Admin level - can access protected sheets in Database & approve users.
+
     Params:
             access level - Boolean
     """
-
+    # User menu options
     user_menu = {
-                    1: 'Get Top 500 companies stock info from SP500 and \
-                        sentiment?',
+                    1: 'Get Top 500 companies stock info from SP500 and'
+                       'sentiment?',
                     2: 'Get a companies stock data for the week',
                     3: 'Exit',
     }
+    # Admin User options.
     admin_menu = {
                     1: 'View Users list?',
                     2: 'View Admin list?',
                     3: 'View User registration list?',
                     4: 'Exit',
     }
-
+    # setting worksheets to vars
     user_sheet = SHEET.worksheet('Users')
     admin_sheet = SHEET.worksheet('Admin')
     reg_sheet = SHEET.worksheet('Registration applications')
@@ -243,8 +255,8 @@ def main(access_level):
             print('\nApprove user? Yes(Y)')
             approval = input()
             if approval.lower() == 'yes' or approval.lower() == 'y':
-                print('Which user from table above? Please pick by index \
-                    number')
+                print('Which user from table above? Please pick by index '
+                      'number')
                 user_to_approve = int(input())
                 user_choice = user_to_approve + 2
                 reg_user = sheets.get_row_vals('Registration applications',
@@ -317,28 +329,31 @@ def main(access_level):
                     quote_t = si.get_quote_table(data)
                     # getting Stock Names and setting to tick_data
                     tick_data = si.get_stock_price(quote_t)
-                    # getting ticker list for Stock Names and setting to div_data
+                    # getting ticker list for Stock Names and setting to
+                    # div_data
                     div_data = si.get_dividends(quote_t)
-                    # getting ticker list for Stock Names and setting to pe_data
+                    # getting ticker list for Stock Names and setting to
+                    # pe_data
                     pe_data = si.get_pe_ratio(quote_t)
-                    # getting polarity for Stock Names ticker and setting to pol_data
+                    # getting polarity for Stock Names ticker and setting to
+                    # pol_data
                     pol_data = tweet.polarity_analysis(data)
                     time.sleep(5)
                     try:
                         stockdata_sh.update_cell(i, 2, data)
                     except:
                         print('Could not write Stock Name')
-                    time.sleep(5)
+                        time.sleep(5)
                     try:
                         stockdata_sh.update_cell(i, 3, tick_data)
                     except:
-                        print('Could not write Ticker Name') 
-                    time.sleep(5)
+                        print('Could not write Ticker Name')
+                        time.sleep(5)
                     try:
                         stockdata_sh.update_cell(i, 4, div_data)
                     except:
-                        print('Could not write Dividend') 
-                    time.sleep(5)
+                        print('Could not write Dividend')
+                        time.sleep(5)
                     try:
                         stockdata_sh.update_cell(i, 5, pe_data)
                     except:
@@ -347,32 +362,32 @@ def main(access_level):
                     try:
                         stockdata_sh.update_cell(i, 6, pol_data)
                     except:
-                        print('Could not write Stock polarity')                    
+                        print('Could not write Stock polarity')
                 print('Done')
                 complete_stock_sheet = sheets().show_worksheet(stock_sheet)
                 print(complete_stock_sheet)
                 user_ready()
             except:
-                print('ERROR: Could not apply data to excelsheet,\
-                        please reach out to admin on this')
+                print('ERROR: Could not apply data to excelsheet,'
+                      'please reach out to admin on this')
                 main(False)
         # Saved retuns
         elif option == 2:
             print('Get a companies stock data for the week')
             s = si.get_companies()
             print(s.iloc[:, 1])
-            print('\nEnter stock you would like data for(Please note you must\
-                enter companies name as it appears \
-                    e.g. "Apple" not "apple"):\n')
+            print('\nEnter stock you would like data for '
+                  '(Please note you must enter companies name '
+                  'as it appears e.g. "Apple" not "apple"):\n')
             stock_p_item = input()
             try:
-                # Stock Data
+                # Stock Data to be returned to terminal to user.
                 stock_ticker = si.get_ticker(stock_p_item)
                 stock_price = si.get_weeks_stock_data(stock_ticker)
                 print(stock_price)
             except:
-                print('ERROR: Could not apply data to excelsheet, please\
-                        reach out to admin on this')
+                print('ERROR: Could not apply data to excelsheet, please'
+                      ' reach out to admin on this')
                 main(False)
             user_ready()
         else:
@@ -381,4 +396,4 @@ def main(access_level):
             print('Exiting......')
             welcome_screen()
 
-main(False)
+welcome_screen()
