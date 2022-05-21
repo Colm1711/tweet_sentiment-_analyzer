@@ -25,21 +25,6 @@ passw_data = users.col_values(2)
 
 class Sheets():
 
-    def share_sheet(user):
-        """
-        Description:
-
-        Share sheet with user.
-
-        Params:
-            str --> user email
-
-        """
-
-
-        new_sheet.share(user, perm_type='user',
-                        role='writer')
-
     def get_col_vals(sheet, col):
         """
         Description:
