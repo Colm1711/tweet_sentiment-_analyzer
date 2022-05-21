@@ -371,7 +371,7 @@ def main(access_level):
                 print('ERROR: Could not apply data to excelsheet,'
                       'please reach out to admin on this')
                 main(False)
-        # Saved retuns
+        # Returns the stock data for the week to user for given stock name.
         elif option == 2:
             print('Get a companies stock data for the week')
             s = si.get_companies()
@@ -379,6 +379,7 @@ def main(access_level):
             print('\nEnter stock you would like data for '
                   '(Please note you must enter companies name '
                   'as it appears e.g. "Apple" not "apple"):\n')
+            # user inputs the stock to check
             stock_p_item = input()
             try:
                 # Stock Data to be returned to terminal to user.
