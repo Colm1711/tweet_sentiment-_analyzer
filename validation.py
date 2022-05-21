@@ -25,13 +25,13 @@ class Validation():
 
         Params:
 
-                data_to_val --> this is the data you want validated for
+                str --> this is the data you want validated for
                 uppercase, lowercase, digits & val
 
         Returns:
 
-                Boolean - True --> if all conditions are met
-                Boolean - False --> if any conditions are not met
+            Boolean --> True
+            Boolean --> iFalse
         """
 
         digit = Validation._has_digit(data_to_val)
@@ -55,12 +55,12 @@ class Validation():
         This function handles email validating using regular expressions.
 
         Params:
-                email --> use regualr expressions to check for email
+                str --> use regualr expressions to check for email
 
         Returns:
 
-                Boolean - True --> if all conditions are met
-                Boolean - False --> if any conditions are not met
+                Boolean --> True
+                Boolean --> False
         """
 
         if re.fullmatch(REGEX, email):
