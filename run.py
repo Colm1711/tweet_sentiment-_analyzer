@@ -174,9 +174,8 @@ def admin_ready():
         print('Not a valid option')
         admin_ready()
 
-
 def user_ready():
-        """
+    """
     Description:
         Handles the ready status of user. If input is yes returns to main menu.
         If invalid option entered, uses recursion to query user to try again.
@@ -213,6 +212,7 @@ def main(access_level):
     user_sheet = SHEET.worksheet('Users')
     admin_sheet = SHEET.worksheet('Admin')
     reg_sheet = SHEET.worksheet('Registration applications')
+    stock_sheet = GSPEAD_CLIENT.open('Stock').worksheet('Stock Data')
 
     if access_level is True:
         print('\nYou have accessed admin level\n')
@@ -349,6 +349,8 @@ def main(access_level):
                     except:
                         print('Could not write Stock polarity')                    
                 print('Done')
+                complete_stock_sheet = sheets().show_worksheet(stock_sheet)
+                print(complete_stock_sheet)
                 user_ready()
             except:
                 print('ERROR: Could not apply data to excelsheet,\
