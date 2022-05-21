@@ -211,6 +211,5 @@ class Sheets():
         name = 'authentication'
         row = row + 2
         # 2 then delete record
-        reg_data_sh = GSPEAD_CLIENT.open(name).worksheet('Registration \
-                                                          applications')
-        reg_data_sh.delete_row(row)
+        reg_data_sh = GSPEAD_CLIENT.open(name).worksheet('Registration applications')
+        reg_data_sh.delete_rows(row)
