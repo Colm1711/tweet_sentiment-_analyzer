@@ -100,10 +100,10 @@ def get_stock_price(qtable):
 
 def get_ls_tickers():
     # returns list of tickers
-    g = get_companies()
-
+    tickers = get_companies()
+    return tickers.iloc[:, 0].tolist()
 
 def get_ls_companies():
     # returns list of companies
-    g = get_companies()
-    return g.iloc[:, 1].tolist()
+    companies_name = get_companies()
+    return companies_name.iloc[:, 1].tolist()
