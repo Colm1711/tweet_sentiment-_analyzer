@@ -64,7 +64,7 @@ class TweetSentiment():
         This function fetched the tweets from the homepage of twitter account.
 
         Params:
-                str - search_term
+                str --> search_term
 
         Returns:
                 str
@@ -79,11 +79,11 @@ class TweetSentiment():
         """
         Description:
 
-        This function cleans the tweets fetched from the homepage of twitter\
- account.
+        This function cleans the tweets fetched from the homepage of twitter
+        account.
 
         Params:
-                str
+                strs
 
         Returns:
                 list(str's)
