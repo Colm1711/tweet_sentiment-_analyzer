@@ -1,5 +1,6 @@
 # Imports
 
+import os
 import gspread
 import stocks_info as si
 import time
@@ -21,6 +22,7 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPEAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPEAD_CLIENT.open('authentication')
+BREAK = '#' * 66
 
 # Welcome message
 
@@ -42,11 +44,17 @@ def welcome_screen():
             none
 
     """
-    print('\nWelcome to the Twitter sentiment application. This is designed to'
-          ' retrieve sotck data and twitter information adding sentiment'
-          ' scores to data.\n')
-    print('If you are returning user please Login. Dont have an account or'
-          ' first time vistor? Please select the Register option.\n')
+    print(BREAK, flush=True)
+    print('\n       Welcome to the Twitter sentiment application.\n',
+          flush=True)
+    print(BREAK, flush=True)
+    time.sleep(1.5)
+    print('\nThis is designed to retrieve stock data and twitter '
+          'information\nadding sentiment scores to data.\n', flush=True)
+    time.sleep(1)
+    print('If you are returning user please Login.\n\nDont have an account or'
+          ' first time vistor? Please select the\nRegister option.\n')
+    time.sleep(1)
     # Login or Register query
     log_reg = input('Login(L) or Register(R)? : ')
     if log_reg.lower() == "l" or log_reg.lower() == 'login':
@@ -54,9 +62,12 @@ def welcome_screen():
     elif log_reg.lower() == 'r' or log_reg.lower() == 'register':
         user_registration()
     else:
+        os.system('clear')
         print('\n\nWARNING! You must select a vaild option: \n')
         print('options: Login(L) or Register(R)')
         print('\nReturning to Welcome screen....\n')
+        time.sleep(4)
+        os.system('clear')
         welcome_screen()
 
 
@@ -227,11 +238,16 @@ def main(access_level):
     stock_sheet = GSPEAD_CLIENT.open('Stock').worksheet('Stock Data')
 
     if access_level is True:
-        print('\nYou have accessed admin level\n')
-        print('What would you like to do?\n')
+        os.system('clear')
+        print(BREAK, flush=True)
+        print('\n               YOU HAVE ACCESSES ADMIN LEVEL\n', flush=True)
+        time.sleep(1.3)
+        print(BREAK, flush=True)
+        print('\nWhat would you like to do?\n')
         # Admin Menu
         for key in admin_menu.keys():
-            print(f'{key} - {admin_menu[key]}')
+            print(f'{key} - {admin_menu[key]}', flush=True)
+            time.sleep(0.8)
         option = input()
         check_option = Validation.has_digit(option)
         # check to ensure option enterd has digit
@@ -280,7 +296,7 @@ def main(access_level):
                     print('Returning to Home Menu')
                     main(True)
                 else:
-                # converts to int before ps
+                    # converts to int before ps
                     user_to_approve = int(user_to_approve)
                     pass
                 user_choice = user_to_approve + 2
@@ -306,15 +322,23 @@ def main(access_level):
             welcome_screen()
     # User Menu
     else:
-        print('\nWelcome to the home screen!\n')
-        print('What would you like to do?\n')
+        os.system('clear')
+        print(BREAK, flush=True)
+        print('\n              Welcome to the home screen!\n', flush=True)
+        print(BREAK, flush=True)
+        time.sleep(1.3)
+      
+        print('\nWhat would you like to do?\n')
         for key in user_menu.keys():
-            print(f'{key} - {user_menu[key]}')
+            print(f'{key} - {user_menu[key]}', flush=True)
+            time.sleep(1.2)
         option = input()
         check_option = Validation.has_digit(option)
         # check to ensure option enterd has digit
         if check_option is False:
             print('You must select a valid option!')
+            time.sleep(2)
+            os.system('clear')
             main(False)
         else:
             # converts to int before ps
@@ -325,19 +349,22 @@ def main(access_level):
             pass
         else:
             print('You must select a valid option!')
+            time.sleep(2)
+            os.system('clear')
             main(False)
         # Stock sentiment Option
         if option == 1:
+            sheets.clear_sheet_exit()
+            os.system('clear')
             print('\nGet Top 500 companies stock info from SP500!\n')
-            print('Updating stock sheet with data, please wait')
             #  limiting to 10 as heavy on resources and time
-            try:
-                name = 'Stock'
-                stockdata_sh = GSPEAD_CLIENT.open(name).sheet1
-                data = ['Stock Name', 'Ticker', 'Price($)', 'Dividend', 'P/E',
-                        'Polarity']
-                stockdata_sh.append_row(data)
-                stockdata_sh.format('1', {
+
+            name = 'Stock'
+            stockdata_sh = GSPEAD_CLIENT.open(name).sheet1
+            data = ['Stock Name', 'Ticker', 'Price($)', 'Dividend', 'P/E',
+                    'Polarity']
+            stockdata_sh.append_row(data)
+            stockdata_sh.format('1', {
                                             "backgroundColor": {
                                                 "red": 0.0,
                                                 "green": 0.0,
@@ -353,18 +380,18 @@ def main(access_level):
                                                     "fontSize": 12,
                                                     "bold": True
                                                             }
-                                            })
+             })
+            try:                               
                 stock_comp_list = si.get_ls_companies()
+                stock_tick_list = si.get_ls_tickers()
                 # limiting to 5 as heavy on resources and time
                 # This adds stock name to the excel sheet
                 for i in range(2, 7):
-                    data = stock_comp_list[i]
-                    time.sleep(2)
-                    stockdata_sh.update_cell(i, 1, data)
-                # limiting to 5 as heavy on resources and time
-                # This adds ticker name and data to the excel sheet
-                stock_tick_list = si.get_ls_tickers()
-                for i in range(2, 7):
+                    f_data = stock_comp_list[i]
+                    stockdata_sh.update_cell(i, 1, f_data)
+                    print('Updating stock sheet with data, please wait...\n\n')
+                    # limiting to 5 as heavy on resources and time
+                    # This adds ticker name and data to the excel sheet
                     # getting list of Stock Names and setting to data
                     data = stock_tick_list[i]
                     # getting qoute table to pass through for ticker, div, pe
@@ -372,50 +399,55 @@ def main(access_level):
                     # getting Stock Names and setting to tick_data
                     tick_data = si.get_stock_price(quote_t)
                     # getting ticker list for Stock Names and setting to
-                    # div_data
+                        # div_data
                     div_data = si.get_dividends(quote_t)
                     # getting ticker list for Stock Names and setting to
-                    # pe_data
+                        # pe_data
                     pe_data = si.get_pe_ratio(quote_t)
-                    # getting polarity for Stock Names ticker and setting to
-                    # pol_data
+                        # getting polarity for Stock Names ticker and setting to
+                        # pol_data
                     pol_data = tweet.polarity_analysis(data)
-                    time.sleep(5)
-                    try:
-                        stockdata_sh.update_cell(i, 2, data)
-                    except:
-                        print('Could not write Stock Name')
-                        time.sleep(5)
-                    try:
-                        stockdata_sh.update_cell(i, 3, tick_data)
-                    except:
-                        print('Could not write Ticker Name')
-                        time.sleep(5)
-                    try:
-                        stockdata_sh.update_cell(i, 4, div_data)
-                    except:
-                        print('Could not write Dividend')
-                        time.sleep(5)
-                    try:
-                        stockdata_sh.update_cell(i, 5, pe_data)
-                    except:
-                        print('Could not write PE ratio')
-                    time.sleep(5)
-                    try:
-                        stockdata_sh.update_cell(i, 6, pol_data)
-                    except:
-                        print('Could not write Stock polarity')
-                print('Done')
-                complete_stock_sheet = sheets().show_worksheet(stock_sheet)
+                    os.system('clear')
+                    time.sleep(2)
+                    print(f'Stock name: {f_data}')
+                    time.sleep(2)
+                    stockdata_sh.update_cell(i, 2, data)
+                    print(f'Wrote {data} ticker name to Stock sheet')
+                    time.sleep(2)
+                    stockdata_sh.update_cell(i, 3, tick_data)
+                    print(f'Wrote {tick_data} share price to Stock sheet')
+                    time.sleep(2)
+                    stockdata_sh.update_cell(i, 4, div_data)
+                    print(f'Wrote {div_data} dividend to Stock sheet')
+                    time.sleep(2)
+                    stockdata_sh.update_cell(i, 5, pe_data)
+                    print(f'Wrote {pe_data} PE ratio to Stock sheet')
+                    time.sleep(2)
+                    stockdata_sh.update_cell(i, 6, pol_data)
+                    print(f'Wrote {pol_data} polarity data to Stock sheet')
+                    time.sleep(2)
+                    print('Sheet has been populated with live data!')
+                    os.system('clear')
+                    time.sleep(2)
+                complete_stock_sheet = sheets.show_worksheet(stock_sheet)
                 print(complete_stock_sheet)
+                print('\\nA polarity above 0 means tweets about company is '
+                      'trending positive')
+                print('\nA polarity below 0 means tweets about company is '
+                      'trending negative')
+                print('A polarity of 0 is neutral!(It never happens ;-) )')
                 user_ready()
             except:
                 print('ERROR: Could not apply data to excelsheet,'
-                      'please reach out to admin on this')
+                        'please reach out to admin on this')
+                sheets.clear_sheet_exit()
+                time.sleep(2)
+                os.system('clear')
                 main(False)
         # Returns the stock data for the week to user for given stock name.
         elif option == 2:
-            print('Get a companies stock data for the week')
+            os.system('clear')
+            print('\nGet a companies stock data for the week:\n')
             s = si.get_companies()
             print(s.iloc[:, 1])
             print('\nEnter stock you would like data for:\n')
@@ -425,6 +457,7 @@ def main(access_level):
                 stock_p_item = stock_p_item.title()
             else:
                 pass
+                user_ready()
             try:
                 # Stock Data to be returned to terminal to user.
                 stock_ticker = si.get_ticker(stock_p_item)
@@ -433,12 +466,14 @@ def main(access_level):
             except:
                 print('ERROR: Could not retrieve data to excelsheet, please'
                       ' reach out to admin on this')
-                main(False)
-            user_ready()
+                time.sleep(5)
+                main(False)            
         else:
             # clears the stock data sheet on exit
             sheets.clear_sheet_exit()
             print('Exiting......')
+            time.sleep(3)
+            os.system('clear')
             welcome_screen()
 
-main(True)
+main(False)
