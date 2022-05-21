@@ -116,7 +116,7 @@ This project looks to collect tweets for the user and clean the data for investm
 - when attempting to hook up smtplib to tweet sentiment gmail account to send user registration froms. Recieved '[Errno 101] Network is unreachable' error
   message. Data online points to firewall issues. No known solution.
 
-- There is a bug when the incorrect option is selected in login and rehgistration in the welcome function.
+- There is a bug when the incorrect option is selected in login and rehgistration in the welcome function. SOLVED: Removing additonal elif from validaiton.
 
 - with gspread there is an API limit of 500 requests per 100 seconds per project and 100 requests per 100 seconds per user. Due to this when writing the 
   company name and ticker name to stock data sheet gfor user was getting 429 error code. SOLVED: added 2 second wait btween writes to sheet.
