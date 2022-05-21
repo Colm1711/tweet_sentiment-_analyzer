@@ -71,7 +71,7 @@ class TweetSentiment():
 
         """
         # have set language to english and limited the search to first 200
-        tweets_timeline = api.search_tweets(q=search_term, lang='en')
+        tweets_timeline = api.search_tweets(q=search_term, lang='en', count=20)
         return tweets_timeline
 
     # Clean data of retweets, hastags, username handles and hyperlinks
@@ -92,7 +92,7 @@ class TweetSentiment():
         # list to populate cleaned tweets
         tweet_list = []
 
-        tweets_dict = {tweet.full_text for tweet in tweets_to_clean}
+        tweets_dict = {tweet.text for tweet in tweets_to_clean}
         for tweet in tweets_dict:
             # removing retweets from tweets
             clean_text = tweet.replace('RT', '')
