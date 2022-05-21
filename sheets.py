@@ -25,56 +25,15 @@ passw_data = users.col_values(2)
 
 class Sheets():
 
-    def new_sheet(input):
+    def share_sheet(input):
         """
         Description:
 
-        This function creates a new worksheet in main tweet sentiment gspread\
-            page.
-
-        Params:
-                str - input of newsheet to be created
-
-        Returns:
-                new worksheet in gspread workspace
+        Share sheet with user.
 
         """
-        self.input = input
-
-        try:
-            new_sheet = GSPEAD_CLIENT.create(input)
-            new_sheet.share('tweet.sentiment.123@gmail.com', perm_type='user',
-                            role='writer')
-            print(f'Your new sheet {new_sheet} has been created!\n')
-        except Exception as inst:
-            print(f'{inst} error! Your new worksheet failed to create.')
-
-    def get_col_value_lists(wrksht):
-        """
-        Description:
-
-        This function get column valuse as a list.
-
-        Params:
-
-
-        Returns:
-                list of lists - cols are the nested list.
-                Returns first 10 by default.
-
-                ex. access list item:
-
-                cols[i]
-
-        """
-
-        col_worksheet = SHEET.worksheet(wrksht)
-
-        cols = []
-        for ind in range(1, 10):
-            column = col_worksheet.col_values(ind)
-            cols.append(column)
-        return cols
+        new_sheet.share('tweet.sentiment.123@gmail.com', perm_type='user',
+                        role='writer')
 
     def get_col_vals(sheet, col):
         """
@@ -114,24 +73,6 @@ class Sheets():
         except ValueError as e:
             print(f'Error {e} occurred when retrieving data!')
 
-    def display_worksheets(self, data):
-        """
-        Description:
-
-        This displays worksheets with an index number to terminal.
-
-        Params:
-                list
-
-        Returns:
-                list of sheets and index numbers.
-        """
-
-        for i in data:
-            # adding one as index is to start 1 instead of 0
-            index = data.index(i) + 1
-            print(f'{index} : {i}')
-
     def update_worksheet_row(data, worksheet):
         """
         Description:
@@ -154,23 +95,6 @@ class Sheets():
         except ValueError as e:
             return f'Invalid data {e}\n'
 
-    def clear_worksheet(worksheet):
-        """
-        Description:
-
-        This clears a worksheet of all data.
-
-        Params:
-            worksheet(str) - worksheet to clear
-
-        """
-
-        try:
-            worksheet.clear()
-            return f'Worksheeet {worksheet} has been cleared of all values\n'
-        except Exception as inst:
-            return f'{inst} error! Failed to clear contents of {worksheet}.\n'
-
     def show_worksheet(self, data):
         """
         Description:
@@ -192,6 +116,13 @@ class Sheets():
         return dataframe
 
     def clear_sheet_exit():
+        """
+        Description:
+
+        This function handles clearing the Stock Dasta sheet on users exit from
+        application
+
+        """
         name = 'Stock'
         stockdata_sh = GSPEAD_CLIENT.open(name).sheet1
         fmt_undo = stockdata_sh.format("1", {"backgroundColor": {
@@ -208,8 +139,18 @@ class Sheets():
         stockdata_sh.clear()
 
     def del_reg(row):
+        """
+    	Description:
+
+        This function handkes the deletion of user from Registration
+        after the user details have been moved to User sheets.
+
+        """
         name = 'authentication'
+        sheet = 'Registration applications'
+        # increments value by two due to difference in indexing between
+        # terminal output and excelsheet
         row = row + 2
-        # 2 then delete record
-        reg_data_sh = GSPEAD_CLIENT.open(name).worksheet('Registration applications')
+        # delete record
+        reg_data_sh = GSPEAD_CLIENT.open(name).worksheet(sheet)
         reg_data_sh.delete_rows(row)
