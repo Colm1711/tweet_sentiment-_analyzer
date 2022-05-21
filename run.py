@@ -295,27 +295,48 @@ def main(access_level):
                 # This adds ticker name and data to the excel sheet
                 stock_tick_list = si.get_ls_tickers()
                 for i in range(2, 7):
+                    # getting list of Stock Names and setting to data
                     data = stock_tick_list[i]
+                    # getting qoute table to pass through for ticker, div, pe
                     quote_t = si.get_quote_table(data)
+                    # getting Stock Names and setting to tick_data
                     tick_data = si.get_stock_price(quote_t)
+                    # getting ticker list for Stock Names and setting to div_data
                     div_data = si.get_dividends(quote_t)
+                    # getting ticker list for Stock Names and setting to pe_data
                     pe_data = si.get_pe_ratio(quote_t)
-                    pol_data = tweet.polarity_analysis(tick_data)
+                    # getting polarity for Stock Names ticker and setting to pol_data
+                    pol_data = tweet.polarity_analysis(data)
                     time.sleep(5)
-                    stockdata_sh.update_cell(i, 2, data)
+                    try:
+                        stockdata_sh.update_cell(i, 2, data)
+                    except:
+                        print('Could not write Stock Name')
                     time.sleep(5)
-                    stockdata_sh.update_cell(i, 3, tick_data)
+                    try:
+                        stockdata_sh.update_cell(i, 3, tick_data)
+                    except:
+                        print('Could not write Ticker Name') 
                     time.sleep(5)
-                    stockdata_sh.update_cell(i, 4, div_data)
+                    try:
+                        stockdata_sh.update_cell(i, 4, div_data)
+                    except:
+                        print('Could not write Dividend') 
                     time.sleep(5)
-                    stockdata_sh.update_cell(i, 5, pe_data)
+                    try:
+                        stockdata_sh.update_cell(i, 5, pe_data)
+                    except:
+                        print('Could not write PE ratio')
                     time.sleep(5)
-                    stockdata_sh.update_cell(i, 6, pol_data)
+                    try:
+                        stockdata_sh.update_cell(i, 6, pol_data)
+                    except:
+                        print('Could not write Stock polarity')                    
                 print('Done')
                 main(False)
-            except ValueError() as e:
-                print(f'ERROR: Could not apply data to excelsheet, as you \
-                        entered {e} please reach out to admin on this')
+            except:
+                print('ERROR: Could not apply data to excelsheet,\
+                        entered please reach out to admin on this')
                 main(False)
         # Saved retuns
         elif option == 2:
@@ -331,9 +352,9 @@ def main(access_level):
                 stock_ticker = si.get_ticker(stock_p_item)
                 stock_price = si.get_weeks_stock_data(stock_ticker)
                 print(stock_price)
-            except ValueError() as e:
-                print(f'ERROR: Could not apply data to excelsheet, as you \
-                        entered {e} please reach out to admin on this')
+            except:
+                print('ERROR: Could not apply data to excelsheet, please\
+                        reach out to admin on this')
                 main(False)
             print('\n\n\nAre you Ready?\n')
             ready = input('Yes(Y)? This will return you to Homescreen: ')
@@ -345,4 +366,4 @@ def main(access_level):
             print('Exiting......')
             welcome_screen()
 
-welcome_screen()
+main(False)
