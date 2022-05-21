@@ -11,14 +11,27 @@ WEEK_LOOKBACK = datetime.datetime.now() - datetime.timedelta(days=7)
 
 
 def get_companies():
+    """
+    Description:
+
+    This returns list of companies from sp500 including ticker
+    and stock information.
+    """
     stock_list = si.tickers_sp500(include_company_data=True)
     pd.set_option('display.max_rows', len(stock_list))
     return stock_list
 
 
-# Use this to get ticker based on name
-# col 0 returns ticker symbol and col 1 company name
 def get_ticker(company_name):
+    """
+    Description:
+
+    Use this to get ticker based on name
+
+    Returns:
+
+    Str ---> ticker
+    """
     # collects list from top 500 companys
     stock_list = si.tickers_sp500(include_company_data=True)
     # filter out just company security and symbol
@@ -36,34 +49,61 @@ def get_ticker(company_name):
 
 
 def get_weeks_stock_data(company_symbol):
+    """
+    Description:
+
+    Gets weeks worth of stock information for given stock name.
+
+    Returns:
+        Dataframe
+    """
     # getting the previous weeks worth of data
     stock_price_data = yf.download(company_symbol, start=WEEK_LOOKBACK,
-                                   end=TODAY, group_by='ticker', rounding=True, actions=True)
+                                   end=TODAY, group_by='ticker', rounding=True,
+                                   actions=True)
     return stock_price_data
 
+
 def get_quote_table(ticker):
-    #This collects teh quote table contents that has price 
+    """
+    Description:
+
+    This collects the quote table contents that has stock price
+    dividend, PE ratio etc.
+
+    Returns:
+        Dict --> Stock informmation.
+
+    """
     quote_table = si.get_quote_table(ticker)
-    PE = quote_table
     return quote_table
 
+
 def get_dividends(qtable):
+    # Gets Dividend and yield. Reuturns dividend.
     dividends = qtable['Forward Dividend & Yield'].split()
     div = dividends[0]
     return div
 
+
 def get_pe_ratio(qtable):
+    # Gets the Price earning ratio
     PE = qtable['PE Ratio (TTM)']
     return PE
 
+
 def get_stock_price(qtable):
+    # Gets stocks price
     stock_price = qtable['Quote Price']
     return round(stock_price, 2)
 
+
 def get_ls_tickers():
+    # returns list of tickers
     g = get_companies()
-    return g.iloc[:, 0].tolist()
+
 
 def get_ls_companies():
+    # returns list of companies
     g = get_companies()
     return g.iloc[:, 1].tolist()
