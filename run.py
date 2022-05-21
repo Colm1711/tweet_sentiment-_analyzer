@@ -73,8 +73,8 @@ def user_login_details():
 
     Returns:
 
-            str - email
-            str - password
+        str --> email
+        str --> password
     """
 
     email = input('Please enter your email: ')
@@ -88,15 +88,16 @@ def user_registration():
 
     This function handles user registration.
     Calls on the user_login_detail to handle the inputs.
+    Calls on validation to check user inputs.
 
     Params:
             none
 
     Returns:
-            str - name
-            str - institution
-            str - val_email
-            str - val_password
+            str --> name
+            str --> institution
+            str --> val_email
+            str --> val_password
     """
     # This handles user registering name
     print('Please fill out your details: \n')
@@ -135,10 +136,10 @@ def access_level(user, password):
     Runs main() with updated access level.
 
     Params:
-            str - user
-            str - password
+            str --> user
+            str --> password
     Returns:
-             Boolean - True or False
+             Boolean --> True or False
 
     """
     # setting access level to default of False
@@ -204,7 +205,7 @@ def main(access_level):
     Admin level - can access protected sheets in Database & approve users.
 
     Params:
-            access level - Boolean
+        Boolean --> access level
     """
     # User menu options
     user_menu = {
