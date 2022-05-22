@@ -23,12 +23,6 @@
     * [**Content**](<#content>)
 *  [**Acknowledgements**](<#acknowledgements>)
 
-## Reminders
-
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
-
 ## Project Goals
 * The Tweet Analyzer application is the beginning of a real world application to allow users retrieve live stock data and get numerical representation of how that company is trending with real
 world users of twitter. To help give stock traders a competitive advantage.
@@ -73,14 +67,18 @@ world users of twitter. To help give stock traders a competitive advantage.
 
 * The flow for how the application operates was mapped out on lucidcharts
 
-    * Highlevel overview wireframe image  
-     ![Highlevel](assets/images/sentiment%20data%20from%20twitter.jpeg)
+<details><summary>Login and registration</summary>
+<img src="assets/images/tweet_sentiment_login_registration.jpeg">
+</details>
 
-    * Login/Registration wireframe  
-    ![lower](assets/images/tweet_sentiment_login_registration.jpeg)  
+<details><summary>Main application</summary>
+<img src="assets/images/sentiment data from twitter user and admin menus.png">
+</details>
 
-    * Micro 
-    ![micro](assets/images)
+<details><summary>Live stock Dataframe process</summary>
+<img src="assets/images/Live stock dataframe.png">
+</details>
+
 
 [Back to top](<#contents>)
 
