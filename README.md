@@ -387,9 +387,15 @@ The deployment terminal is set to 80 columns by 24 rows. That means that each li
 
 - How to set dates for stock look back was sourced here: [python.org](https://docs.python.org/3/library/datetime.html#timedelta-objects)
 
-- Yahoo finance reference for all stock related queries was sourced from here: (https://algotrading101.com/learn/yahoo-finance-api-guide/)
+- Yahoo finance reference for all stock related queries was sourced from here: [algotrading101](https://algotrading101.com/learn/yahoo-finance-api-guide/)
 
-- Gspread formating was sourced from here: (https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells)
+- Gspread formating was sourced from here: [google developer](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells)
+
+- All Twitter API information was sourced from here: [twitter developer](https://developer.twitter.com/en)
+
+- All Twitter API queries using the various arguements was sourced from here: [tweepy](https://www.tweepy.org/)
+
+- All Yahoo finance API queroes and various arguements was sourced from here: [yfinance](https://pypi.org/project/yfinance/) 
 
 
 ### Content
