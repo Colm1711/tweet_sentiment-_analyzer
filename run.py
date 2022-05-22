@@ -444,9 +444,9 @@ def main(access_level):
                     time.sleep(2)
                 complete_stock_sheet = sheets.show_worksheet(stock_sheet)
                 print(complete_stock_sheet)
-                print('\\nA polarity above 0 means tweets about company is '
+                print('\nA polarity above 0 means tweets about company is '
                       'trending positive')
-                print('\nA polarity below 0 means tweets about company is '
+                print('A polarity below 0 means tweets about company is '
                       'trending negative')
                 print('A polarity of 0 is neutral!(It never happens ;-) )')
                 user_ready()
@@ -468,18 +468,17 @@ def main(access_level):
             stock_p_item = input()
             if stock_p_item.islower() is True:
                 stock_p_item = stock_p_item.title()
-            else:
-                try:
-                    # Stock Data to be returned to terminal to user.
-                    stock_ticker = si.get_ticker(stock_p_item)
-                    stock_price = si.get_weeks_stock_data(stock_ticker)
-                    print(stock_price)
-                    user_ready()
-                except:
-                    print('ERROR: Could not retrieve data to excelsheet, please'
-                      ' reach out to admin on this')
-                    time.sleep(5)
-                    main(False)
+            try:
+                # Stock Data to be returned to terminal to user.
+                stock_ticker = si.get_ticker(stock_p_item)
+                stock_price = si.get_weeks_stock_data(stock_ticker)
+                print(stock_price)
+                user_ready()
+            except:
+                print('ERROR: Could not retrieve data to excelsheet, please'
+                  ' reach out to admin on this')
+                time.sleep(5)
+                main(False)        
         else:
             # clears the stock data sheet on exit
             sheets.clear_sheet_exit()
@@ -488,4 +487,4 @@ def main(access_level):
             os.system('clear')
             welcome_screen()
 
-welcome_screen()
+main(False)
