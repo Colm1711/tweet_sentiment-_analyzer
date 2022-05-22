@@ -129,6 +129,9 @@ def user_registration():
     password = getpass('Please enter your password: ')
     val_email = Validation.email_valid(email)
     val_password = Validation.psw_valid(password)
+    print(val_password)
+    # test_inputs = registration_user_password_val(val_email, val_password)
+    
     data = name, institution, email, password
     curr_sheet = 'Registration applications'
     sheets.update_worksheet_row(data, curr_sheet)
@@ -141,6 +144,27 @@ def user_registration():
     welcome_screen()
     return name, institution, val_email, val_password
 
+def registration_user_password_val(val_email, val_password):
+    """
+    Descriptioin:
+            Function handles the password checks on registration form. 
+            Using recursion if either param is False. Uses recursion.
+
+    Params:
+            Bool --> True or False
+            Bool --> True or False
+
+    """
+
+
+    if  val_email is False or val_password is False:
+        print('You have not provided valid details! Please try again.')
+        time.sleep(5)
+        os.system('clear')
+        user_registration()
+    else:
+        print('You have provided valid details thanks you :)')
+        pass
 
 def access_level(user, password):
     """
