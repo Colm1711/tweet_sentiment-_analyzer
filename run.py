@@ -241,8 +241,8 @@ def main(access_level):
         os.system('clear')
         print(BREAK, flush=True)
         print('\n               YOU HAVE ACCESSES ADMIN LEVEL\n', flush=True)
-        time.sleep(1.3)
         print(BREAK, flush=True)
+        time.sleep(1.3)
         print('\nWhat would you like to do?\n')
         # Admin Menu
         for key in admin_menu.keys():
@@ -253,6 +253,7 @@ def main(access_level):
         # check to ensure option enterd has digit
         if check_option is False:
             print('You must select a valid option!')
+            os.system('clear')
             main(True)
         else:
             # converts to int before ps
@@ -263,21 +264,26 @@ def main(access_level):
             pass
         else:
             print('You must select a valid option!')
+            time.sleep(2)
+            os.system('clear')
             main(True)
         # Users list
         if option == 1:
+            os.system('clear')
             print('\nUsers list\n')
             users = sheets.show_worksheet(user_sheet)
             print(users)
             admin_ready()
         # Admin list
         elif option == 2:
+            os.system('clear')
             print('\nAdmin list\n')
             admins = sheets.show_worksheet(admin_sheet)
             print(admins)
             admin_ready()
         # User registration list
         elif option == 3:
+            os.system('clear')
             # presents user with registration list
             print('\nUser registration list\n')
             reg_list = sheets.show_worksheet(reg_sheet)
@@ -314,11 +320,14 @@ def main(access_level):
                 print(reg_list)
                 admin_ready()
             else:
-                print('Need to input a valid option! Please try again :-(\n')
+                print('Need to input a valid option! Please try again\n')
                 print('Returning to Home Menu')
+                os.system('clear')
                 main(True)
         else:
             print('Returning Home Screen.')
+            time.sleep(3)
+            os.system('clear')
             welcome_screen()
     # User Menu
     else:
@@ -327,7 +336,7 @@ def main(access_level):
         print('\n              Welcome to the home screen!\n', flush=True)
         print(BREAK, flush=True)
         time.sleep(1.3)
-      
+
         print('\nWhat would you like to do?\n')
         for key in user_menu.keys():
             print(f'{key} - {user_menu[key]}', flush=True)
@@ -381,7 +390,7 @@ def main(access_level):
                                                     "bold": True
                                                             }
              })
-            try:                               
+            try:
                 stock_comp_list = si.get_ls_companies()
                 stock_tick_list = si.get_ls_tickers()
                 # limiting to 5 as heavy on resources and time
@@ -399,13 +408,13 @@ def main(access_level):
                     # getting Stock Names and setting to tick_data
                     tick_data = si.get_stock_price(quote_t)
                     # getting ticker list for Stock Names and setting to
-                        # div_data
+                    # div_data
                     div_data = si.get_dividends(quote_t)
                     # getting ticker list for Stock Names and setting to
-                        # pe_data
+                    # pe_data
                     pe_data = si.get_pe_ratio(quote_t)
-                        # getting polarity for Stock Names ticker and setting to
-                        # pol_data
+                    # getting polarity for Stock Names ticker and setting to
+                    # pol_data
                     pol_data = tweet.polarity_analysis(data)
                     os.system('clear')
                     time.sleep(2)
@@ -439,7 +448,7 @@ def main(access_level):
                 user_ready()
             except:
                 print('ERROR: Could not apply data to excelsheet,'
-                        'please reach out to admin on this')
+                      'please reach out to admin on this')
                 sheets.clear_sheet_exit()
                 time.sleep(2)
                 os.system('clear')
@@ -467,7 +476,7 @@ def main(access_level):
                 print('ERROR: Could not retrieve data to excelsheet, please'
                       ' reach out to admin on this')
                 time.sleep(5)
-                main(False)            
+                main(False)
         else:
             # clears the stock data sheet on exit
             sheets.clear_sheet_exit()
@@ -476,4 +485,4 @@ def main(access_level):
             os.system('clear')
             welcome_screen()
 
-main(False)
+main(True)
