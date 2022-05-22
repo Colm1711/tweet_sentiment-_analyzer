@@ -10,37 +10,12 @@ from textblob import TextBlob
 # CONATANTS
 
 # SETTING UP ACCESS TO TWITTER
-# TWEET_API = open("tweet_api.json")
-# TWEET_API = os.environ.get("TWEET_API")
 
-# if not os.path.exists('tweet_api.json'):
-#     with open("tweet_api.json", 'wb') as f:
-#         f.write(str.encode(TWEET_API))
-
-# ADMIN_DATA = json.load(DICT_DATA)
-# API_KEY = ADMIN_DATA.get('api_key')
-# API_KEY_SECRET = ADMIN_DATA.get('api_key_secret')
-# ACCESS_TOKEN = ADMIN_DATA.get('access_token')
-# ACCESS_TOKEN_SECRET = ADMIN_DATA.get('access_token_secret')
 
 API_KEY = os.environ.get('API_KEY')
 API_KEY_SECRET = os.environ.get('API_KEY_SECRET')
 ACCESS_TOKEN = os.environ.get('ACCESS_TOKEN')
 ACCESS_TOKEN_SECRET = os.environ.get('ACCESS_TOKEN_SECRET')
-print(API_KEY)
-print(type(API_KEY))
-
-print(API_KEY_SECRET)
-print(type(API_KEY_SECRET))
-
-print(ACCESS_TOKEN)
-print(type(ACCESS_TOKEN))
-
-print(ACCESS_TOKEN_SECRET)
-print(type(ACCESS_TOKEN_SECRET))
-
-
-
 
 # # VARIABLES
 
