@@ -306,7 +306,8 @@ def live_stock_data():
         print('A polarity below 0 means tweets about company is '
                       'trending negative')
         print('A polarity of 0 is neutral!(It never happens ;-) )')
-    except:
+    except EnvironmentError as e:
+        print(e)
         print('ERROR: Could not apply data to excelsheet,'
               'please reach out to admin on this')
         sheets.clear_sheet_exit()
