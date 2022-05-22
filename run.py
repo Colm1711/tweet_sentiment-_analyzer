@@ -210,13 +210,14 @@ def user_ready():
         print('Not a valid option')
         user_ready()
 
+
 def write_header_to_stock_sheet():
     """
     Description:
         This function hanldes writting header to the stock sheet for user
     """
     data = ['Stock Name', 'Ticker', 'Price($)', 'Dividend', 'P/E',
-                    'Polarity']
+            'Polarity']
     STOCKDATA_SH.append_row(data)
     STOCKDATA_SH.format('1', {
                                 "backgroundColor": {
@@ -236,6 +237,7 @@ def write_header_to_stock_sheet():
                                                 }
              })
     print('Header written!')
+
 
 def live_stock_data():
     """
@@ -288,14 +290,14 @@ def live_stock_data():
             print(f'Wrote {pol_data} polarity data to Stock sheet')
             time.sleep(2)
             print('Sheet has been populated with live data!')
-            os.system('clear')
             time.sleep(2)
+            os.system('clear')
         complete_stock_sheet = sheets.show_worksheet(STOCKDATA_SH)
         print(complete_stock_sheet)
         print('\nA polarity above 0 means tweets about company is '
-                      'trending positive')
+              'trending positive')
         print('A polarity below 0 means tweets about company is '
-                      'trending negative')
+              'trending negative')
         print('A polarity of 0 is neutral!(It never happens ;-) )')
     except EnvironmentError as e:
         print(e)
@@ -305,6 +307,7 @@ def live_stock_data():
         time.sleep(2)
         os.system('clear')
         main(False)
+
 
 def main(access_level):
     """
@@ -421,7 +424,7 @@ def main(access_level):
                 new_reg_sheet = sheets.show_worksheet(reg_sheet)
                 print(new_reg_sheet)
             else:
-                print('Need to input a valid option as this is sensitive data!' 
+                print('Need to input a valid option as this is sensitive data!'
                       'Please try again\n')
                 print('Returning to Home Menu')
                 time.sleep(5)
@@ -468,7 +471,7 @@ def main(access_level):
             print('\nGet Top 500 companies stock info from SP500!\n')
             write_header_to_stock_sheet()
             live_stock_data()
-            admin_ready()    
+            admin_ready()
         # Returns the stock data for the week to user for given stock name.
         elif option == 2:
             os.system('clear')
@@ -488,9 +491,9 @@ def main(access_level):
                 user_ready()
             except:
                 print('ERROR: Could not retrieve data to excelsheet, please'
-                  ' reach out to admin on this')
+                      ' reach out to admin on this')
                 time.sleep(5)
-                main(False)        
+                main(False)
         else:
             print('Exiting......')
             time.sleep(3)
