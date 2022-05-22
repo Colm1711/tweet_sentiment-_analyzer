@@ -322,7 +322,8 @@ def main(access_level):
                 print(reg_list)
                 admin_ready()
             else:
-                print('Need to input a valid option as this is sensitive data! Please try again\n')
+                print('Need to input a valid option as this is sensitive data!' 
+                      'Please try again\n')
                 print('Returning to Home Menu')
                 time.sleep(5)
                 os.system('clear')
