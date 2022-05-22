@@ -208,6 +208,71 @@ def user_ready():
         print('Not a valid option')
         user_ready()
 
+def live_stock_data():
+    stock_comp_list = si.get_ls_companies()
+    stock_tick_list = si.get_ls_tickers()
+    # limiting to 5 as heavy on resources and time
+    # This adds stock name to the excel sheet
+    try:
+        for i in range(2, 7):
+            f_data = stock_comp_list[i]
+            stockdata_sh.update_cell(i, 1, f_data)
+            print('Updating stock sheet with data, please wait...\n\n')
+            # limiting to 5 as heavy on resources and time
+            # This adds ticker name and data to the excel sheet
+            # getting list of Stock Names and setting to data
+            data = stock_tick_list[i]
+            # getting qoute table to pass through for ticker, div, pe
+            quote_t = si.get_quote_table(data)
+            # getting Stock Names and setting to tick_data
+            tick_data = si.get_stock_price(quote_t)
+            # getting ticker list for Stock Names and setting to
+            # div_data
+            div_data = si.get_dividends(quote_t)
+            # getting ticker list for Stock Names and setting to
+            # pe_data
+            pe_data = si.get_pe_ratio(quote_t)
+            # getting polarity for Stock Names ticker and setting to
+            # pol_data
+            pol_data = tweet.polarity_analysis(data)
+            os.system('clear')
+            time.sleep(2)
+            print(f'Stock name: {f_data}')
+            time.sleep(2)
+            stockdata_sh.update_cell(i, 2, data)
+            print(f'Wrote {data} ticker name to Stock sheet')
+            time.sleep(2)
+            stockdata_sh.update_cell(i, 3, tick_data)
+            print(f'Wrote {tick_data} share price to Stock sheet')
+            time.sleep(2)
+            stockdata_sh.update_cell(i, 4, div_data)
+            print(f'Wrote {div_data} dividend to Stock sheet')
+            time.sleep(2)
+            stockdata_sh.update_cell(i, 5, pe_data)
+            print(f'Wrote {pe_data} PE ratio to Stock sheet')
+            time.sleep(2)
+            stockdata_sh.update_cell(i, 6, pol_data)
+            print(f'Wrote {pol_data} polarity data to Stock sheet')
+            time.sleep(2)
+            print('Sheet has been populated with live data!')
+            os.system('clear')
+            time.sleep(2)
+            complete_stock_sheet = sheets.show_worksheet(stock_sheet)
+            print(complete_stock_sheet)
+            print('\nA polarity above 0 means tweets about company is '
+                      'trending positive')
+            print('A polarity below 0 means tweets about company is '
+                      'trending negative')
+            print('A polarity of 0 is neutral!(It never happens ;-) )')
+            user_ready()
+            except:
+                print('ERROR: Could not apply data to excelsheet,'
+                      'please reach out to admin on this')
+                sheets.clear_sheet_exit()
+                time.sleep(2)
+                os.system('clear')
+                main(False)
+
 
 def main(access_level):
     """
@@ -323,7 +388,6 @@ def main(access_level):
                 os.system('clear')
                 new_reg_sheet = sheets.show_worksheet(reg_sheet)
                 print(new_reg_sheet)
-                admin_ready()
             else:
                 print('Need to input a valid option as this is sensitive data!' 
                       'Please try again\n')
@@ -370,8 +434,8 @@ def main(access_level):
             sheets.clear_sheet_exit()
             os.system('clear')
             print('\nGet Top 500 companies stock info from SP500!\n')
-            #  limiting to 10 as heavy on resources and time
-
+            
+            # write header and styling
             name = 'Stock'
             stockdata_sh = GSPEAD_CLIENT.open(name).sheet1
             data = ['Stock Name', 'Ticker', 'Price($)', 'Dividend', 'P/E',
@@ -394,69 +458,8 @@ def main(access_level):
                                                     "bold": True
                                                             }
              })
-            try:
-                stock_comp_list = si.get_ls_companies()
-                stock_tick_list = si.get_ls_tickers()
-                # limiting to 5 as heavy on resources and time
-                # This adds stock name to the excel sheet
-                for i in range(2, 7):
-                    f_data = stock_comp_list[i]
-                    stockdata_sh.update_cell(i, 1, f_data)
-                    print('Updating stock sheet with data, please wait...\n\n')
-                    # limiting to 5 as heavy on resources and time
-                    # This adds ticker name and data to the excel sheet
-                    # getting list of Stock Names and setting to data
-                    data = stock_tick_list[i]
-                    # getting qoute table to pass through for ticker, div, pe
-                    quote_t = si.get_quote_table(data)
-                    # getting Stock Names and setting to tick_data
-                    tick_data = si.get_stock_price(quote_t)
-                    # getting ticker list for Stock Names and setting to
-                    # div_data
-                    div_data = si.get_dividends(quote_t)
-                    # getting ticker list for Stock Names and setting to
-                    # pe_data
-                    pe_data = si.get_pe_ratio(quote_t)
-                    # getting polarity for Stock Names ticker and setting to
-                    # pol_data
-                    pol_data = tweet.polarity_analysis(data)
-                    os.system('clear')
-                    time.sleep(2)
-                    print(f'Stock name: {f_data}')
-                    time.sleep(2)
-                    stockdata_sh.update_cell(i, 2, data)
-                    print(f'Wrote {data} ticker name to Stock sheet')
-                    time.sleep(2)
-                    stockdata_sh.update_cell(i, 3, tick_data)
-                    print(f'Wrote {tick_data} share price to Stock sheet')
-                    time.sleep(2)
-                    stockdata_sh.update_cell(i, 4, div_data)
-                    print(f'Wrote {div_data} dividend to Stock sheet')
-                    time.sleep(2)
-                    stockdata_sh.update_cell(i, 5, pe_data)
-                    print(f'Wrote {pe_data} PE ratio to Stock sheet')
-                    time.sleep(2)
-                    stockdata_sh.update_cell(i, 6, pol_data)
-                    print(f'Wrote {pol_data} polarity data to Stock sheet')
-                    time.sleep(2)
-                    print('Sheet has been populated with live data!')
-                    os.system('clear')
-                    time.sleep(2)
-                complete_stock_sheet = sheets.show_worksheet(stock_sheet)
-                print(complete_stock_sheet)
-                print('\nA polarity above 0 means tweets about company is '
-                      'trending positive')
-                print('A polarity below 0 means tweets about company is '
-                      'trending negative')
-                print('A polarity of 0 is neutral!(It never happens ;-) )')
-                user_ready()
-            except:
-                print('ERROR: Could not apply data to excelsheet,'
-                      'please reach out to admin on this')
-                sheets.clear_sheet_exit()
-                time.sleep(2)
-                os.system('clear')
-                main(False)
+            live_stock_data()
+            admin_ready()    
         # Returns the stock data for the week to user for given stock name.
         elif option == 2:
             os.system('clear')
