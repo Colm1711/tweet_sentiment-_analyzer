@@ -6,7 +6,7 @@
     *  [User Stories](<#user-stories>)
     *  [Scope](<#scope>)
     *  [Design](<#design>)
-    *  [Wireframes](<#wireframes>)
+    *  [Technical Design](<#technical-design>)
 * [**Features**](<#features>)
     * [Current Features](<#current-features>)
     * [Future Features](<#future-features>)
@@ -63,7 +63,7 @@ world users of twitter. To help give stock traders a competitive advantage.
 2. Future scope includes adding ability for user to email or downloiad live data offline. Search multiple parameters and filtering of data.
 3. Build internal alogrithm to assign sentiment to tweets.
 
-## Wireframes
+## Technical Design
 
 * The flow for how the application operates was mapped out on lucidcharts
 
@@ -78,6 +78,26 @@ world users of twitter. To help give stock traders a competitive advantage.
 <details><summary>Live stock Dataframe process</summary>
 <img src="assets/images/Live stock dataframe.png">
 </details>
+
+### Data Modeling
+
+<details><summary>Live stock Dataframe process</summary>
+<img src="assets/images/dataModeling.png">
+</details>
+
+- 2 API's,Twitter & Yahoo finance, are userd to retrieve stock data, using the SP500 list provided by Yahoo.
+
+- Stock's name and ticker value are retrieved, this is then used to collect further data on company such as price, PE ratio, dividend paid.
+
+- This is then combined with polarity score, which is calcculted by mapping words against a trend of positive and negative words used in tweets from the public. If polarity is above 0 it is coinsidered positive, below zero is negative and exactly zero is negative.
+
+- This is then dispplayed to user to help make decisions on what stock is trending above market value based on feedback from news and public on Twitter.
+
+- The above data has been limited to 5 company writes to google sheet taking the first in list due to time to write all 500 companies.(Full list in weeks data)
+
+- In addition the number of tweets scanned is also limited, again this is with time contraints in mind due to waits in between API calls for demonstration.
+
+- To achieve the above I have achieved using calling on Classes to inherit methods for Twitter & Stock API's. To achieve it also involved using Lists, Dictionaries and Dataframes to unpack, pack, assign variables and present the data.
 
 
 [Back to top](<#contents>)
