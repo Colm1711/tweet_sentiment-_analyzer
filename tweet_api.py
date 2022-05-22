@@ -17,6 +17,7 @@ if not os.path.exists('tweet_api.json'):
         f.write(str.encode(TWEET_API))
 
 print(TWEET_API)
+print(type(TWEET_API))
 
 ADMIN_DATA = json.load(TWEET_API)
 API_KEY = ADMIN_DATA.get('api_key')
