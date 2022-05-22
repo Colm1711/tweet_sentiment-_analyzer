@@ -4,8 +4,9 @@
     *  [Site Owner Goals](#site-owner-goals)
 * [**User Experience UX**](<#user-experience-ux>)
     *  [User Stories](<#user-stories>)
-    * [Design](<#design>)
-    * [Wireframes](<#wireframes>)
+    *  [Scope](<#scope>)
+    *  [Design](<#design>)
+    *  [Wireframes](<#wireframes>)
 * [**Features**](<#features>)
     * [Current Features](<#current-features>)
     * [Future Features](<#future-features>)
@@ -16,6 +17,7 @@
 * [**Testing**](<#testing>)
     * [Validation](<#validation>)
     * [Testing User Stories from User Experience](<#testing-user-experienece>)
+* [**Bugs**](<#bugs>)
 * [**Deployment**](<#deployment>)
 * [**Credits**](<#credits>)
     * [**Content**](<#content>)
@@ -61,15 +63,15 @@ world users of twitter. To help give stock traders a competitive advantage.
 13.   I want validation on data entry points such as user email and password.
 14.   I want to be able to update the users list by remongin from registration application.
 
--   ### Scope
+## Scope
 
 1. For first release, the scope is to rpovide users ability to register, login and retrieve live data.
 2. Future scope includes adding ability for user to email or downloiad live data offline. Search multiple parameters and filtering of data.
 3. Build internal alogrithm to assign sentiment to tweets.
 
-*   ### Wireframes
+## Wireframes
 
-    The flow for how the application operates was mapped out on lucidcharts
+* The flow for how the application operates was mapped out on lucidcharts
 
     * Highlevel overview wireframe image  
      ![Highlevel](assets/images/sentiment%20data%20from%20twitter.jpeg)
@@ -88,13 +90,15 @@ world users of twitter. To help give stock traders a competitive advantage.
 
 - User can login with their email and password validated by external Database.
 
-- User can reigster their details, again this is checked at time of reistration to avoid unnecessary follow up emails.
+- User can reigster their details, again this is checked at time of registration to avoid unnecessary follow up emails.
 
 - User can view live data from stock market.
 
 - User can view how that company is currently trending in real time, application parses tweets and adds snetiment score to data.
 
 - User can search look back of previous weeks stock information for given company.
+
+- Admin can approve registraitns in real time & automatically. This updates user sheet so user can then log in.
 
 
 ### Future Features
@@ -153,23 +157,23 @@ world users of twitter. To help give stock traders a competitive advantage.
 ### PEP8:
 
 <details><summary>run.py</summary>
-<img src="/docs/testing/user-story-1a.png">
+<img src="assets/images/run.py.png">
 </details>
 
 <details><summary>sheets.py</summary>
-<img src="/docs/testing/user-story-1a.png">
+<img src="assets/images/sheets.py.png">
 </details>
 
 <details><summary>stocks_info.py</summary>
-<img src="/docs/testing/user-story-1a.png">
+<img src="assets/images/stocks_info.py.png">
 </details>
 
 <details><summary>tweet_api.py</summary>
-<img src="/docs/testing/user-story-1a.png">
+<img src="assets/images/tweet_api.py.png">
 </details>
 
 <details><summary>validation.py</summary>
-<img src="/docs/testing/user-story-1a.png">
+<img src="assets/images/validation.py.png">
 </details>
 
 ### Testing User Stories from User Experience (UX) Section
@@ -179,11 +183,10 @@ world users of twitter. To help give stock traders a competitive advantage.
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Find main menu       |      No action needed      | User is presented with welcome page | Works as expected |
-
+| Find main menu       |      No action needed      | User is presented with welcome page | `Works as expected` |
 
 <details><summary>Screenshots</summary>
-<img src="/docs/testing/user-story-1a.png">
+<img src="assets/images/main-menu.png">
 </details>
 
 
@@ -192,135 +195,132 @@ world users of twitter. To help give stock traders a competitive advantage.
 
 | **Feature**       |   **Action**        |   **Expected Result**                    |  **Actual Result**|
 |-------------------|---------------------|------------------------------------------|-------------------|
-| Login menu        |   Select option 1   | User is presented with LOG IN page       | Works as expected |
+| Login menu        |   Select option 1   | User is presented with LOG IN page       | `Works as expected` |
 
 <details><summary>Screenshots</summary>
-<img src="/docs/testing/user-story-1a.png">
+<img src="assets/images/login.png">
 </details>
 
 3. As a user I want to be able to register my information and have it stored so I can log in again.
 
 | **Feature**       |   **Action**        |   **Expected Result**                    |  **Actual Result**|
 |-------------------|---------------------|------------------------------------------|-------------------|
-| Reistration menu  |   Select option 2   | User is presented with registration page | Works as expected |
+| Reistration menu  |   Select option 2   | User is presented with registration page | `Works as expected` |
 
 <details><summary>Screenshots</summary>
-<img src="/docs/testing/user-story-1a.png">
+<img src="assets/images/registration.png">
 </details>
 
 4. As a user I want to get real time data through the application.
 
 | **Feature** | **Action**                       | **Expected Result**                                 | **Actual Result** |
 |-------------|----------------------------------|-----------------------------------------------------|-------------------|
-| Live Data   |   Select option 1 on User menu   | User is presented with live data from yahoo finance | Works as expected |
+| Live Data   |   Select option 1 on User menu   | User is presented with live data from yahoo finance | `Works as expected` |
 
 <details><summary>Screenshots</summary>
-<img src="/docs/testing/user-story-1a.png">
+<img src="assets/images/livedata.png">
 </details>
 
 5. As a user I want to be able to have data sheet to view in more organised way in the application.
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Dataframes  |   Select option 1 or 2  on User menu  | User is presented with dataframe of stock information | Works as expected |
+| Dataframes  |   Select option 1 or 2  on User menu  | User is presented with dataframe of stock information | `Works as expected` |
+
 
 <details><summary>Screenshots</summary>
-<img src="/docs/testing/user-story-1a.png">
+<img src="assets/images/livedatafr.png">
 </details>
 
 6. As a user I want to be able to access single stock data showing weekly trending information.
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Live Data  |   Select option 2   | User is presented with live data from yahoo finance for single stock | Works as expected |
+| Live Data  |   Select option 2   | User is presented with live data from yahoo finance for single stock | `Works as expected` |
 
 <details><summary>Screenshots</summary>
-<img src="/docs/testing/user-story-1a.png">
+<img src="assets/images/weekly_data.png">
 </details>
 
 7. As a user I want to be able to get sentiment data on my query of information.
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Live Data  |   Select option 1   | User is presented with sentiment data as part of the live stock data | Works as expected |
+| Live Data  |   Select option 1   | User is presented with sentiment data as part of the live stock data | `Works as expected` |
 
 <details><summary>Screenshots</summary>
-<img src="/docs/testing/user-story-1a.png">
+<img src="assets/images/livedatafr.png">
 </details>
 
 8. As a user I want to be able to understand data that is being presented to me.
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Option 1 on User Menu |   Select option 1   | User is presented with explanation of how the sentiment scores are presented | Works as expected |
+| Option 1 on User Menu |   Select option 1   | User is presented with explanation of how the sentiment scores are presented | `Works as expected` |
 
 <details><summary>Screenshots</summary>
-<img src="/docs/testing/user-story-1a.png">
+<img src="assets/images/livedatafr.png">
 </details>
 
 9. As a user I want users to have positive experience when using the app.
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Find main menu and User menu |   No action needed   |  No action needed  |  No action needed  |
+| Find main menu and User menu |   No action needed   |  No action needed  |  *No action needed*  |
 
 
 10. As a user I want users to understand and easily use the menu screen.
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Find main menu  |   No action needed   | User is presented with main menu | Works as expected |
+| Find main menu  |   No action needed   | User is presented with main menu | `Works as expected` |
 
 <details><summary>Screenshots</summary>
-<img src="/docs/testing/user-story-1a.png">
+<img src="assets/images/usermenu.png">
 </details>
 
 11. As a user I want to have record of users email and password and retrieve information for validation.
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Registration  |   Admin menu option 1 & 3  | Amdmin is presented with registration page & user page | Works as expected |
+| Registration  |   Admin menu option 1 & 3  | Amdmin is presented with registration page & user page | `Works as expected` |
 
 <details><summary>Screenshots</summary>
-<img src="/docs/testing/user-story-1a.png">
+<img src="assets/images/registration.png">
 </details>
 
 12. As a user I want to provide user with clear message if incorrect information is entered.
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| validation  |   incorrect pasword or email   | User is presented with error message | Works as expected |
+| validation  |   incorrect pasword or email   | User is presented with error message | `Works as expected` |
 
 <details><summary>Screenshots</summary>
-<img src="/docs/testing/user-story-1a.png">
+<img src="assets/images/validation.png">
 </details>
 
 13. As a user I want validation on data entry points such as user email and password.
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| validation  |   incorrect pasword or email    | User is presented with registration page that does not match DB | Works as expected |
+| validation  |   incorrect pasword or email    | User is presented with registration page that does not match DB | `Works as expected` |
 
 <details><summary>Screenshots</summary>
-<img src="/docs/testing/user-story-1a.png">
+<img src="assets/images/validation.png">
 </details>
 
 14. As a user I want to be able to update the users list by removing from registration application.
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Registration  |   Admin menu option 3  | User is presented with registration page & can register user | Works as expected |
+| Registration  |   Admin menu option 3  | User is presented with registration page & can register user | `Works as expected` |
 
 <details><summary>Screenshots</summary>
-<img src="/docs/testing/user-story-1a.png">
-</details>
-
-
-
-### Further Testing
-
-
-### Known Bugs
+<img src="assets/images/adminmenu.png">
+</details>  
+                                         
+                                       
+## Bugs
 
 | **Bug** | **Fix** |
 | ----------- | ----------- |
@@ -329,6 +329,7 @@ world users of twitter. To help give stock traders a competitive advantage.
 | heroku deployement with twitter API keys. Tutor support resolved issue of file missing but presented new issues of keys not being recognised and bad response 404. | Adding keys to config vars and removing quotations credit[github](https://github.com/duttashi/scrapers/issues/21) and [heroku docs](https://devcenter.heroku.com/articles/config-vars#accessing-config-var-values-from-code)
 | when attempting to hook up smtplib to tweet sentiment gmail account to send user registration forms. Recieved '[Errno 101] Network is unreachable' error message. Data online points to firewall issues  |  No known solution. |
 |  pandas append is being depreciated for concat. This leads to print out to terminal of warning message printing to terminal.  | No known solution. |
+|  User was incorrectly being redirected to admin menu after exiting live data section. | removed admin ready function and put in user ready in place. |
 
 [Back to top](<#contents>)
 
