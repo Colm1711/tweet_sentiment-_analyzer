@@ -322,8 +322,9 @@ def main(access_level):
                 print(reg_list)
                 admin_ready()
             else:
-                print('Need to input a valid option! Please try again\n')
+                print('Need to input a valid option as this is sensitive data! Please try again\n')
                 print('Returning to Home Menu')
+                time.sleep(5)
                 os.system('clear')
                 main(True)
         else:
@@ -484,4 +485,4 @@ def main(access_level):
             os.system('clear')
             welcome_screen()
 
-main(True)
+welcome_screen()
