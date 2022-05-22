@@ -2,30 +2,31 @@
 
 import tweepy
 import json
-import ast
 import re
 import os
 from textblob import TextBlob
+
 
 # CONATANTS
 
 # SETTING UP ACCESS TO TWITTER
 # TWEET_API = open("tweet_api.json")
-TWEET_API = os.environ.get("TWEET_API")
+# TWEET_API = os.environ.get("TWEET_API")
 
-if not os.path.exists('tweet_api.json'):
-    with open("tweet_api.json", 'wb') as f:
-        f.write(str.encode(TWEET_API))
+# if not os.path.exists('tweet_api.json'):
+#     with open("tweet_api.json", 'wb') as f:
+#         f.write(str.encode(TWEET_API))
 
+# ADMIN_DATA = json.load(DICT_DATA)
+# API_KEY = ADMIN_DATA.get('api_key')
+# API_KEY_SECRET = ADMIN_DATA.get('api_key_secret')
+# ACCESS_TOKEN = ADMIN_DATA.get('access_token')
+# ACCESS_TOKEN_SECRET = ADMIN_DATA.get('access_token_secret')
 
-
-DICT_DATA = ast.literal_eval(TWEET_API)
-ADMIN_DATA = json.load(DICT_DATA)
-API_KEY = ADMIN_DATA.get('api_key')
-API_KEY_SECRET = ADMIN_DATA.get('api_key_secret')
-ACCESS_TOKEN = ADMIN_DATA.get('access_token')
-ACCESS_TOKEN_SECRET = ADMIN_DATA.get('access_token_secret')
-
+API_KEY = os.environ.get('api_key')
+API_KEY_SECRET = os.environ.get('api_key_secret')
+ACCESS_TOKEN = os.environ.get('access_token')
+ACCESS_TOKEN_SECRET = os.environ.('access_token_secret')
 
 # # VARIABLES
 
