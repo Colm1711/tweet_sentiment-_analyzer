@@ -23,9 +23,11 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPEAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPEAD_CLIENT.open('authentication')
 BREAK = '#' * 66
+STOCK_SHEET = 'Stock'
+STOCKDATA_SH = GSPEAD_CLIENT.open(STOCK_SHEET).sheet1
+
 
 # Welcome message
-
 
 def welcome_screen():
     """
@@ -208,7 +210,38 @@ def user_ready():
         print('Not a valid option')
         user_ready()
 
+def write_header_to_stock_sheet():
+    """
+    Description:
+        This function hanldes writting header to the stock sheet for user
+    """
+    data = ['Stock Name', 'Ticker', 'Price($)', 'Dividend', 'P/E',
+                    'Polarity']
+    STOCKDATA_SH.append_row(data)
+    STOCKDATA_SH.format('1', {
+                                "backgroundColor": {
+                                    "red": 0.0,
+                                    "green": 0.0,
+                                    "blue": 1.0
+                                                            },
+                                "horizontalAlignment": "CENTER",
+                                "textFormat": {
+                                    "foregroundColor": {
+                                        "red": 1.0,
+                                        "green": 1.0,
+                                        "blue": 1.0
+                                                        },
+                                        "fontSize": 12,
+                                        "bold": True
+                                                }
+             })
+    print('Header written!')
+
 def live_stock_data():
+    """
+    Description:
+        This function hanldes writting of live data to the stock sheet for user
+    """
     stock_comp_list = si.get_ls_companies()
     stock_tick_list = si.get_ls_tickers()
     # limiting to 5 as heavy on resources and time
@@ -216,7 +249,7 @@ def live_stock_data():
     try:
         for i in range(2, 7):
             f_data = stock_comp_list[i]
-            stockdata_sh.update_cell(i, 1, f_data)
+            STOCKDATA_SH.update_cell(i, 1, f_data)
             print('Updating stock sheet with data, please wait...\n\n')
             # limiting to 5 as heavy on resources and time
             # This adds ticker name and data to the excel sheet
@@ -239,40 +272,38 @@ def live_stock_data():
             time.sleep(2)
             print(f'Stock name: {f_data}')
             time.sleep(2)
-            stockdata_sh.update_cell(i, 2, data)
+            STOCKDATA_SH.update_cell(i, 2, data)
             print(f'Wrote {data} ticker name to Stock sheet')
             time.sleep(2)
-            stockdata_sh.update_cell(i, 3, tick_data)
+            STOCKDATA_SH.update_cell(i, 3, tick_data)
             print(f'Wrote {tick_data} share price to Stock sheet')
             time.sleep(2)
-            stockdata_sh.update_cell(i, 4, div_data)
+            STOCKDATA_SH.update_cell(i, 4, div_data)
             print(f'Wrote {div_data} dividend to Stock sheet')
             time.sleep(2)
-            stockdata_sh.update_cell(i, 5, pe_data)
+            STOCKDATA_SH.update_cell(i, 5, pe_data)
             print(f'Wrote {pe_data} PE ratio to Stock sheet')
             time.sleep(2)
-            stockdata_sh.update_cell(i, 6, pol_data)
+            STOCKDATA_SH.update_cell(i, 6, pol_data)
             print(f'Wrote {pol_data} polarity data to Stock sheet')
             time.sleep(2)
             print('Sheet has been populated with live data!')
             os.system('clear')
             time.sleep(2)
-            complete_stock_sheet = sheets.show_worksheet(stock_sheet)
-            print(complete_stock_sheet)
-            print('\nA polarity above 0 means tweets about company is '
+        complete_stock_sheet = sheets.show_worksheet(STOCKDATA_SH)
+        print(complete_stock_sheet)
+        print('\nA polarity above 0 means tweets about company is '
                       'trending positive')
-            print('A polarity below 0 means tweets about company is '
+        print('A polarity below 0 means tweets about company is '
                       'trending negative')
-            print('A polarity of 0 is neutral!(It never happens ;-) )')
-            user_ready()
-            except:
-                print('ERROR: Could not apply data to excelsheet,'
-                      'please reach out to admin on this')
-                sheets.clear_sheet_exit()
-                time.sleep(2)
-                os.system('clear')
-                main(False)
-
+        print('A polarity of 0 is neutral!(It never happens ;-) )')
+    except:
+        print('ERROR: Could not apply data to excelsheet,'
+              'please reach out to admin on this')
+        sheets.clear_sheet_exit()
+        time.sleep(2)
+        os.system('clear')
+        main(False)
 
 def main(access_level):
     """
@@ -434,30 +465,7 @@ def main(access_level):
             sheets.clear_sheet_exit()
             os.system('clear')
             print('\nGet Top 500 companies stock info from SP500!\n')
-            
-            # write header and styling
-            name = 'Stock'
-            stockdata_sh = GSPEAD_CLIENT.open(name).sheet1
-            data = ['Stock Name', 'Ticker', 'Price($)', 'Dividend', 'P/E',
-                    'Polarity']
-            stockdata_sh.append_row(data)
-            stockdata_sh.format('1', {
-                                            "backgroundColor": {
-                                                "red": 0.0,
-                                                "green": 0.0,
-                                                "blue": 1.0
-                                                            },
-                                            "horizontalAlignment": "CENTER",
-                                            "textFormat": {
-                                                "foregroundColor": {
-                                                    "red": 1.0,
-                                                    "green": 1.0,
-                                                    "blue": 1.0
-                                                                    },
-                                                    "fontSize": 12,
-                                                    "bold": True
-                                                            }
-             })
+            write_header_to_stock_sheet()
             live_stock_data()
             admin_ready()    
         # Returns the stock data for the week to user for given stock name.
