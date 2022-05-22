@@ -2,6 +2,7 @@
 
 import tweepy
 import json
+import ast
 import re
 import os
 from textblob import TextBlob
@@ -16,10 +17,10 @@ if not os.path.exists('tweet_api.json'):
     with open("tweet_api.json", 'wb') as f:
         f.write(str.encode(TWEET_API))
 
-print(TWEET_API)
-print(type(TWEET_API))
 
-ADMIN_DATA = json.load(TWEET_API)
+
+DICT_DATA = ast.literal_eval(TWEET_API)
+ADMIN_DATA = json.load(DICT_DATA)
 API_KEY = ADMIN_DATA.get('api_key')
 API_KEY_SECRET = ADMIN_DATA.get('api_key_secret')
 ACCESS_TOKEN = ADMIN_DATA.get('access_token')
