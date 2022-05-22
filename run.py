@@ -246,37 +246,28 @@ def live_stock_data():
     stock_tick_list = si.get_ls_tickers()
     # limiting to 5 as heavy on resources and time
     # This adds stock name to the excel sheet
-    print(stock_comp_list)
-    print(stock_tick_list)
     try:
         for i in range(2, 7):
             f_data = stock_comp_list[i]
             STOCKDATA_SH.update_cell(i, 1, f_data)
-            print(f_data)
             print('Updating stock sheet with data, please wait...\n\n')
             # limiting to 5 as heavy on resources and time
             # This adds ticker name and data to the excel sheet
             # getting list of Stock Names and setting to data
             data = stock_tick_list[i]
-            print(data)
             # getting qoute table to pass through for ticker, div, pe
             quote_t = si.get_quote_table(data)
-            print(quote_t)
             # getting Stock Names and setting to tick_data
             tick_data = si.get_stock_price(quote_t)
-            print(tick_data)
             # getting ticker list for Stock Names and setting to
             # div_data
             div_data = si.get_dividends(quote_t)
-            print(div_data)
             # getting ticker list for Stock Names and setting to
             # pe_data
             pe_data = si.get_pe_ratio(quote_t)
-            print(pe_data)
             # getting polarity for Stock Names ticker and setting to
             # pol_data
             pol_data = tweet.polarity_analysis(data)
-            print(pol_data)
             os.system('clear')
             time.sleep(2)
             print(f'Stock name: {f_data}')
@@ -501,8 +492,6 @@ def main(access_level):
                 time.sleep(5)
                 main(False)        
         else:
-            # clears the stock data sheet on exit
-            sheets.clear_sheet_exit()
             print('Exiting......')
             time.sleep(3)
             os.system('clear')
