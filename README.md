@@ -63,6 +63,79 @@ world users of twitter. To help give stock traders a competitive advantage.
 2. Future scope includes adding ability for user to email or downloiad live data offline. Search multiple parameters and filtering of data.
 3. Build internal alogrithm to assign sentiment to tweets.
 
+### User Manual
+
+<details><summary>Click Here for instructions for use</summary>
+
+#### Overview
+
+The Tweet analyzer is for the modeling of sentiment analysis to stock data.  It's purpose is to provide an easy way for investors to get real time stock assessments for trading or trading analysis to review prior to investing.  This is to help make better investment decisions and to try to see ahead of time how a stock will perform.
+
+#### Welcome Screen
+
+On the Welcome menu, you will be provdided with 2 options.
+
+Operation: Input R(Register) or L(Login) letter(s) and press enter.
+
+1: Login - This is portal by which users and admin users can login. Your details will be evaluted against database records. After details have been assessed you will be assigned access level.
+
+2: Registration.  This directs users to fill in their details to become registered user. Once all fields have been filled out correctly you will be redirected back to this screen and member of the admin team will be in contact when you have been appproved.
+
+#### User Menu
+
+Purpose: To allow users to search for SP500 stock list for live stock data analysis & search live stock data by name.
+
+Operation: Input numeric value and press enter key
+
+1: Retrieve live data and sentiment polarity. The user is presented with the live data as it is written to Google sheet, when ready user is present with table of stock data which has live stock price, dividend, PE ratio and polarity.
+
+Prompted Y:  Enter using y.  This returns user to Main menu when ready. All other keys prompt question again.
+
+2: Gets week worth of stock data by searching name
+
+- User is presented with list of stocks in SP500 list and can search for previous weeks worth of trading data for the stock
+
+- Enter company: Valid cpany name from stocks sheet list presented.
+
+Prompted Y:  Enter using y.  This returns user to Main menu when ready. All other keys prompt question again.
+
+3: Return to Welcome menu:
+
+- returns to main menu of applicaiton.
+
+#### Admin Menu
+
+1: View User list from Database.
+
+- returns Table of usernames and emails of valid users.
+
+Prompted Y:  Enter using y.  This returns user to Admin menu when ready. All other keys prompt question again.
+
+2: View Admin list from Database.
+
+- returns Table of usernames and emails of valid admin team members.
+
+Prompted Y:  Enter using y.  This returns user to Admin menu when ready. All other keys prompt question again.
+
+3: View Registered applications list from Database.
+
+- User is presented of list of registration applications from database.
+
+- From here user is prompted if they want to remove user. 
+
+- Hot key of Y(Yes) if user presses any other key returns to Admin menu. 
+
+- User enter numeric screen value to approve registration applicant. They registered user if approved is moved to approved users list in option 1 and delted from database as registeration applicant. 
+
+ - Prompted Y:  Enter using y.  This returns user to Admin menu when ready. All other keys prompt question again.
+
+4: Return to Welcome menu:
+
+- returns to main menu of applicaiton.
+
+</details>
+
+
 ## Technical Design
 
 * The flow for how the application operates was mapped out on lucidcharts
@@ -89,7 +162,7 @@ world users of twitter. To help give stock traders a competitive advantage.
 
 - Stock's name and ticker value are retrieved, this is then used to collect further data on company such as price, PE ratio, dividend paid.
 
-- This is then combined with polarity score, which is calcculted by mapping words against a trend of positive and negative words used in tweets from the public. If polarity is above 0 it is coinsidered positive, below zero is negative and exactly zero is negative.
+- This is then combined with polarity score, which is calculated by mapping words against a trend of positive and negative words used in tweets from the public. If the tweets sentiment polarity is above 0 it is coinsidered positive, if it is below zero it's negative and exactly zero is negative.
 
 - This is then dispplayed to user to help make decisions on what stock is trending above market value based on feedback from news and public on Twitter.
 
@@ -348,6 +421,7 @@ world users of twitter. To help give stock traders a competitive advantage.
 | when attempting to hook up smtplib to tweet sentiment gmail account to send user registration forms. Recieved '[Errno 101] Network is unreachable' error message. Data online points to firewall issues  |  No known solution. |
 |  pandas append is being depreciated for concat. This leads to print out to terminal of warning message printing to terminal.  | No known solution. |
 |  User was incorrectly being redirected to admin menu after exiting live data section. | removed admin ready function and put in user ready in place. |
+| There is a bug when the incorrect option is entered on user passowrd in resgistration |   Addressed this by adding return False to func and also addressing greater than or equal to   |
 
 [Back to top](<#contents>)
 
