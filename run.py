@@ -130,9 +130,12 @@ def user_registration():
     data = name, institution, email, password
     curr_sheet = 'Registration applications'
     sheets.update_worksheet_row(data, curr_sheet)
-    print('\n Thank you for submitting your interest with us. Why not check'
+    os.system('clear')
+    print(f'\nThank you {name} for your interest with us. Why not check'
           'out our twitter page @TSentiment123 \n')
-    print('\n Returning to Welcome screen, admin team will be in contact\n')
+    print('\nReturning to Welcome screen, admin team will be in contact\n')
+    time.sleep(8)
+    os.system('clear')
     welcome_screen()
     return name, institution, val_email, val_password
 
@@ -239,20 +242,19 @@ def main(access_level):
 
     if access_level is True:
         os.system('clear')
-        print(BREAK, flush=True)
-        print('\n               YOU HAVE ACCESSES ADMIN LEVEL\n', flush=True)
-        print(BREAK, flush=True)
-        time.sleep(1.3)
+        print(BREAK)
+        print('\n               YOU HAVE ACCESSES ADMIN LEVEL\n')
+        print(BREAK)
         print('\nWhat would you like to do?\n')
         # Admin Menu
         for key in admin_menu.keys():
             print(f'{key} - {admin_menu[key]}', flush=True)
-            time.sleep(0.8)
         option = input()
         check_option = Validation.has_digit(option)
         # check to ensure option enterd has digit
         if check_option is False:
             print('You must select a valid option!')
+            time.sleep(1)
             os.system('clear')
             main(True)
         else:
@@ -332,21 +334,18 @@ def main(access_level):
     # User Menu
     else:
         os.system('clear')
-        print(BREAK, flush=True)
-        print('\n              Welcome to the home screen!\n', flush=True)
-        print(BREAK, flush=True)
-        time.sleep(1.3)
-
+        print(BREAK)
+        print('\n              Welcome to the home screen!\n')
+        print(BREAK)
         print('\nWhat would you like to do?\n')
         for key in user_menu.keys():
-            print(f'{key} - {user_menu[key]}', flush=True)
-            time.sleep(1.2)
+            print(f'{key} - {user_menu[key]}')
         option = input()
         check_option = Validation.has_digit(option)
         # check to ensure option enterd has digit
         if check_option is False:
             print('You must select a valid option!')
-            time.sleep(2)
+            time.sleep(1)
             os.system('clear')
             main(False)
         else:
@@ -358,7 +357,7 @@ def main(access_level):
             pass
         else:
             print('You must select a valid option!')
-            time.sleep(2)
+            time.sleep(1)
             os.system('clear')
             main(False)
         # Stock sentiment Option
@@ -485,4 +484,4 @@ def main(access_level):
             os.system('clear')
             welcome_screen()
 
-main(True)
+welcome_screen()
