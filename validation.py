@@ -38,9 +38,9 @@ class Validation():
         lowercase = Validation._has_lowercase(data_to_val)
         punc = Validation._has_punc(data_to_val)
         upper = Validation._has_uppercase(data_to_val)
-        print(len(data_to_val))
         if len(data_to_val) >= 6:
-            if digit is True and lowercase is True and punc is True and upper is True:
+            if (digit is True and lowercase is True and punc is True and
+                    upper is True):
                 return True
             else:
                 print('This password is not valid, must be alphanumeric with lowercase\
@@ -141,8 +141,3 @@ class Validation():
         if not pw_has_punc:
             return False
         return True
-
-
-ca = 'asas'
-c = Validation.psw_valid(ca)
-print(c)
