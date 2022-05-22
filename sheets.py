@@ -32,7 +32,7 @@ class Sheets():
         Returns first col of worksheets as list.
 
         Params:
-            str -->  sheet  
+            str -->  sheet
             int -->  col
 
         Returns:
@@ -51,8 +51,8 @@ class Sheets():
         Returns first row of worksheets as list.
 
         Params:
-            str --> sheet 
-            int --> row 
+            str --> sheet
+            int --> row
 
         Returns:
                 list of str's excluding first row.
@@ -133,7 +133,7 @@ class Sheets():
         This function handkes the deletion of user from Registration
         after the user details have been moved to User sheets.
 
-        int --> row 
+        int --> row
 
         """
         name = 'authentication'
