@@ -27,6 +27,20 @@ API_KEY = os.environ.get('api_key')
 API_KEY_SECRET = os.environ.get('api_key_secret')
 ACCESS_TOKEN = os.environ.get('access_token')
 ACCESS_TOKEN_SECRET = os.environ.get('access_token_secret')
+print(API_KEY)
+print(type(API_KEY))
+
+print(API_KEY_SECRET)
+print(type(API_KEY_SECRET))
+
+print(ACCESS_TOKEN)
+print(type(ACCESS_TOKEN))
+
+print(ACCESS_TOKEN_SECRET)
+print(type(ACCESS_TOKEN_SECRET))
+
+
+
 
 # # VARIABLES
 
