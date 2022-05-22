@@ -469,18 +469,17 @@ def main(access_level):
             if stock_p_item.islower() is True:
                 stock_p_item = stock_p_item.title()
             else:
-                pass
-                user_ready()
-            try:
-                # Stock Data to be returned to terminal to user.
-                stock_ticker = si.get_ticker(stock_p_item)
-                stock_price = si.get_weeks_stock_data(stock_ticker)
-                print(stock_price)
-            except:
-                print('ERROR: Could not retrieve data to excelsheet, please'
+                try:
+                    # Stock Data to be returned to terminal to user.
+                    stock_ticker = si.get_ticker(stock_p_item)
+                    stock_price = si.get_weeks_stock_data(stock_ticker)
+                    print(stock_price)
+                    user_ready()
+                except:
+                    print('ERROR: Could not retrieve data to excelsheet, please'
                       ' reach out to admin on this')
-                time.sleep(5)
-                main(False)
+                    time.sleep(5)
+                    main(False)
         else:
             # clears the stock data sheet on exit
             sheets.clear_sheet_exit()
