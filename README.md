@@ -46,9 +46,9 @@ world users of twitter. To help give stock traders a competitive advantage.
 1.    I want a clear menu with options that are clear on intention.
 2.    I want to able to log in and know that my details are secure and no one has access to my account.
 3.    I want to be able to register my information and have it stored so I can log in again.
-4.    I want to get real time data through the app.
+4.    I want to get real time data through the application.
 5.    I want to be able to have data sheet to view in more organised way in the application.
-6.    I want to be able to access single stock data showing weekly treending information.
+6.    I want to be able to access single stock data showing weekly trending information.
 7.    I want to be able to get sentiment data on my query of information.
 8.    I want to be able to understand data that is being presented to me.
     
@@ -86,11 +86,26 @@ world users of twitter. To help give stock traders a competitive advantage.
 
 ### Current Features
 
+- User can login with their email and password validated by external Database.
+
+- User can reigster their details, again this is checked at time of reistration to avoid unnecessary follow up emails.
+
+- User can view live data from stock market.
+
+- User can view how that company is currently trending in real time, application parses tweets and adds snetiment score to data.
+
+- User can search look back of previous weeks stock information for given company.
 
 
 ### Future Features
 
+- Admin can reject registrations
 
+- Admin can send email of verification of registration.
+
+- User can download\export live data in form of excelsheet.
+
+- User can email the live data.
 
 [Back to top](<#contents>)
 
@@ -125,7 +140,7 @@ world users of twitter. To help give stock traders a competitive advantage.
 1. [gspread](https://docs.gspread.org/en/latest/) - JUSTIFICATION: Efforts to source native python library available that gives access to add, update, remove or return data from googlesheets and to interact with the google cloud platform API. Based on this it was imported to facilate google sheet operations to provide external database.
 2. [Textblob](https://textblob.readthedocs.io/en/dev/) -  JUSTIFICATION: Efforts to source native python library available were exhausted. To build algorithm to break text to binary and map to chart to build positive, negative & neutral data points to compare tweets against is outside the scope of the initial application version. 
 3. [tweepy](https://www.tweepy.org/) - JUSTIFICATION: Efforts to source native python library available that gives access to live twitter API & data does not exist. This libaray was imported ot help provide access to this data so that the polarity of tweets can be accessed.
-4. [yahoo_fin](https://pypi.org/project/yahoo-finance/) -  JUSTIFICATION: Efforts to source native python library available that gives access to live stock data is not accessible. This libabry was used to pull this infomraiton in. Otherwise static data would have to be used to populate data.
+4. [yahoo_fin](https://pypi.org/project/yahoo-finance/) -  JUSTIFICATION: Efforts to source native python library available that gives access to live stock data is not accessible. This libabry was used to pull this infomraiton in. Otherwise static data would have to be used to populate data. This is needed in additiona of yfinance as it does not have PE ratio and stock dividend with yahoo_fin has.
 5. [yfinance](https://pypi.org/project/yfinance/) - JUSTIFICATION: Efforts to source native python library available that gives access to live stock data is not accessible. This libabry was used to pull this infomraiton in. Otherwise static data would have to be used to populate data.
 6. [pandas](https://pandas.pydata.org/) - JUSTIFICATION: Efforts to source native python library available that gives access to add, update, remove or return data in organised representation. This is a widely used libaryr by data scientists.
 
@@ -135,17 +150,171 @@ world users of twitter. To help give stock traders a competitive advantage.
 
 ### Validation
 
+### PEP8:
 
+<details><summary>run.py</summary>
+<img src="/docs/testing/user-story-1a.png">
+</details>
+
+<details><summary>sheets.py</summary>
+<img src="/docs/testing/user-story-1a.png">
+</details>
+
+<details><summary>stocks_info.py</summary>
+<img src="/docs/testing/user-story-1a.png">
+</details>
+
+<details><summary>tweet_api.py</summary>
+<img src="/docs/testing/user-story-1a.png">
+</details>
+
+<details><summary>validation.py</summary>
+<img src="/docs/testing/user-story-1a.png">
+</details>
 
 ### Testing User Stories from User Experience (UX) Section
 
 ### Testing User Experienece
+1. As a user I want a clear menu with options that are clear on intention.
 
--   #### First Time Visitor Goals
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Find main menu       |      No action needed      | User is presented with welcome page | Works as expected |
 
--   #### Returning Visitor Goals
 
--   #### Frequent User Goals
+<details><summary>Screenshots</summary>
+<img src="/docs/testing/user-story-1a.png">
+</details>
+
+
+2. As a user I want to able to log in and know that my details are secure and no one has access to my account.
+
+
+| **Feature**       |   **Action**        |   **Expected Result**                    |  **Actual Result**|
+|-------------------|---------------------|------------------------------------------|-------------------|
+| Login menu        |   Select option 1   | User is presented with LOG IN page       | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="/docs/testing/user-story-1a.png">
+</details>
+
+3. As a user I want to be able to register my information and have it stored so I can log in again.
+
+| **Feature**       |   **Action**        |   **Expected Result**                    |  **Actual Result**|
+|-------------------|---------------------|------------------------------------------|-------------------|
+| Reistration menu  |   Select option 2   | User is presented with registration page | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="/docs/testing/user-story-1a.png">
+</details>
+
+4. As a user I want to get real time data through the application.
+
+| **Feature** | **Action**                       | **Expected Result**                                 | **Actual Result** |
+|-------------|----------------------------------|-----------------------------------------------------|-------------------|
+| Live Data   |   Select option 1 on User menu   | User is presented with live data from yahoo finance | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="/docs/testing/user-story-1a.png">
+</details>
+
+5. As a user I want to be able to have data sheet to view in more organised way in the application.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Dataframes  |   Select option 1 or 2  on User menu  | User is presented with dataframe of stock information | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="/docs/testing/user-story-1a.png">
+</details>
+
+6. As a user I want to be able to access single stock data showing weekly trending information.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Live Data  |   Select option 2   | User is presented with live data from yahoo finance for single stock | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="/docs/testing/user-story-1a.png">
+</details>
+
+7. As a user I want to be able to get sentiment data on my query of information.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Live Data  |   Select option 1   | User is presented with sentiment data as part of the live stock data | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="/docs/testing/user-story-1a.png">
+</details>
+
+8. As a user I want to be able to understand data that is being presented to me.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Option 1 on User Menu |   Select option 1   | User is presented with explanation of how the sentiment scores are presented | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="/docs/testing/user-story-1a.png">
+</details>
+
+9. As a user I want users to have positive experience when using the app.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Find main menu and User menu |   No action needed   |  No action needed  |  No action needed  |
+
+
+10. As a user I want users to understand and easily use the menu screen.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Find main menu  |   No action needed   | User is presented with main menu | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="/docs/testing/user-story-1a.png">
+</details>
+
+11. As a user I want to have record of users email and password and retrieve information for validation.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Registration  |   Admin menu option 1 & 3  | Amdmin is presented with registration page & user page | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="/docs/testing/user-story-1a.png">
+</details>
+
+12. As a user I want to provide user with clear message if incorrect information is entered.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| validation  |   incorrect pasword or email   | User is presented with error message | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="/docs/testing/user-story-1a.png">
+</details>
+
+13. As a user I want validation on data entry points such as user email and password.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| validation  |   incorrect pasword or email    | User is presented with registration page that does not match DB | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="/docs/testing/user-story-1a.png">
+</details>
+
+14. As a user I want to be able to update the users list by removing from registration application.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Registration  |   Admin menu option 3  | User is presented with registration page & can register user | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="/docs/testing/user-story-1a.png">
+</details>
+
 
 
 ### Further Testing
@@ -153,34 +322,49 @@ world users of twitter. To help give stock traders a competitive advantage.
 
 ### Known Bugs
 
-- when attempting to hook up smtplib to tweet sentiment gmail account to send user registration froms. Recieved '[Errno 101] Network is unreachable' error
-  message. Data online points to firewall issues. No known solution.
-
-- There is a bug when the incorrect option is selected in login and rehgistration in the welcome function. SOLVED: Removing additonal elif from validaiton.
-
-- with gspread there is an API limit of 500 requests per 100 seconds per project and 100 requests per 100 seconds per user. Due to this when writing the 
-  company name and ticker name to stock data sheet gfor user was getting 429 error code. SOLVED: added 2 second wait btween writes to sheet.
-
-- pandas append is being depreciated for concat. This leads to print out to terminal of warning message 
-
-- heroku deployement with twitter API keys. Tutor support resolved.
+| **Bug** | **Fix** |
+| ----------- | ----------- |
+| There is a bug when the incorrect option is selected in login and registration in the welcome function. |   Removing additonal elif from validaiton.   |
+| with gspread there is an API limit of 500 requests per 100 seconds per project and 100 requests per 100 seconds per user. Due to this when writing the company name and ticker name to stock data |sheet for user was getting 409 error code | added 2 second wait between writes to sheet |
+| heroku deployement with twitter API keys. Tutor support resolved issue of file missing but presented new issues of keys not being recognised and bad response 404. | Adding keys to config vars and removing quotations credit[github](https://github.com/duttashi/scrapers/issues/21) and [heroku docs](https://devcenter.heroku.com/articles/config-vars#accessing-config-var-values-from-code)
+| when attempting to hook up smtplib to tweet sentiment gmail account to send user registration forms. Recieved '[Errno 101] Network is unreachable' error message. Data online points to firewall issues  |  No known solution. |
+|  pandas append is being depreciated for concat. This leads to print out to terminal of warning message printing to terminal.  | No known solution. |
 
 [Back to top](<#contents>)
 
 ## Deployment
 
-## Creating the Heroku app
+This application has been deployed from Github using Heroku. Here's how:
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+1. Create an account at heroku.com
+2. Create a new app, add app name and your region
+3. Click on create app
+4. Go to "Settings"
+5. Under Config Vars, add your sensitive data (creds.json for example)
+6. For this project, I set buildpacks to and in that order.
+7. Go to "Deploy" and at "Deployment method", click on "Connect to Github"
+8. Enter your repository name and click on it when it shows below
+9. Choose the branch you want to buid your app from
+10. If desired, click on "Enable Automatic Deploys", which keeps the app up to date with your Github repository
 
-1. `heroku/python`
-2. `heroku/nodejs`
+### Forking the GitHub Repository 
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+By forking this GitHub repository you are making a copy of the original to view or make changes without affecting the original. You can do this by following these steps...
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+1. Log into your GitHub account and find the [repository](https://github.com/dannymagnus/CI_MS3_MitsurukiFMS).
+2. Click 'Fork' (last button on the top right of the repository page).
+3. You will then have a copy of the repository in your own GitHub account. 
 
-Connect your GitHub repository and deploy as normal.
+### Making a Local Clone
+
+1. Log into your GitHub account and find the [repository](https://github.com/dannymagnus/CI_MS3_MitsurukiFMS).
+2. Click on the 'Code' button (next to 'Add file'). 
+3. To clone the repository using HTTPS, under clone with HTTPS, copy the link.
+4. Then open Git Bash.
+5. Change the current working directory to where you want the cloned directory to be made.
+6. In your IDE's terminal type 'git clone' followed by the URL you copied.
+7. Press Enter. 
+8. Your local clone will now be made.
 
 ## Constraints
 
@@ -208,23 +392,6 @@ The deployment terminal is set to 80 columns by 24 rows. That means that each li
 
 - Gspread formating (https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells)
 
-#### Libraries
-
-- Imported Tweepy library to help extend this project and to connect with the Twitter API [Tweepy](https://docs.tweepy.org/en/stable/)
-
-- Gspread
-
-- re - regualr expressions
-
-- JSON
-
-- getpass this is to hide password for user from terminal output to ensure their data is protected
-
-- TextBlob is imported to help woth polarity analysis of tweets[TextBlob](https://textblob.readthedocs.io/en/dev/)
-
-- yfinance 
-
-- yahoo_fin.stock_info
 
 ### Content
 
