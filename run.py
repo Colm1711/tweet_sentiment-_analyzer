@@ -424,7 +424,7 @@ def main(access_level):
                 new_reg_sheet = sheets.show_worksheet(reg_sheet)
                 print(new_reg_sheet)
             else:
-                print('Need to input a valid option as this is sensitive data!'
+                print('Need to input a valid option as this is sensitive data! '
                       'Please try again\n')
                 print('Returning to Home Menu')
                 time.sleep(5)
