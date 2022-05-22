@@ -26,7 +26,7 @@ from textblob import TextBlob
 API_KEY = os.environ.get('api_key')
 API_KEY_SECRET = os.environ.get('api_key_secret')
 ACCESS_TOKEN = os.environ.get('access_token')
-ACCESS_TOKEN_SECRET = os.environ.('access_token_secret')
+ACCESS_TOKEN_SECRET = os.environ.get('access_token_secret')
 
 # # VARIABLES
 
