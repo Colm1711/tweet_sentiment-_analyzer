@@ -413,6 +413,7 @@ def main(access_level):
             print(reg_list)
             # Queries user if they want to do next
             print('\nApprove user? Yes(Y)')
+            print('\nPress any other key to return to main menu')
             approval = input()
             if approval.lower() == 'yes' or approval.lower() == 'y':
                 print('Which user from table above? Please pick by index '
