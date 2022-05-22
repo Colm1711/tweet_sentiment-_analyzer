@@ -103,6 +103,7 @@ def get_ls_tickers():
     tickers = get_companies()
     return tickers.iloc[:, 0].tolist()
 
+
 def get_ls_companies():
     # returns list of companies
     companies_name = get_companies()
