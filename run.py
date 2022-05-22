@@ -484,4 +484,4 @@ def main(access_level):
             os.system('clear')
             welcome_screen()
 
-welcome_screen()
+main(True)
