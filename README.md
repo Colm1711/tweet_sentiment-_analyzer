@@ -65,6 +65,7 @@ world users of twitter. To help give stock traders a competitive advantage.
 
 1. For first release, the scope is to rpovide users ability to register, login and retrieve live data.
 2. Future scope includes adding ability for user to email or downloiad live data offline. Search multiple parameters and filtering of data.
+3. Build internal alogrithm to assign sentiment to tweets.
 
 *   ### Wireframes
 
@@ -122,11 +123,11 @@ world users of twitter. To help give stock traders a competitive advantage.
 ##### 3rd Party Libraries
 
 1. [gspread](https://docs.gspread.org/en/latest/) - JUSTIFICATION: Efforts to source native python library available that gives access to add, update, remove or return data from googlesheets and to interact with the google cloud platform API. Based on this it was imported to facilate google sheet operations to provide external database.
-2. [Textblob](https://textblob.readthedocs.io/en/dev/) -  JUSTIFICATION: Efforts to source native python library available that gives access to add, update, remove or return data from googlesheets and to interact with the google cloud platform API. Based on this it was imported to facilate google sheet operations to provide external database.
-3. [tweepy](https://www.tweepy.org/) - JUSTIFICATION: Efforts to source native python library available that gives access to add, update, remove or return data from googlesheets and to interact with the google cloud platform API. Based on this it was imported to facilate google sheet operations to provide external database.
-4. [yahoo_fin](https://pypi.org/project/yahoo-finance/) -  JUSTIFICATION: Efforts to source native python library available that gives access to add, update, remove or return data from googlesheets and to interact with the google cloud platform API. Based on this it was imported to facilate google sheet operations to provide external database.
-5. [yfinance](https://pypi.org/project/yfinance/) - JUSTIFICATION: Efforts to source native python library available that gives access to add, update, remove or return data from googlesheets and to interact with the google cloud platform API. Based on this it was imported to facilate google sheet operations to provide external database.
-6. [pandas](https://pandas.pydata.org/) - JUSTIFICATION: Efforts to source native python library available that gives access to add, update, remove or return data from googlesheets and to interact with the google cloud platform API. Based on this it was imported to facilate google sheet operations to provide external database.
+2. [Textblob](https://textblob.readthedocs.io/en/dev/) -  JUSTIFICATION: Efforts to source native python library available were exhausted. To build algorithm to break text to binary and map to chart to build positive, negative & neutral data points to compare tweets against is outside the scope of the initial application varsion. 
+3. [tweepy](https://www.tweepy.org/) - JUSTIFICATION: Efforts to source native python library available that gives access to live twitter API & data does not exist. This libaray was imported ot help provide access to this data so that the polarity of tweets can be accessed.
+4. [yahoo_fin](https://pypi.org/project/yahoo-finance/) -  JUSTIFICATION: Efforts to source native python library available that gives access to live stock data is not accessible. This libabry was used to pull this infomraiton in. Otherwise static data would have to be used to populate data.
+5. [yfinance](https://pypi.org/project/yfinance/) - JUSTIFICATION: Efforts to source native python library available that gives access to live stock data is not accessible. This libabry was used to pull this infomraiton in. Otherwise static data would have to be used to populate data.
+6. [pandas](https://pandas.pydata.org/) - JUSTIFICATION: Efforts to source native python library available that gives access to add, update, remove or return data in organised representation. This is a widely used libaryr by data scientists.
 
 [Back to top](<#contents>)
 
