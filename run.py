@@ -360,7 +360,6 @@ def main(access_level):
     user_sheet = SHEET.worksheet('Users')
     admin_sheet = SHEET.worksheet('Admin')
     reg_sheet = SHEET.worksheet('Registration applications')
-    stock_sheet = GSPEAD_CLIENT.open('Stock').worksheet('Stock Data')
 
     if access_level is True:
         os.system('clear')
@@ -432,7 +431,7 @@ def main(access_level):
                 user_choice = user_to_approve + 2
                 reg_user = sheets.get_row_vals('Registration applications',
                                                user_choice)
-                move_to_user = sheets.update_worksheet_row([reg_user[1],
+                sheets.update_worksheet_row([reg_user[1],
                                                             reg_user[2]],
                                                            'Users')
                 print('Usersheet has been updated!\n')
@@ -445,6 +444,10 @@ def main(access_level):
                 os.system('clear')
                 new_reg_sheet = sheets.show_worksheet(reg_sheet)
                 print(new_reg_sheet)
+                time.sleep(2)
+                print('Returning to Main.')
+                os.system('clear')
+                main(True)
             else:
                 print('Need to input a valid option as this is sensitive data!'
                       'Please try again\n')
@@ -522,4 +525,5 @@ def main(access_level):
             os.system('clear')
             welcome_screen()
 
-welcome_screen()
+# welcome_screen()
+main(True)
