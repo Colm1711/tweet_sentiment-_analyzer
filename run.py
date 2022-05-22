@@ -315,11 +315,14 @@ def main(access_level):
                                                            'Users')
                 print('Usersheet has been updated!\n')
                 print('Now deleting from registration page...')
+                time.sleep(5)
                 sheets.del_reg(user_to_approve)
                 print('All Done!')
-                # waiting so script has chance to update
-                time.sleep(10)
-                print(reg_list)
+                # waiting so script has chance to update to display new sheet
+                time.sleep(5)
+                os.system('clear')
+                new_reg_sheet = sheets.show_worksheet(reg_sheet)
+                print(new_reg_sheet)
                 admin_ready()
             else:
                 print('Need to input a valid option as this is sensitive data!' 
