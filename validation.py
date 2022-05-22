@@ -70,14 +70,13 @@ class Validation():
             return False
 
     def has_digit(data_to_val):
-        
         """
         Description:
 
                 Checks if input has digit
 
-        returns: 
-                
+        returns:
+
                 bol -->    False if not present
 
                 bol -->    True if present
