@@ -375,21 +375,21 @@ The deployment terminal is set to 80 columns by 24 rows. That means that each li
 
 ### Code
 
-- Email validation and password validation information on use of regular expression was sourced here[GeeksforGeeks](https://www.geeksforgeeks.org/password-validation-in-python/)
+- Email validation and password validation information on use of regular expression was sourced here: [GeeksforGeeks](https://www.geeksforgeeks.org/password-validation-in-python/)
 
-- Regular expressions were taken from cheetsheet[MyGreatLearning](https://www.mygreatlearning.com/blog/regular-expression-in-python/)
+- Regular expressions were taken from cheetsheet listed here as knowledge of email capture was not known, it was sourced here: [MyGreatLearning](https://www.mygreatlearning.com/blog/regular-expression-in-python/)
 
-- Regualr expressions of emojis was sourced from this cheatsheet[Github](https://gist.github.com/Alex-Just/e86110836f3f93fe7932290526529cd1)
+- Regualar expressions of emojis was sourced from this cheatsheet as knowledge of emoji scraping was not known, it was sourced here: [Github](https://gist.github.com/Alex-Just/e86110836f3f93fe7932290526529cd1)
 
-- Dataframes information was sourced from [w3schools](https://www.w3schools.com/python/pandas/pandas_dataframes.asp)
+- Dataframes information was sourced from here: [w3schools](https://www.w3schools.com/python/pandas/pandas_dataframes.asp)
 
-- Manipulation of spreadhseets was sourced from here[gspread](https://docs.gspread.org/en/latest/user-guide.html)
+- Manipulation of spreadhseets was sourced from here: [gspread](https://docs.gspread.org/en/latest/user-guide.html)
 
-- how to set dates for stock look back was sourced here[python.org](https://docs.python.org/3/library/datetime.html#timedelta-objects)
+- How to set dates for stock look back was sourced here: [python.org](https://docs.python.org/3/library/datetime.html#timedelta-objects)
 
-- Yahoo finance reference (https://algotrading101.com/learn/yahoo-finance-api-guide/)
+- Yahoo finance reference for all stock related queries was sourced from here: (https://algotrading101.com/learn/yahoo-finance-api-guide/)
 
-- Gspread formating (https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells)
+- Gspread formating was sourced from here: (https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells)
 
 
 ### Content
