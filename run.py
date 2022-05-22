@@ -112,8 +112,8 @@ def user_registration():
             str --> val_password
     """
     # This handles user registering name
-    print('Please fill out your details: \n')
-    name = input('Please your name: ')
+    print('Please fill out your details to register: \n')
+    name = input('Please enter your full name: ')
 
     # This handles user registering organization
     institution = input('Please enter institution you work for: ')
