@@ -471,7 +471,7 @@ def main(access_level):
             print('\nGet Top 500 companies stock info from SP500!\n')
             write_header_to_stock_sheet()
             live_stock_data()
-            admin_ready()
+            user_ready()
         # Returns the stock data for the week to user for given stock name.
         elif option == 2:
             os.system('clear')
