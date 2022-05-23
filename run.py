@@ -331,6 +331,22 @@ def live_stock_data():
         main(False)
 
 
+def get_stock_for_list():
+    stock_list = si.get_companies()
+    print(s.iloc[:, 1])
+    print('\nEnter stock you would like data for:\n')
+    # user inputs the stock to check
+    stock_p_item = input()
+    if stock_p_item.islower() is True:
+        stock_p_item = stock_p_item.title()
+        if stock_p_item in stock_list:
+            pass
+        else:
+            print(f'Stock {stock_p_item} unfortunately is not in the SP500, please try again.')
+            os.system('clear')
+            get_stock_for_list()
+
+
 def main(access_level):
     """
     This function handles Admin and user menu and options.
@@ -502,13 +518,7 @@ def main(access_level):
         elif option == 2:
             os.system('clear')
             print('\nGet a companies stock data for the week:\n')
-            s = si.get_companies()
-            print(s.iloc[:, 1])
-            print('\nEnter stock you would like data for:\n')
-            # user inputs the stock to check
-            stock_p_item = input()
-            if stock_p_item.islower() is True:
-                stock_p_item = stock_p_item.title()
+            get_stock_for_list()
             try:
                 # Stock Data to be returned to terminal to user.
                 stock_ticker = si.get_ticker(stock_p_item)
@@ -527,4 +537,4 @@ def main(access_level):
             welcome_screen()
 
 
-welcome_screen()
+main(False)
