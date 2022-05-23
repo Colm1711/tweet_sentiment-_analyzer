@@ -333,7 +333,7 @@ def live_stock_data():
 
 def get_stock_for_list():
     stock_list = si.get_companies()
-    print(s.iloc[:, 1])
+    print(stock_list.iloc[:, 1])
     print('\nEnter stock you would like data for:\n')
     # user inputs the stock to check
     stock_p_item = input()
