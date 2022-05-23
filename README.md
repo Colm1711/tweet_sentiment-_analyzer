@@ -27,13 +27,14 @@
 * The Tweet Analyzer application is the beginning of a real world application to allow users retrieve live stock data and get numerical representation of how that company is trending with real
 world users of twitter. To help give stock traders a competitive advantage.
 * The application enables user to retrieve live stock information and have it represented back to them in the terminal from the SP500 list.
+* Combines it sentiment polarity of words used about company on Twitter. Sentiment polarity for an element defines the orientation of the expressed sentiment, i.e., it determines if the text expresses the positive, negative or neutral sentiment of the user about the entity in consideration. 
 * Application also looks to provide weekly data for a given stock.
 
 
 ## User Experience (UX)
 
 -   ### Target Audience
-1. Users looking to retrieve live data from stock market and are looking for sentiment score of company to help with decisions.
+1. Users looking to retrieve live data from stock market and are looking for sentiment score of company to help with decisions on investsments in the S&P 500.  The S&P 500 tracks the market capitalization of the companies in its index. Market cap is the total value of all shares of stock that a company has issued. It's calculated by multiplying the number of shares issued by the stock price.
 
 ## User stories
 
